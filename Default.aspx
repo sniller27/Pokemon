@@ -22,7 +22,7 @@
               background-image: -o-linear-gradient(top, #3498db, #2980b9);
               background-image: linear-gradient(to bottom, #3498db, #2980b9);
               border: none;
-              font-weight: 700;
+              font-weight: 700; 
               cursor: pointer;
         }
         #ButtonSubmit:hover {
