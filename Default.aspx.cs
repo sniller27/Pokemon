@@ -20,19 +20,24 @@ public partial class _Default : System.Web.UI.Page
 
     protected void ButtonSubmit_Click(object sender, EventArgs e)
     {
-        person = new Person(TextBoxAlias.Text, TextBoxName.Text, RadioButtonListGender.SelectedValue, int.Parse(TextBoxAge.Text), TextBoxEmail.Text, TextBoxPassword.Text);
-        personlist.Add(person);
-        printinfo.Text = person.ToString();
-
-        //making kids- and adult lists.. just in case
-        if (person.age < person.getAdultcap())
+        if (Page.IsValid)
         {
-            kidslist.Add(person);
+            person = new Person(TextBoxAlias.Text, TextBoxName.Text, RadioButtonListGender.SelectedValue, int.Parse(TextBoxAge.Text), TextBoxEmail.Text, TextBoxPassword.Text);
+            personlist.Add(person);
+            printinfo.Text = person.ToString();
+
+            //making kids- and adult lists.. just in case
+            if (person.age < person.getAdultcap())
+            {
+                kidslist.Add(person);
+            }
+            else
+            {
+                adultlist.Add(person);
+            }
+            showAllPersons();
         }
-        else {
-            adultlist.Add(person);
-        }
-        showAllPersons();
+       
 
     }
     public void showAllPersons() {
