@@ -4,42 +4,16 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-    <title>Pokemon</title>
-    <style>
-        body {
-            font-family: 'Open Sans', sans-serif;
-        }
-        #TextBoxPassword, #TextBoxPasswordRepeat {
-            -webkit-text-security: disc;
-        }
-        #ButtonSubmit {
-              padding: 13px 25px 13px 25px;
-              background: #3498db;
-              color: white;
-              background-image: -webkit-linear-gradient(top, #3498db, #2980b9);
-              background-image: -moz-linear-gradient(top, #3498db, #2980b9);
-              background-image: -ms-linear-gradient(top, #3498db, #2980b9);
-              background-image: -o-linear-gradient(top, #3498db, #2980b9);
-              background-image: linear-gradient(to bottom, #3498db, #2980b9);
-              border: none;
-              font-weight: 700; 
-              cursor: pointer;
-        }
-        #ButtonSubmit:hover {
-              background: #3cb0fd;
-              background-image: -webkit-linear-gradient(top, #3cb0fd, #3498db);
-              background-image: -moz-linear-gradient(top, #3cb0fd, #3498db);
-              background-image: -ms-linear-gradient(top, #3cb0fd, #3498db);
-              background-image: -o-linear-gradient(top, #3cb0fd, #3498db);
-              background-image: linear-gradient(to bottom, #3cb0fd, #3498db);
-        }
-    </style>
+    <title>Pokemon Run Event</title>
+    <link href="styles.css" type="text/css" rel="stylesheet" />
 </head>
 <body>
     <form id="form1" runat="server">
     <div>
     
-        <asp:Label ID="Label8" runat="server" Font-Bold="True" Font-Size="X-Large" Text="Pokémon Run"></asp:Label>
+        <asp:Label ID="Label8" runat="server" Font-Bold="True" Font-Size="X-Large" Text="Pokémon Run Event"></asp:Label>
+        <br />
+        <asp:Label ID="Label9" runat="server" Text="Sign up"></asp:Label>
         <br />
         <br />
         <asp:TextBox ID="TextBoxAlias" runat="server"></asp:TextBox>
@@ -88,12 +62,19 @@
         <asp:Button ID="ButtonSubmit" runat="server" Text="Create" Font-Size="Large" OnClick="ButtonSubmit_Click" />
     
         <br />
-        <asp:Label ID="printinfo" runat="server" Text="Label"></asp:Label>
+        <asp:Label ID="printinfo" runat="server"></asp:Label>
         <br />
         <br />
-        <asp:ListBox ID="personlistid" runat="server" Width="348px"></asp:ListBox>
-        <asp:ListBox ID="kidslistid" runat="server" Width="348px"></asp:ListBox>
-        <asp:ListBox ID="adultlistid" runat="server" Width="348px"></asp:ListBox>
+        <div class="half">
+            <p>Pokehunters</p>
+            <asp:ListBox ID="personlistid" runat="server" Width="658px"></asp:ListBox></div>
+        
+        <div class="quarter">
+            <p>Pokerhunter kids</p>
+            <asp:ListBox ID="kidslistid" runat="server" Width="231px"></asp:ListBox></div>
+        <div class="quarter">
+            <p>Pokehunter adults</p>
+            <asp:ListBox ID="adultlistid" runat="server" Width="237px"></asp:ListBox></div>
     
     </div>
     </form>

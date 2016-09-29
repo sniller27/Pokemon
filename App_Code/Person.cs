@@ -32,9 +32,10 @@ public class Person
     //overriding ToString Method
     public override string ToString()
     {
-        return alias + name + gender + age + email + password;
+        return "Alias: " + alias + ", Name: " + name + ", Gender: " + gender + ", Age: " + age + ", Email: " + email + ", Password: " + password;
     }
 
+    //More properties ... getters and setters
     public void setAdultcap(int adultcap) {
         this.adultcap = adultcap;
     }
