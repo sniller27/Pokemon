@@ -7,7 +7,7 @@ using System.Web;
 /// Summary description for Person
 /// This class is responsible for handling Persons
 /// </summary>
-public class Person
+public abstract class Person
 {
     //declaring private fields/attributes with (automated implemented) properties for getters/setters
     public String alias { get; set; }
@@ -42,4 +42,8 @@ public class Person
     public int getAdultcap() {
         return adultcap;
     }
+
+    //Change mail method
+    public abstract void ChangeEmail(String email);
+
 }
