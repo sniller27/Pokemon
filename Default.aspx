@@ -63,18 +63,8 @@
     
         <br />
         <asp:Label ID="printinfo" runat="server"></asp:Label>
-        <br />
-        <br />
-        <div class="half">
-            <p>Pokehunters</p>
-            <asp:ListBox ID="personlistid" runat="server" Width="658px"></asp:ListBox></div>
-        
         <div class="quarter">
-            <p>Pokerhunter kids</p>
-            <asp:ListBox ID="kidslistid" runat="server" Width="231px"></asp:ListBox></div>
-        <div class="quarter">
-            <p>Pokehunter adults</p>
-            <asp:ListBox ID="adultlistid" runat="server" Width="237px"></asp:ListBox></div>
+            </div>
     
     </div>
     </form>
