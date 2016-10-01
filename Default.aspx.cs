@@ -31,8 +31,9 @@ public partial class _Default : System.Web.UI.Page
     }
     public void showAllPersons() {
         personlistid.Items.Clear();
+        kidslistid.Items.Clear();
+        adultlistid.Items.Clear();
 
-        
         foreach (Person item in personlist)
         {
             personlistid.Items.Add(item.ToString());

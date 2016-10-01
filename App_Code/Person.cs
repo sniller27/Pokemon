@@ -16,7 +16,7 @@ public class Person
     public String email { get; set; }
     public String password { get; set; }
     public int age { get; set; }
-    public int adultcap = 18;
+    private int adultcap = 18;
 
     //constructor defines the structure of an object and is being called everytime a specific object is created.
     public Person(String alias, String name, String gender, int age, String email, String password)
