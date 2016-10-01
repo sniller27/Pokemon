@@ -7,7 +7,7 @@ using System.Web;
 /// Summary description for Person
 /// This class is responsible for handling Persons
 /// </summary>
-public abstract class Person
+public class Person
 {
     //declaring private fields/attributes with (automated implemented) properties for getters/setters
     public String alias { get; set; }
@@ -16,7 +16,6 @@ public abstract class Person
     public String email { get; set; }
     public String password { get; set; }
     public int age { get; set; }
-    public int adultcap = 18;
 
     //constructor defines the structure of an object and is being called everytime a specific object is created.
     public Person(String alias, String name, String gender, int age, String email, String password)
@@ -34,16 +33,5 @@ public abstract class Person
     {
         return "Alias: " + alias + ", Name: " + name + ", Gender: " + gender + ", Age: " + age + ", Email: " + email + ", Password: " + password;
     }
-
-    //More properties ... getters and setters
-    public void setAdultcap(int adultcap) {
-        this.adultcap = adultcap;
-    }
-    public int getAdultcap() {
-        return adultcap;
-    }
-
-    //Change mail method
-    public abstract void ChangeEmail(String email);
 
 }
