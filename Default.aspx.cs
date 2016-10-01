@@ -8,10 +8,8 @@ using System.Web.UI.WebControls;
 
 public partial class _Default : System.Web.UI.Page
 {
-    Pokehunter person;
+    Person person;
     static ArrayList personlist = new ArrayList();
-    static ArrayList kidslist = new ArrayList();
-    static ArrayList adultlist = new ArrayList();
 
     protected void Page_Load(object sender, EventArgs e)
     {
@@ -22,19 +20,10 @@ public partial class _Default : System.Web.UI.Page
     {
         if (Page.IsValid)
         {
-            person = new Pokehunter(TextBoxAlias.Text, TextBoxName.Text, RadioButtonListGender.SelectedValue, int.Parse(TextBoxAge.Text), TextBoxEmail.Text, TextBoxPassword.Text, "Pikachu");
+            person = new Person(TextBoxAlias.Text, TextBoxName.Text, RadioButtonListGender.SelectedValue, int.Parse(TextBoxAge.Text), TextBoxEmail.Text, TextBoxPassword.Text);
             personlist.Add(person);
             printinfo.Text = person.ToString();
 
-            //making kids- and adult lists.. just in case
-            if (person.age < person.getAdultcap())
-            {
-                kidslist.Add(person);
-            }
-            else
-            {
-                adultlist.Add(person);
-            }
             showAllPersons();
         }
        
@@ -42,8 +31,7 @@ public partial class _Default : System.Web.UI.Page
     }
     public void showAllPersons() {
         personlistid.Items.Clear();
-        kidslistid.Items.Clear();
-        adultlistid.Items.Clear();
+
         
         foreach (Person item in personlist)
         {
