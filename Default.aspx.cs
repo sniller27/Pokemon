@@ -8,7 +8,7 @@ using System.Web.UI.WebControls;
 
 public partial class _Default : System.Web.UI.Page
 {
-    Organizer person;
+    Pokehunter person;
     static ArrayList personlist = new ArrayList();
     static ArrayList kidslist = new ArrayList();
     static ArrayList adultlist = new ArrayList();
@@ -22,7 +22,7 @@ public partial class _Default : System.Web.UI.Page
     {
         if (Page.IsValid)
         {
-            person = new Organizer(TextBoxAlias.Text, TextBoxName.Text, RadioButtonListGender.SelectedValue, int.Parse(TextBoxAge.Text), TextBoxEmail.Text, TextBoxPassword.Text);
+            person = new Pokehunter(TextBoxAlias.Text, TextBoxName.Text, RadioButtonListGender.SelectedValue, int.Parse(TextBoxAge.Text), TextBoxEmail.Text, TextBoxPassword.Text, "Pikachu");
             personlist.Add(person);
             printinfo.Text = person.ToString();
 

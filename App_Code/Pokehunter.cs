@@ -8,8 +8,10 @@ using System.Web;
 /// </summary>
 public class Pokehunter : Person
 {
-    public Pokehunter(string alias, string name, string gender, int age, string email, string password) : base(alias, name, gender, age, email, password)
+    String favoritepokemon;
+    public Pokehunter(string alias, string name, string gender, int age, string email, string password, String favoritepokemon) : base(alias, name, gender, age, email, password)
     {
+        this.favoritepokemon = favoritepokemon;
     }
 
     public override void ChangeEmail(string email)
