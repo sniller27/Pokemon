@@ -62,6 +62,8 @@
         <asp:Button ID="ButtonSubmit" runat="server" Text="Create" Font-Size="Large" OnClick="ButtonSubmit_Click" ValidationGroup="signupvalidation" />
     
         <br />
+    
+        <br />
         <asp:Label ID="printinfo" runat="server"></asp:Label>
         <div class="quarter">
             </div>
