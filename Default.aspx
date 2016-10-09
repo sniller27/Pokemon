@@ -77,6 +77,11 @@
             <asp:ListBox ID="adultlistid" runat="server" Width="237px"></asp:ListBox></div>
     
     </div>
+    <h2>Attenders:</h2>
+        <p>
+            <asp:GridView ID="GridView1" runat="server">
+            </asp:GridView>
+        </p>
     </form>
-</body>
+    </body>
 </html>
