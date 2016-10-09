@@ -42,5 +42,5 @@ public abstract class Person
     public int getAdultcap() {
         return adultcap;
     }
-    public abstract String ChangeEmail(String email);
+    public abstract void ChangeEmail(String email);
 }

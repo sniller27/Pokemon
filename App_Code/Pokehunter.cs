@@ -6,12 +6,20 @@ using System.Web;
 /// <summary>
 /// Summary description for Pokehunter
 /// </summary>
-public class Pokehunter
+public class Pokehunter : Person
 {
-    public Pokehunter()
+    public String Favoritepokemon { get; set; }
+
+    public Pokehunter(string Favoritepokemon) : base(alias, name, gender, age, email, password)
     {
         //
         // TODO: Add constructor logic here
         //
+        this.Favoritepokemon = Favoritepokemon;
+    }
+
+    public override void ChangeEmail(string email)
+    {
+        this.email = email;
     }
 }

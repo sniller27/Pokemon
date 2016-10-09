@@ -15,8 +15,8 @@ public class Organizer : Person
         //
     }
 
-    public override string ChangeEmail(string email)
+    public override void ChangeEmail(string email)
     {
-        return this.email = email;
+        this.email = email;
     }
 }
