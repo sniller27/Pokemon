@@ -45,9 +45,38 @@ public partial class _Default : System.Web.UI.Page
          * 
          * **/
 
+        //READ POKEHUNTER
+        xmldoc = XDocument.Load("C:/Users/Jonas/Documents/Visual Studio 2015/WebSites/Pokemon/crudfiles/personsfile.xml");   //add xml document  
+        var bindpokehunters = xmldoc.Descendants("Pokehunter").Select(p => new
+        {
+            Id = p.Element("id").Value,
+            Alias = p.Element("alias").Value,
+            Name = p.Element("name").Value,
+            Salary = p.Element("gender").Value,
+            Email = p.Element("age").Value,
+            Address = p.Element("email").Value,
+            Password = p.Element("password").Value,
+            Favoritepokemon = p.Element("favoritepokemon").Value
+        }).OrderBy(p => p.Id);
+        GridView1.DataSource = bindpokehunters;
+        GridView1.DataBind();
+
+        //INSERT POKEHUNTER
+        XElement pokehunter = new XElement("Pokehunter",
+        new XElement("id", "23"),
+        new XElement("alias", "poxehuntz"),
+        new XElement("name", "dox"),
+        new XElement("gender", "1233d"),
+        new XElement("age", "fsdofjos"),
+        new XElement("email", "adress"),
+        new XElement("password", "12345"),
+        new XElement("favoritepokemon", "onix"));
+        xmldoc.Root.Add(pokehunter);
+        xmldoc.Save("C:/Users/Jonas/Documents/Visual Studio 2015/WebSites/Pokemon/crudfiles/personsfile.xml");
+
         //READ ORGANIZER
         xmldoc = XDocument.Load("C:/Users/Jonas/Documents/Visual Studio 2015/WebSites/Pokemon/crudfiles/personsfile.xml");   //add xml document  
-        var bind = xmldoc.Descendants("Organizer").Select(p => new
+        var bindorganizers = xmldoc.Descendants("Organizer").Select(p => new
         {
             Id = p.Element("id").Value,
             Alias = p.Element("alias").Value,
@@ -57,21 +86,21 @@ public partial class _Default : System.Web.UI.Page
             Address = p.Element("email").Value,
             Password = p.Element("password").Value
         }).OrderBy(p => p.Id);
-        GridView1.DataSource = bind;
-        GridView1.DataBind();
+        GridView2.DataSource = bindorganizers;
+        GridView2.DataBind();
 
         //INSERT (using namespace using System.Xml.Linq)
 
         //INSERT ORGANIZER
-        XElement emp = new XElement("Organizer",
+        XElement organizer = new XElement("Organizer",
         new XElement("id", "23"),
-        new XElement("alias", "orgyss"),
+        new XElement("alias", "organis"),
         new XElement("name", "dox"),
         new XElement("gender", "1233d"),
         new XElement("age", "fsdofjos"),
         new XElement("email", "adress"),
         new XElement("password", "12345"));
-        xmldoc.Root.Add(emp);
+        xmldoc.Root.Add(organizer);
         xmldoc.Save("C:/Users/Jonas/Documents/Visual Studio 2015/WebSites/Pokemon/crudfiles/personsfile.xml");
 
         //using dataset
