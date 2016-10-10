@@ -11,6 +11,7 @@
     <div>
     <h2>Welcome</h2>
         <a href="Default.aspx">Organizers</a>
+        <a href="Default2.aspx">Pokehunters</a>
     </div>
     </form>
 </body>

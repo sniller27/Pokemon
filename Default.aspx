@@ -11,7 +11,7 @@
     <form id="form1" runat="server">
     <div>
     
-        <asp:Label ID="Label8" runat="server" Font-Bold="True" Font-Size="X-Large" Text="Pokémon Run Event"></asp:Label>
+        <asp:Label ID="Label8" runat="server" Font-Bold="True" Font-Size="X-Large" Text="Organizers"></asp:Label>
         <br />
         <asp:Label ID="Label9" runat="server" Text="Sign up"></asp:Label>
         <br />
