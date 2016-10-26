@@ -43,7 +43,7 @@ public partial class _Default : System.Web.UI.Page
         //{
         //    personlistid.Items.Add(item.ToString());
 
-        //    if (item.age > person.getAdultcap())
+        //    if (item.age < person.getAdultcap())
         //    {
         //        kidslistid.Items.Add(item.name);
         //    }
