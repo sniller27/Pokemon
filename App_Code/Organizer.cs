@@ -6,22 +6,18 @@ using System.Web;
 /// <summary>
 /// Summary description for Organizer
 /// </summary>
+/// 
+
+//code snippet som bruger class information til at restore class
+[Serializable]
 public class Organizer : Person
 {
-    public Organizer(string alias, string name, string gender, int age, string email, string password) : base(alias, name, gender, age, email, password)
+    public Organizer(string alias, string name, int age, string gender, string email, string password) : base(alias, name, age, gender, email, password)
     {
-        //
-        // TODO: Add constructor logic here
-        //
     }
 
     public override void ChangeEmail(string email)
     {
-        this.email = email;
-    }
-
-    public override string ToString()
-    {
-        return base.ToString();
+        throw new NotImplementedException();
     }
 }

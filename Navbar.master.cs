@@ -5,15 +5,10 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-public partial class Welcome : System.Web.UI.Page
+public partial class Navbar : System.Web.UI.MasterPage
 {
     protected void Page_Load(object sender, EventArgs e)
     {
 
-    }
-
-    protected void LinkButton1_Click(object sender, EventArgs e)
-    {
-        Response.Redirect("readorganizers.aspx");
     }
 }

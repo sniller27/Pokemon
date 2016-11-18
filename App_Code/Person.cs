@@ -7,24 +7,26 @@ using System.Web;
 /// Summary description for Person
 /// This class is responsible for handling Persons
 /// </summary>
+/// 
+//code snippet som bruger class information til at restore class
+[Serializable]
 public abstract class Person
 {
     //declaring private fields/attributes with (automated implemented) properties for getters/setters
     public String alias { get; set; }
     public String name { get; set; }
+    public int age { get; set; }
     public String gender { get; set; }
     public String email { get; set; }
     public String password { get; set; }
-    public int age { get; set; }
-    private int adultcap = 18;
 
     //constructor defines the structure of an object and is being called everytime a specific object is created.
-    public Person(String alias, String name, String gender, int age, String email, String password)
+    public Person(String alias, String name, int age, String gender, String email, String password)
     {
         this.alias = alias;
         this.name = name;
-        this.gender = gender;
         this.age = age;
+        this.gender = gender;
         this.email = email;
         this.password = password;
     }
@@ -32,15 +34,9 @@ public abstract class Person
     //overriding ToString Method
     public override string ToString()
     {
-        return "Alias: " + alias + ", Name: " + name + ", Gender: " + gender + ", Age: " + age + ", Email: " + email + ", Password: " + password;
+        return "Alias: " + alias + ", Name: " + name + ", Age: " + age + ", Gender: " + gender + ", Email: " + email + ", Password: " + password;
     }
 
-    //More properties ... getters and setters
-    public void setAdultcap(int adultcap) {
-        this.adultcap = adultcap;
-    }
-    public int getAdultcap() {
-        return adultcap;
-    }
+    //Change email method
     public abstract void ChangeEmail(String email);
 }
