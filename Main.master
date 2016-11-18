@@ -1,0 +1,63 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="Main.master.cs" Inherits="Main" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title></title>
+
+    <!-- Material Design fonts -->
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:300,400,500,700" type="text/css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://code.getmdl.io/1.2.1/material.indigo-pink.min.css">
+
+    <!-- My CSS -->
+    <link href="styles.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+    <div class="demo-layout-transparent mdl-layout mdl-js-layout">
+  <header class="mdl-layout__header mdl-layout__header--transparent">
+    <div class="mdl-layout__header-row">
+      <!-- Title -->
+      <span class="mdl-layout-title">Title</span>
+      <!-- Add spacer, to align navigation to the right -->
+      <div class="mdl-layout-spacer"></div>
+      <!-- Navigation -->
+      <nav class="mdl-navigation">
+        <a href="readorganizers.aspx" class="mdl-navigation__link" <%= IsCurrentPage("readorganizers.aspx")  %>>Organizers</a>
+            <a href="CreateOrganizer.aspx" class="mdl-navigation__link" <%= IsCurrentPage("CreateOrganizer.aspx")  %>>Create organizer</a>
+            <a href="Default2.aspx" class="mdl-navigation__link" <%= IsCurrentPage("abc.aspx")  %>>Pokehunters</a>
+            <a href="Default2.aspx" class="mdl-navigation__link" <%= IsCurrentPage("def.aspx")  %>>Create pokehunter</a>
+      </nav>
+    </div>
+  </header>
+  <div class="mdl-layout__drawer">
+    <span class="mdl-layout-title">Title</span>
+    <nav class="mdl-navigation">
+            <a href="readorganizers.aspx" class="mdl-navigation__link" <%= IsCurrentPage("readorganizers.aspx")  %>>Organizers</a>
+            <a href="CreateOrganizer.aspx" class="mdl-navigation__link" <%= IsCurrentPage("CreateOrganizer.aspx")  %>>Create organizer</a>
+            <a href="Default2.aspx" class="mdl-navigation__link" <%= IsCurrentPage("abc.aspx")  %>>Pokehunters</a>
+            <a href="Default2.aspx" class="mdl-navigation__link" <%= IsCurrentPage("def.aspx")  %>>Create pokehunter</a>
+    </nav>
+  </div>
+  <main class="mdl-layout__content">
+      <div class="visiblebackgroundcolor">
+       
+        <asp:ContentPlaceHolder id="content" runat="server">
+        
+
+        </asp:ContentPlaceHolder>
+    </div>
+  </main>
+    
+        
+</div>
+
+    
+
+    <!-- MDL -->
+    <script defer src="https://code.getmdl.io/1.2.1/material.min.js"></script>
+</body>
+</html>

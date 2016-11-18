@@ -1,3 +1,28 @@
-﻿        body {
-            background-color: red;
-        }
+﻿.active {
+
+    background-color: red;
+
+}
+.demo-layout-transparent {
+  /** background: url('Images/pokemonevent.jpg'); **/
+  background-color: gray;
+  /* Create the parallax scrolling effect */
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    min-height: 400px;
+}
+.demo-layout-transparent .mdl-layout__header,
+.demo-layout-transparent .mdl-layout__drawer-button {
+  /* This background is dark, so we set text to white. Use 87% black instead if
+     your background is light. */
+  color: white;
+}
+
+.visiblebackgroundcolor {
+    
+    background-color: gray;
+    margin: 0px 21px;
+
+}

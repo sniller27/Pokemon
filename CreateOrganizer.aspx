@@ -1,15 +1,13 @@
-﻿<%@ Page Title="Create Organizer" Language="C#" MasterPageFile="~/Navbar.master" AutoEventWireup="true" CodeFile="CreateOrganizer.aspx.cs" Inherits="CreateOrganizer" %>
+﻿<%@ Page Title="Create Organizer" Language="C#" MasterPageFile="~/Main.master" AutoEventWireup="true" CodeFile="CreateOrganizer.aspx.cs" Inherits="CreateOrganizer" %>
 
+<asp:Content ID="Content2" ContentPlaceHolderID="content" Runat="Server">
+    <h2>Create new organizer</h2>
 
-<asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
-    
-</asp:Content>
-
-<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
     <form id="createorganizerform" runat="server">
     <div>
         <asp:Label ID="Label1" runat="server" Text="Create Organizer"></asp:Label>
         <br />
+
         <asp:TextBox ID="TextBoxAlias" runat="server"></asp:TextBox>
         <asp:Label ID="LabelAlias" runat="server" Text="Alias"></asp:Label>
         <br />
@@ -36,10 +34,11 @@
         <asp:Label ID="LabelPasswordRepeat" runat="server" Text="Repeat password"></asp:Label>
         <br />
         <br />
-        <asp:Button ID="ButtonCreateOrganizer" runat="server" Text="Button" OnClick="ButtonCreateOrganizer_Click" />
+        <asp:Button ID="ButtonCreateOrganizer" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" runat="server" Text="Button" OnClick="ButtonCreateOrganizer_Click" />
         <br />
         <br />
         <asp:Label ID="LabelAddOrganizerFeedback" runat="server"></asp:Label>
     </div>
     </form>
+
 </asp:Content>
