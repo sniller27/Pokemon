@@ -38,5 +38,5 @@ public abstract class Person
     }
 
     //Change email method
-    public abstract void ChangeEmail(String email);
+    public abstract bool ChangeEmail(String email);
 }

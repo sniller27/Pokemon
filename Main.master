@@ -26,20 +26,18 @@
       <div class="mdl-layout-spacer"></div>
       <!-- Navigation -->
       <nav class="mdl-navigation">
-        <a href="readorganizers.aspx" class="mdl-navigation__link" <%= IsCurrentPage("readorganizers.aspx")  %>>Organizers</a>
-            <a href="CreateOrganizer.aspx" class="mdl-navigation__link" <%= IsCurrentPage("CreateOrganizer.aspx")  %>>Create organizer</a>
-            <a href="Default2.aspx" class="mdl-navigation__link" <%= IsCurrentPage("abc.aspx")  %>>Pokehunters</a>
-            <a href="Default2.aspx" class="mdl-navigation__link" <%= IsCurrentPage("def.aspx")  %>>Create pokehunter</a>
+            <a href="Welcome.aspx" class="mdl-navigation__link" <%= IsCurrentPage("Welcome.aspx")  %>>Home</a>
+            <a href="CreateOrganizer.aspx" class="mdl-navigation__link" <%= IsCurrentPage("CreateOrganizer.aspx")  %>>Sign up</a>
+            <a href="readorganizers.aspx" class="mdl-navigation__link" <%= IsCurrentPage("readorganizers.aspx")  %>>Participants</a>
       </nav>
     </div>
   </header>
   <div class="mdl-layout__drawer">
     <span class="mdl-layout-title">Title</span>
     <nav class="mdl-navigation">
-            <a href="readorganizers.aspx" class="mdl-navigation__link" <%= IsCurrentPage("readorganizers.aspx")  %>>Organizers</a>
-            <a href="CreateOrganizer.aspx" class="mdl-navigation__link" <%= IsCurrentPage("CreateOrganizer.aspx")  %>>Create organizer</a>
-            <a href="Default2.aspx" class="mdl-navigation__link" <%= IsCurrentPage("abc.aspx")  %>>Pokehunters</a>
-            <a href="Default2.aspx" class="mdl-navigation__link" <%= IsCurrentPage("def.aspx")  %>>Create pokehunter</a>
+            <a href="Welcome.aspx" class="mdl-navigation__link" <%= IsCurrentPage("Welcome.aspx")  %>>Home</a>
+            <a href="CreateOrganizer.aspx" class="mdl-navigation__link" <%= IsCurrentPage("CreateOrganizer.aspx")  %>>Sign up</a>
+            <a href="readorganizers.aspx" class="mdl-navigation__link" <%= IsCurrentPage("readorganizers.aspx")  %>>Participants</a>
     </nav>
   </div>
   <main class="mdl-layout__content">

@@ -16,8 +16,13 @@ public class Organizer : Person
     {
     }
 
-    public override void ChangeEmail(string email)
+    public override bool ChangeEmail(string email)
     {
         throw new NotImplementedException();
+    }
+
+    public override string ToString()
+    {
+        return base.ToString();
     }
 }

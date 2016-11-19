@@ -17,7 +17,7 @@ public partial class Main : System.Web.UI.MasterPage
 
     public string IsCurrentPage(string itemName)
     {
-        return Path.GetFileName(Request.Url.AbsolutePath) == itemName ? "class='active'" : string.Empty;
+        return Path.GetFileName(Request.Url.AbsolutePath) == itemName ? "id='active'" : string.Empty;
         //return "class='"+ Path.GetFileName(Request.Url.AbsolutePath) + "'";
 
     }

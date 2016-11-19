@@ -1,6 +1,6 @@
-﻿.active {
+﻿.active, #active {
 
-    background-color: red;
+    color: saddlebrown;
 
 }
 .demo-layout-transparent {
@@ -23,6 +23,6 @@
 .visiblebackgroundcolor {
     
     background-color: gray;
-    margin: 0px 21px;
+    margin: 0px 0px 20px 21px;
 
 }
