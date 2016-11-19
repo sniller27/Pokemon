@@ -19,8 +19,8 @@ public partial class CreateOrganizer : System.Web.UI.Page
         organizerlist = new ArrayList();
         pokehunterlist = new ArrayList();
 
-        pokehunter = new Pokehunter("ko", "skonavn", 65, "male", "malss", "daspas", "lort");
-        LabelGender.Text = pokehunter.ToString();
+        //pokehunter = new Pokehunter("ko", "skonavn", 65, "male", "malss", "daspas", "lort");
+        //LabelGender.Text = pokehunter.ToString();
 
 
         //check if "session"/global arraylist exists (Organizer)
