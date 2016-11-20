@@ -20,8 +20,9 @@ public class Pokehunter : Person
 
     public override bool ChangeEmail(string email)
     {
-        if (email.Contains(mailrequirement))
+        if (email.EndsWith(mailrequirement))
         {
+            this.email = email;
             return true;
         }
         else

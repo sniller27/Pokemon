@@ -64,49 +64,47 @@ public partial class CreateOrganizer : System.Web.UI.Page
 
             //saves to file
             FileUtility.WriteFile(organizerlist, Server.MapPath("~/App_Data/Organizers.ser"));
-            LabelAddOrganizerFeedback.Text = "You have been signed up Organizer" + organizer;
+            LabelAddOrganizerFeedback.Text = "You have been signed up";
 
+            //clearform
+            Formcleaner.ClearForm(createorganizerform);
         }
+
+        //checks if you are a Pokehunter and if you can a valid email with @poke.dk
         if (DropdownlistCreateParticipant.Text == "Pokehunter")
         {
             //make instance of Organizer object
             pokehunter = new Pokehunter(TextBoxAlias.Text, TextBoxName.Text, Convert.ToInt32(TextBoxAge.Text), RadioButtonListOrganizerGender.Text, TextBoxEmail.Text, TextBoxPassword.Text, TextBoxFavorite.Text);
-            //pokehunter = new Pokehunter("ko", "skonavn", 65, "male", "malss", "daspas", "lort");
 
-            //getting the arraylist before inserting
-            pokehunterlist = (ArrayList)Application["Pokehuntercollection"];
-            //add to list
-            pokehunterlist.Add(pokehunter);
-
-            pokehunterlist = (ArrayList)Application["Pokehuntercollection"];
-
-            //saves to file
-            FileUtility.WriteFile(organizerlist, Server.MapPath("~/App_Data/Pokehunters.ser"));
-
-            LabelAddOrganizerFeedback.Text = "You have been signed up Pokehunter" + pokehunter;
-
-        }
-
-        //feedback
-        //LabelAddOrganizerFeedback.Text = "You have been signed up";
-        //clearform
-        ClearForm(createorganizerform);
-    }
-
-    //clearform method
-    public static void ClearForm(Control parent)
-    {
-        foreach (Control c in parent.Controls)
-        {
-            if (c.GetType() == typeof(TextBox))
+            //checks mail by using instance of object
+            if (pokehunter.ChangeEmail(TextBoxEmail.Text))
             {
-                ((TextBox)(c)).Text = string.Empty;
+                //getting the arraylist before inserting
+                pokehunterlist = (ArrayList)Application["Pokehuntercollection"];
+                //add to list
+                pokehunterlist.Add(pokehunter);
+
+                pokehunterlist = (ArrayList)Application["Pokehuntercollection"];
+
+                //saves to file
+                FileUtility.WriteFile(organizerlist, Server.MapPath("~/App_Data/Pokehunters.ser"));
+
+                LabelAddOrganizerFeedback.Text = "You have been signed up";
+
+                //resetform
+                DropdownlistCreateParticipant.SelectedValue = "Organizer";
+
+                //clearform
+                Formcleaner.ClearForm(createorganizerform);
             }
-            if (c.GetType() == typeof(RadioButtonList))
+            else
             {
-                ((RadioButtonList)(c)).ClearSelection();
+                LabelAddOrganizerFeedback.Text = "Mail is not valid";
+                TextBoxFavorite.Enabled = true;
             }
         }
+
+        
     }
 
     protected void Unnamed1_SelectedIndexChanged(object sender, EventArgs e)
