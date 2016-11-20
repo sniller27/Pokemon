@@ -19,10 +19,6 @@ public partial class CreateOrganizer : System.Web.UI.Page
         organizerlist = new ArrayList();
         pokehunterlist = new ArrayList();
 
-        //pokehunter = new Pokehunter("ko", "skonavn", 65, "male", "malss", "daspas", "lort");
-        //LabelGender.Text = pokehunter.ToString();
-
-
         //check if "session"/global arraylist exists (Organizer)
         if (Application["Organizercollection"] == null)
         {
@@ -45,12 +41,11 @@ public partial class CreateOrganizer : System.Web.UI.Page
 
         //disable pokehunter textfield
         TextBoxFavorite.Enabled = false;
-        
-
     }
 
     protected void ButtonCreateOrganizer_Click(object sender, EventArgs e)
     {
+        //checks if you are an Organizer
         if (DropdownlistCreateParticipant.Text == "Organizer")
         {
             //make instance of Organizer object
@@ -70,10 +65,10 @@ public partial class CreateOrganizer : System.Web.UI.Page
             Formcleaner.ClearForm(createorganizerform);
         }
 
-        //checks if you are a Pokehunter and if you can a valid email with @poke.dk
+        //checks if you are a Pokehunter
         if (DropdownlistCreateParticipant.Text == "Pokehunter")
         {
-            //make instance of Organizer object
+            //make instance of pokehunter object
             pokehunter = new Pokehunter(TextBoxAlias.Text, TextBoxName.Text, Convert.ToInt32(TextBoxAge.Text), RadioButtonListOrganizerGender.Text, TextBoxEmail.Text, TextBoxPassword.Text, TextBoxFavorite.Text);
 
             //checks mail by using instance of object
@@ -103,8 +98,6 @@ public partial class CreateOrganizer : System.Web.UI.Page
                 TextBoxFavorite.Enabled = true;
             }
         }
-
-        
     }
 
     protected void Unnamed1_SelectedIndexChanged(object sender, EventArgs e)

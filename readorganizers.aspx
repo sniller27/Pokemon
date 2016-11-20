@@ -12,7 +12,7 @@
         <%--<asp:TextBox ID="TextBoxReadOrganizers" runat="server" Height="145px" TextMode="MultiLine" Width="734px"></asp:TextBox>--%>
         
 
-        <asp:GridView ID="GridViewOrganizers" runat="server" Width="730px" AutoGenerateColumns="False" OnSelectedIndexChanged="GridViewOrganizers_SelectedIndexChanged" OnRowDeleting="OrganizerGridviewDeleteRow">
+        <asp:GridView ID="GridViewOrganizers" runat="server" Width="730px" AutoGenerateColumns="False" OnSelectedIndexChanged="GridViewOrganizers_SelectedIndexChanged" OnRowDeleting="GridViewOrganizers_RowDeleting" datakeynames="alias">
             <Columns>
                 <asp:CommandField ShowSelectButton="True" />
                 <asp:BoundField DataField="alias" HeaderText="alias" SortExpression="alias" />
@@ -21,7 +21,7 @@
                 <asp:BoundField DataField="gender" HeaderText="gender" SortExpression="gender" />
                 <asp:BoundField DataField="email" HeaderText="email" SortExpression="email" />
                 <asp:BoundField DataField="password" HeaderText="password" SortExpression="password" />
-                <asp:CommandField ShowDeleteButton="True" />
+                <asp:CommandField ButtonType="Button" ShowDeleteButton="True" />
             </Columns>
             <%--<selectedrowstyle BackColor="lightblue"/>--%>
 
@@ -30,7 +30,7 @@
         <h2>Pokehunters</h2>
         <asp:Label ID="LabelReadPokehuntersInfo" runat="server"></asp:Label>
 
-        <asp:GridView ID="GridViewPokehunters" runat="server" Width="730px" OnSelectedIndexChanged="GridViewPokehunters_SelectedIndexChanged"  AutoGenerateColumns="False" onrowcommand="GridViewPokehunters_RowCommand" >
+        <asp:GridView ID="GridViewPokehunters" runat="server" Width="730px" AutoGenerateColumns="False" OnSelectedIndexChanged="GridViewPokehunters_SelectedIndexChanged" OnRowDeleting="GridViewPokehunters_RowDeleting" datakeynames="alias">
             <Columns>
                 <asp:CommandField ShowSelectButton="True" />
                 <asp:BoundField DataField="alias" HeaderText="alias" SortExpression="alias" />
@@ -40,9 +40,7 @@
                 <asp:BoundField DataField="email" HeaderText="email" SortExpression="email" />
                 <asp:BoundField DataField="password" HeaderText="password" SortExpression="password" />
                 <asp:BoundField DataField="FavoritePokemon" HeaderText="FavoritePokemon" SortExpression="FavoritePokemon" />
-
-                <asp:ButtonField ButtonType="Button" commandname="Select" ShowHeader="True" Text="Delete" />
-
+                <asp:CommandField ButtonType="Button" ShowDeleteButton="True" />
             </Columns>
             <%--<selectedrowstyle BackColor="lightblue"/>--%>
             
@@ -53,9 +51,6 @@
         <div>
             <h2>Change information</h2>
             <asp:Label ID="LabelUpdateFeedback" runat="server"></asp:Label>
-
-            <br />
-            <br />
 
             <asp:Label ID="LabelUpdateInfoFor" runat="server"></asp:Label>
             <asp:Label ID="LabelUpdateInfoAlias" runat="server"></asp:Label>
@@ -90,21 +85,6 @@
             <asp:Button ID="ButtonUpdate" runat="server" Text="Button" CssClass="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" OnClick="ButtonUpdate_Click" />
             <br />
 
-            <asp:gridview id="CustomersGridView" 
-                allowpaging="true"
-                autogeneratecolumns="true"
-                autogenerateselectbutton="true"
-                selectedindex="0"   
-                runat="server"
-                OnRowDeleting="CustomersGridView_RowDeleting">
-
-                <selectedrowstyle BackColor="lightblue"/>
-
-            </asp:gridview>
-            <asp:button id="DeleteRowButton"
-                text="Delete Record"
-                onclick="DeleteRowButton_Click" 
-                runat="server"/>
         </div>
     </form>
 </asp:Content>
