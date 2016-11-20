@@ -87,7 +87,7 @@ public partial class CreateOrganizer : System.Web.UI.Page
                 pokehunterlist = (ArrayList)Application["Pokehuntercollection"];
 
                 //saves to file
-                FileUtility.WriteFile(organizerlist, Server.MapPath("~/App_Data/Pokehunters.ser"));
+                FileUtility.WriteFile(pokehunterlist, Server.MapPath("~/App_Data/Pokehunters.ser"));
 
                 LabelAddOrganizerFeedback.Text = "You have been signed up";
 
@@ -99,7 +99,7 @@ public partial class CreateOrganizer : System.Web.UI.Page
             }
             else
             {
-                LabelAddOrganizerFeedback.Text = "Mail is not valid";
+                LabelAddOrganizerFeedback.Text = "A pokehunters mail must end with @poke.dk";
                 TextBoxFavorite.Enabled = true;
             }
         }

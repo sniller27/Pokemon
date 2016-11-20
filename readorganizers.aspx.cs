@@ -8,20 +8,17 @@ using System.Web.UI.WebControls;
 
 public partial class readorganizers : System.Web.UI.Page
 {
+    //declare arraylists
     private ArrayList organizerlist;
     private ArrayList pokehunterlist;
-
-
-
-
-
-
+    
     //buttons
     public void DeleteRowButton_Click(Object sender, EventArgs e)
     {
         // Programmatically delete the selected record.
        // CustomersGridView.DeleteRow(CustomersGridView.SelectedIndex);
     }
+
     //gridviews
     public void CustomersGridView_RowDeleting(Object sender, GridViewDeleteEventArgs e)
     {
@@ -29,83 +26,88 @@ public partial class readorganizers : System.Web.UI.Page
         CustomersGridView.DataBind();
     }
 
-
-
-
-
-
+    //PAGE LOAD METHOD
     protected void Page_Load(object sender, EventArgs e)
     {
-        organizerlist = (ArrayList)Application["Organizercollection"];
-        pokehunterlist = (ArrayList)Application["Pokehuntercollection"];
-
-        //var columnToMove = GridViewPokehunters.Columns[1];
-        //GridViewPokehunters.Columns.RemoveAt(1);
-        //GridViewPokehunters.Columns.Insert(0, columnToMove);
-
-
-        //experiment
-        CustomersGridView.DataSource = pokehunterlist;
-        CustomersGridView.DataBind();
-
-
+        //read organizers from file
         try
         {
+            organizerlist = FileUtility.ReadFile(Server.MapPath("~/App_Data/Organizers.ser"));
+
+            Application["Organizercollection"] = organizerlist;
+
             if (organizerlist.Count == 0)
             {
-                LabelReadOrganizersInfo.Text = "No data at the moment";
+                LabelReadOrganizersInfo.Text = "No data at the moment1";
             }
             else
             {
-                //for (int i = 0; i < organizerlist.Count; i++)
-                //{
-                //    TextBoxReadOrganizers.Text += organizerlist[i].ToString() + "\n";
-                //}
                 GridViewOrganizers.DataSource = organizerlist;
                 GridViewOrganizers.DataBind();
             }
 
-            //checks if arraylist is empty
-            if (pokehunterlist.Count == 0)
-            {
-                LabelReadPokehuntersInfo.Text = "No data at the moment";
-            }
-            else
-            {
-                //for (int i = 0; i < pokehunterlist.Count; i++)
-                //{
-                //    TextBoxReadPokehunters.Text += pokehunterlist[i].ToString() + "\n";
-                //    ListBoxReadPokehunters.Items.Add(pokehunterlist[i].ToString());
-                //}
-                GridViewPokehunters.DataSource = pokehunterlist;
-                GridViewPokehunters.DataBind();
-            }
         }
         catch (Exception ex)
         {
-            LabelUpdateFeedback.Text = ex.Message;
+            LabelReadOrganizersInfo.Text = ex.Message;
         }
-            
-        
-        
-    }
 
 
-    protected void ButtonUpdate_Click(object sender, EventArgs e)
-    {
-        if (LabelUpdateShowType.Text.Contains("Organizer")) {
-            //update organiser
-            UpdateOrganizer();
-        }
-        else if(LabelUpdateShowType.Text.Contains("Pokehunter"))
+        //read pokehunters from file
+        try
         {
-            //updatepokehunter
-            UpdatePokehunter();
+            pokehunterlist = FileUtility.ReadFile(Server.MapPath("~/App_Data/Pokehunters.ser"));
+
+            Application["Pokehuntercollection"] = pokehunterlist;
+
+            if (pokehunterlist.Count == 0)
+            {
+                LabelReadPokehuntersInfo.Text = "No data at the moment1";
+            }
+            else
+            {
+                GridViewPokehunters.DataSource = pokehunterlist;
+                GridViewPokehunters.DataBind();
+            }
+
+        }
+        catch (Exception ex)
+        {
+            LabelReadPokehuntersInfo.Text = ex.Message;
         }
 
+        //EXPERIMENT
+        CustomersGridView.DataSource = pokehunterlist;
+        CustomersGridView.DataBind();
+    
     }
 
+    //SELECT ROW ORGANIZER METHOD
+    protected void GridViewOrganizers_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        //clean form
+        Formcleaner.ClearForm(participantform);
+        LabelUpdateInfoFor.Text = "";
+        LabelUpdateInfoAlias.Text = "";
+        LabelUpdateShowType.Text = "";
 
+        //disable favorite pokemon textbox
+        TextBoxUpdateFavorite.Enabled = false;
+
+        //can be done in a smarter way?
+        TextBoxUpdateAlias.Text = GridViewOrganizers.SelectedRow.Cells[1].Text;
+        TextBoxUpdateName.Text = GridViewOrganizers.SelectedRow.Cells[2].Text;
+        TextBoxUpdateAge.Text = GridViewOrganizers.SelectedRow.Cells[3].Text;
+        RadioButtonListUpdate.SelectedValue = GridViewOrganizers.SelectedRow.Cells[4].Text;
+        TextBoxUpdateEmail.Text = GridViewOrganizers.SelectedRow.Cells[5].Text;
+        TextBoxUpdatePassword.Text = GridViewOrganizers.SelectedRow.Cells[6].Text;
+
+        LabelUpdateInfoFor.Text = "Information about: ";
+        LabelUpdateInfoAlias.Text = GridViewOrganizers.SelectedRow.Cells[1].Text;
+        LabelUpdateShowType.Text = "(Organizer)";
+    }
+
+    //SELECT ROW POKEHUNTERS METHOD
     protected void GridViewPokehunters_SelectedIndexChanged(object sender, EventArgs e)
     {
         //clean form
@@ -132,25 +134,58 @@ public partial class readorganizers : System.Web.UI.Page
 
     }
 
+    //UPDATE BUTTON METHOD
+    protected void ButtonUpdate_Click(object sender, EventArgs e)
+    {
+        if (LabelUpdateShowType.Text.Contains("Organizer")) {
+            //update organiser
+            UpdateOrganizer();
+        }
+        else if(LabelUpdateShowType.Text.Contains("Pokehunter"))
+        {
+            //updatepokehunter
+            UpdatePokehunter();
+        }
+
+    }
 
 
     protected void OrganizerGridviewDeleteRow(object sender, GridViewDeleteEventArgs e)
     {
-        foreach (Organizer item in organizerlist)
-        {
-            //find match in arraylist
-            if (GridViewOrganizers.SelectedRow.Cells[1].Text == item.alias.ToString())
-            {
-                organizerlist.Remove(item);
-                LabelUpdateFeedback.Text = "Person deleted";
-                break;
-            }
-            else
-            {
-                LabelUpdateFeedback.Text = "Person not found";
+        //FOREACH LOOP DELETE METODE
+        //foreach (Organizer item in organizerlist)
+        //{
+        //    //find match in arraylist
+        //    if (GridViewOrganizers.SelectedRow.Cells[1].Text == item.alias.ToString())
+        //    {
+        //        organizerlist.Remove(item);
+        //        LabelUpdateFeedback.Text = "Person deleted";
+        //        break;
+        //    }
+        //    else
+        //    {
+        //        LabelUpdateFeedback.Text = "Person not found";
 
-            }
-        }
+        //    }
+        //}
+
+
+        //FOR LOOP DELETE METODE
+
+        //for (int i = 0; i < organizerlist.Count; i++)
+        //{
+        //    //find match in arraylist
+        //    if (GridViewOrganizers.SelectedRow.Cells[1].Text == organizerlist[i].ToString())
+        //    {
+        //        organizerlist.Remove(i);
+        //        LabelUpdateFeedback.Text = "Person deleted";
+        //        break;
+        //    }
+        //    else
+        //    {
+        //        LabelUpdateFeedback.Text = "Person not found";
+        //    }
+        //}
 
         //update gridview
         GridViewOrganizers.DataSource = organizerlist;
@@ -185,32 +220,51 @@ public partial class readorganizers : System.Web.UI.Page
 
     
 
-    protected void GridViewOrganizers_SelectedIndexChanged(object sender, EventArgs e)
+    
+    //UPDATE ORGANIZER METHOD
+    public void UpdateOrganizer()
     {
-        //clean form
-        Formcleaner.ClearForm(participantform);
-        LabelUpdateInfoFor.Text = "";
-        LabelUpdateInfoAlias.Text = "";
-        LabelUpdateShowType.Text = "";
+        foreach (Organizer item in organizerlist)
+        {
+            //find match in arraylist
+            if (LabelUpdateInfoAlias.Text == item.alias.ToString())
+            {
+                item.alias = TextBoxUpdateAlias.Text;
+                item.name = TextBoxUpdateName.Text;
+                item.age = Convert.ToInt32(TextBoxUpdateAge.Text);
+                item.gender = RadioButtonListUpdate.SelectedValue;
+                item.email = TextBoxUpdateEmail.Text;
+                item.password = TextBoxUpdatePassword.Text;
 
-        //disable favorite pokemon textbox
-        TextBoxUpdateFavorite.Enabled = false;
+                //write to file
+                FileUtility.WriteFile(organizerlist, Server.MapPath("~/App_Data/Organizers.ser"));
 
-        //can be done in a smarter way?
-        TextBoxUpdateAlias.Text = GridViewOrganizers.SelectedRow.Cells[1].Text;
-        TextBoxUpdateName.Text = GridViewOrganizers.SelectedRow.Cells[2].Text;
-        TextBoxUpdateAge.Text = GridViewOrganizers.SelectedRow.Cells[3].Text;
-        RadioButtonListUpdate.SelectedValue = GridViewOrganizers.SelectedRow.Cells[4].Text;
-        TextBoxUpdateEmail.Text = GridViewOrganizers.SelectedRow.Cells[5].Text;
-        TextBoxUpdatePassword.Text = GridViewOrganizers.SelectedRow.Cells[6].Text;
+                //populate gridview
+                GridViewOrganizers.DataSource = organizerlist;
+                GridViewOrganizers.DataBind();
 
-        LabelUpdateInfoFor.Text = "Information about: ";
-        LabelUpdateInfoAlias.Text = GridViewOrganizers.SelectedRow.Cells[1].Text;
-        LabelUpdateShowType.Text = "(Organizer)";
+                //clear form
+                Formcleaner.ClearForm(participantform);
+                LabelUpdateInfoFor.Text = "";
+                LabelUpdateInfoAlias.Text = "";
+                LabelUpdateShowType.Text = "";
+
+                //feedback message
+                LabelUpdateFeedback.Text = "Information has been changed";
+
+                break;
+            }
+            else
+            {
+                LabelUpdateFeedback.Text = "Person not found";
+
+            }
+        }
     }
 
-
+    //UPDATE POKEHUNTER METHOD
     public void UpdatePokehunter() {
+        
         foreach (Pokehunter item in pokehunterlist)
         {
             //find match in arraylist
@@ -224,10 +278,8 @@ public partial class readorganizers : System.Web.UI.Page
                 item.password = TextBoxUpdatePassword.Text;
                 item.FavoritePokemon = TextBoxUpdateFavorite.Text;
 
-                //feedback message
-                LabelUpdateFeedback.Text = "Information has been changed";
-
-                //empty gridview
+                //write to file
+                FileUtility.WriteFile(pokehunterlist, Server.MapPath("~/App_Data/Pokehunters.ser"));
 
                 //populate gridview
                 GridViewPokehunters.DataSource = pokehunterlist;
@@ -239,43 +291,10 @@ public partial class readorganizers : System.Web.UI.Page
                 LabelUpdateInfoAlias.Text = "";
                 LabelUpdateShowType.Text = "";
 
-            }
-            else
-            {
-                LabelUpdateFeedback.Text = "Person not found";
-
-            }
-        }
-    }
-
-    public void UpdateOrganizer() {
-        foreach (Organizer item in organizerlist)
-        {
-            //find match in arraylist
-            if (LabelUpdateInfoAlias.Text == item.alias.ToString())
-            {
-                item.alias = TextBoxUpdateAlias.Text;
-                item.name = TextBoxUpdateName.Text;
-                item.age = Convert.ToInt32(TextBoxUpdateAge.Text);
-                item.gender = RadioButtonListUpdate.SelectedValue;
-                item.email = TextBoxUpdateEmail.Text;
-                item.password = TextBoxUpdatePassword.Text;
-
                 //feedback message
                 LabelUpdateFeedback.Text = "Information has been changed";
 
-                //empty gridview
-
-                //populate gridview
-                GridViewOrganizers.DataSource = organizerlist;
-                GridViewOrganizers.DataBind();
-
-                //clear form
-                Formcleaner.ClearForm(participantform);
-                LabelUpdateInfoFor.Text = "";
-                LabelUpdateInfoAlias.Text = "";
-                LabelUpdateShowType.Text = "";
-
+                break;
             }
             else
             {
@@ -283,5 +302,7 @@ public partial class readorganizers : System.Web.UI.Page
 
             }
         }
+        
     }
+
 }

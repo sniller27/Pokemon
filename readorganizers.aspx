@@ -23,6 +23,8 @@
                 <asp:BoundField DataField="password" HeaderText="password" SortExpression="password" />
                 <asp:CommandField ShowDeleteButton="True" />
             </Columns>
+            <%--<selectedrowstyle BackColor="lightblue"/>--%>
+
         </asp:GridView>
         
         <h2>Pokehunters</h2>
@@ -42,7 +44,7 @@
                 <asp:ButtonField ButtonType="Button" commandname="Select" ShowHeader="True" Text="Delete" />
 
             </Columns>
-            <selectedrowstyle BackColor="lightblue"/>
+            <%--<selectedrowstyle BackColor="lightblue"/>--%>
             
         </asp:GridView>
 
