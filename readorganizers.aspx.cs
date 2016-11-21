@@ -205,7 +205,7 @@ public partial class readorganizers : System.Web.UI.Page
     
     //UPDATE POKEHUNTER METHOD
     public void UpdatePokehunter() {
-        //create object
+        //going through list and checks if mail is valid.
         pokehunter = new Pokehunter(TextBoxUpdateAlias.Text, TextBoxUpdateName.Text, Convert.ToInt32(TextBoxUpdateAge.Text), RadioButtonListUpdate.SelectedValue, TextBoxUpdateEmail.Text, TextBoxUpdatePassword.Text, TextBoxUpdateFavorite.Text);
 
         //checks valid email
