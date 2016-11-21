@@ -50,39 +50,49 @@
 
         <div>
             <h2>Change information</h2>
-            <asp:Label ID="LabelUpdateFeedback" runat="server"></asp:Label>
+            <asp:Label ID="LabelUpdateFeedbackPositive" runat="server" CssClass="successcolor" Font-Size="20px"></asp:Label>
+
+            <asp:Label ID="LabelUpdateFeedbackNegative" runat="server" CssClass="errorcolor" Font-Size="20px"></asp:Label>
+            <br />
 
             <asp:Label ID="LabelUpdateInfoFor" runat="server"></asp:Label>
             <asp:Label ID="LabelUpdateInfoAlias" runat="server"></asp:Label>
             <asp:Label ID="LabelUpdateShowType" runat="server"></asp:Label>
             <br />
-            <asp:TextBox ID="TextBoxUpdateAlias" runat="server"></asp:TextBox>
+            <asp:TextBox ID="TextBoxUpdateAlias" runat="server" Enabled="False"></asp:TextBox>
             <asp:Label ID="LabelUpdateAlias" runat="server" Text="Alias"></asp:Label>
+            <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ControlToValidate="TextBoxUpdateAlias" EnableClientScript="False" ErrorMessage="Fill in alias please" CssClass="errorcolor"></asp:RequiredFieldValidator>
             <br />
-            <asp:TextBox ID="TextBoxUpdateName" runat="server"></asp:TextBox>
+            <asp:TextBox ID="TextBoxUpdateName" runat="server" Enabled="False"></asp:TextBox>
             <asp:Label ID="LabelUpdateName" runat="server" Text="Name"></asp:Label>
+            <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ControlToValidate="TextBoxUpdateName" EnableClientScript="False" ErrorMessage="Fill in name please" CssClass="errorcolor"></asp:RequiredFieldValidator>
             <br />
-            <asp:TextBox ID="TextBoxUpdateAge" runat="server"></asp:TextBox>
+            <asp:TextBox ID="TextBoxUpdateAge" runat="server" TextMode="Number" Enabled="False"></asp:TextBox>
             <asp:Label ID="LabelUpdateAge" runat="server" Text="Age"></asp:Label>
+            <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ControlToValidate="TextBoxUpdateAge" EnableClientScript="False" ErrorMessage="Fill in age please" CssClass="errorcolor"></asp:RequiredFieldValidator>
             <br />
             <asp:Label ID="LabelUpdateGender" runat="server" Text="Gender"></asp:Label>
-            <asp:RadioButtonList ID="RadioButtonListUpdate" runat="server">
+            <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server" ControlToValidate="RadioButtonListUpdate" EnableClientScript="False" ErrorMessage="Choose your gender please" CssClass="errorcolor"></asp:RequiredFieldValidator>
+            <asp:RadioButtonList ID="RadioButtonListUpdate" runat="server" Enabled="False">
                 <asp:ListItem>Male</asp:ListItem>
                 <asp:ListItem>Female</asp:ListItem>
             </asp:RadioButtonList>
-            <asp:TextBox ID="TextBoxUpdateEmail" runat="server"></asp:TextBox>
+            <asp:TextBox ID="TextBoxUpdateEmail" runat="server" TextMode="Email" Enabled="False"></asp:TextBox>
             <asp:Label ID="LabelUpdateEmail" runat="server" Text="Email"></asp:Label>
+            <asp:RequiredFieldValidator ID="RequiredFieldValidator5" runat="server" ControlToValidate="TextBoxUpdateEmail" EnableClientScript="False" ErrorMessage="Fill in email please" CssClass="errorcolor"></asp:RequiredFieldValidator>
+            <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" ControlToValidate="TextBoxUpdateEmail" CssClass="errorcolor" EnableClientScript="False" ErrorMessage="Please write your email properly" ValidationExpression="[a-z0-9!#$%&amp;'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&amp;'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?"></asp:RegularExpressionValidator>
             <br />
-            <asp:TextBox ID="TextBoxUpdatePassword" runat="server"></asp:TextBox>
+            <asp:TextBox ID="TextBoxUpdatePassword" runat="server" CssClass="passwordstyle" Enabled="False"></asp:TextBox>
             <asp:Label ID="LabelUpdatePassword" runat="server" Text="Password"></asp:Label>
+            <asp:RequiredFieldValidator ID="RequiredFieldValidator6" runat="server" ControlToValidate="TextBoxUpdatePassword" EnableClientScript="False" ErrorMessage="Fill in password please" CssClass="errorcolor"></asp:RequiredFieldValidator>
             <br />
-            <asp:TextBox ID="TextBoxUpdateFavorite" runat="server"></asp:TextBox>
+            <asp:TextBox ID="TextBoxUpdateFavorite" runat="server" Enabled="False"></asp:TextBox>
             <asp:Label ID="LabelUpdateFavorite" runat="server" Text="Favorite Pokémon"></asp:Label>
+            <asp:RequiredFieldValidator ID="RequiredFieldValidatorUpdateFavorite" runat="server" ControlToValidate="TextBoxUpdateFavorite" CssClass="errorcolor" EnableClientScript="False" Enabled="False" ErrorMessage="Please choose your favorite Pokémon"></asp:RequiredFieldValidator>
             <br />
             
             <br />
-            <br />
-            <asp:Button ID="ButtonUpdate" runat="server" Text="Button" CssClass="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" OnClick="ButtonUpdate_Click" />
+            <asp:Button ID="ButtonUpdate" runat="server" Text="Update" CssClass="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" OnClick="ButtonUpdate_Click" Enabled="False" />
             <br />
 
         </div>

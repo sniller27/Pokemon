@@ -64,7 +64,9 @@ public partial class readorganizers : System.Web.UI.Page
             LabelReadPokehuntersInfo.Text = "File not created";
         }
 
-    
+        //reset label
+        LabelUpdateFeedbackNegative.Text = "";
+        LabelUpdateFeedbackPositive.Text = "";
     }
 
     //SELECT ROW ORGANIZER METHOD
@@ -76,8 +78,19 @@ public partial class readorganizers : System.Web.UI.Page
         LabelUpdateInfoAlias.Text = "";
         LabelUpdateShowType.Text = "";
 
-        //disable favorite pokemon textbox
+        //disable and disable fields
+        TextBoxUpdateAlias.Enabled = true;
+        TextBoxUpdateName.Enabled = true;
+        TextBoxUpdateAge.Enabled = true;
+        RadioButtonListUpdate.Enabled = true;
+        TextBoxUpdateEmail.Enabled = true;
+        TextBoxUpdatePassword.Enabled = true;
+        TextBoxUpdateFavorite.Enabled = true;
+        ButtonUpdate.Enabled = true;
         TextBoxUpdateFavorite.Enabled = false;
+
+        //deactivate validation label for favoritepokemon
+        RequiredFieldValidatorUpdateFavorite.Enabled = false;
 
         //can be done in a smarter way?
         TextBoxUpdateAlias.Text = GridViewOrganizers.SelectedRow.Cells[1].Text;
@@ -102,7 +115,17 @@ public partial class readorganizers : System.Web.UI.Page
         LabelUpdateShowType.Text = "";
 
         //enable favorite pokemon textbox
+        TextBoxUpdateAlias.Enabled = true;
+        TextBoxUpdateName.Enabled = true;
+        TextBoxUpdateAge.Enabled = true;
+        RadioButtonListUpdate.Enabled = true;
+        TextBoxUpdateEmail.Enabled = true;
+        TextBoxUpdatePassword.Enabled = true;
         TextBoxUpdateFavorite.Enabled = true;
+        ButtonUpdate.Enabled = true;
+
+        //activate validation label for favoritepokemon
+        RequiredFieldValidatorUpdateFavorite.Enabled = true;
 
         //can be done in a smarter way?
         TextBoxUpdateAlias.Text = GridViewPokehunters.SelectedRow.Cells[1].Text;
@@ -122,16 +145,19 @@ public partial class readorganizers : System.Web.UI.Page
     //UPDATE BUTTON METHOD
     protected void ButtonUpdate_Click(object sender, EventArgs e)
     {
-        if (LabelUpdateShowType.Text.Contains("Organizer")) {
-            //update organiser
-            UpdateOrganizer();
-        }
-        else if(LabelUpdateShowType.Text.Contains("Pokehunter"))
+        if (Page.IsValid)
         {
-            //updatepokehunter
-            UpdatePokehunter();
+            if (LabelUpdateShowType.Text.Contains("Organizer"))
+            {
+                //update organiser
+                UpdateOrganizer();
+            }
+            else if (LabelUpdateShowType.Text.Contains("Pokehunter"))
+            {
+                //updatepokehunter
+                UpdatePokehunter();
+            }
         }
-
     }
 
     //UPDATE ORGANIZER METHOD
@@ -163,18 +189,20 @@ public partial class readorganizers : System.Web.UI.Page
                 LabelUpdateShowType.Text = "";
 
                 //feedback message
-                LabelUpdateFeedback.Text = "Information has been changed";
+                LabelUpdateFeedbackPositive.Text = "Information has been changed";
+
+                DisableUpdateForm();
 
                 break;
             }
             else
             {
-                LabelUpdateFeedback.Text = "Person not found";
+                LabelUpdateFeedbackNegative.Text = "Person not found";
 
             }
         }
     }
-
+    
     //UPDATE POKEHUNTER METHOD
     public void UpdatePokehunter() {
         //create object
@@ -211,20 +239,22 @@ public partial class readorganizers : System.Web.UI.Page
                     LabelUpdateShowType.Text = "";
 
                     //feedback message
-                    LabelUpdateFeedback.Text = "Information has been changed";
+                    LabelUpdateFeedbackPositive.Text = "Information has been changed";
+
+                    DisableUpdateForm();
 
                     break;
                 }
                 else
                 {
-                    LabelUpdateFeedback.Text = "Person not found";
+                    LabelUpdateFeedbackNegative.Text = "Person not found";
 
                 }
             }
         }
         else
         {
-            LabelUpdateFeedback.Text = "A pokehunters mail must end with @poke.dk";
+            LabelUpdateFeedbackNegative.Text = "A pokehunters mail must end with @poke.dk";
         }
    
     }
@@ -244,12 +274,12 @@ public partial class readorganizers : System.Web.UI.Page
             if (organizernamerow == item.alias.ToString())
             {
                 organizerlist.Remove(item);
-                LabelUpdateFeedback.Text = "Person deleted";
+                LabelUpdateFeedbackPositive.Text = "Person deleted";
                 break;
             }
             else
             {
-                LabelUpdateFeedback.Text = "Person not found";
+                LabelUpdateFeedbackNegative.Text = "Person not found";
 
             }
         }
@@ -277,12 +307,12 @@ public partial class readorganizers : System.Web.UI.Page
             if (pokehunternamerow == item.alias.ToString())
             {
                 pokehunterlist.Remove(item);
-                LabelUpdateFeedback.Text = "Person deleted";
+                LabelUpdateFeedbackPositive.Text = "Person deleted";
                 break;
             }
             else
             {
-                LabelUpdateFeedback.Text = "Person not found";
+                LabelUpdateFeedbackNegative.Text = "Person not found";
 
             }
         }
@@ -293,5 +323,17 @@ public partial class readorganizers : System.Web.UI.Page
         //update gridview
         GridViewPokehunters.DataSource = pokehunterlist;
         GridViewPokehunters.DataBind();
+    }
+
+    private void DisableUpdateForm()
+    {
+        TextBoxUpdateAlias.Enabled = false;
+        TextBoxUpdateName.Enabled = false;
+        TextBoxUpdateAge.Enabled = false;
+        RadioButtonListUpdate.Enabled = false;
+        TextBoxUpdateEmail.Enabled = false;
+        TextBoxUpdatePassword.Enabled = false;
+        TextBoxUpdateFavorite.Enabled = false;
+        ButtonUpdate.Enabled = false;
     }
 }
