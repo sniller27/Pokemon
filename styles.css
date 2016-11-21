@@ -4,14 +4,7 @@
 
 }
 .demo-layout-transparent {
-  /** background: url('Images/pokemonevent.jpg'); **/
   background-color: gray;
-  /* Create the parallax scrolling effect */
-    background-attachment: fixed;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    min-height: 400px;
 }
 .demo-layout-transparent .mdl-layout__header,
 .demo-layout-transparent .mdl-layout__drawer-button {

@@ -195,7 +195,7 @@ public partial class readorganizers : System.Web.UI.Page
 
                 break;
             }
-            else
+            else if(item == organizerlist[organizerlist.Count - 1])
             {
                 LabelUpdateFeedbackNegative.Text = "Person not found";
 
@@ -245,8 +245,9 @@ public partial class readorganizers : System.Web.UI.Page
 
                     break;
                 }
-                else
+                else if(item == pokehunterlist[pokehunterlist.Count-1])
                 {
+                    //if no of the elements in the list is found
                     LabelUpdateFeedbackNegative.Text = "Person not found";
 
                 }
@@ -277,7 +278,7 @@ public partial class readorganizers : System.Web.UI.Page
                 LabelUpdateFeedbackPositive.Text = "Person deleted";
                 break;
             }
-            else
+            else if(item == organizerlist[organizerlist.Count - 1])
             {
                 LabelUpdateFeedbackNegative.Text = "Person not found";
 
@@ -310,7 +311,7 @@ public partial class readorganizers : System.Web.UI.Page
                 LabelUpdateFeedbackPositive.Text = "Person deleted";
                 break;
             }
-            else
+            else if(item == pokehunterlist[pokehunterlist.Count - 1])
             {
                 LabelUpdateFeedbackNegative.Text = "Person not found";
 
