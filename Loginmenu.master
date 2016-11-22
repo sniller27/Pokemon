@@ -1,0 +1,11 @@
+﻿<%@ Master Language="C#" MasterPageFile="~/Mastermenu.master" AutoEventWireup="true" CodeFile="Loginmenu.master.cs" Inherits="Loginmenu" %>
+
+<asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
+</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
+    <a href="Mypokemon.aspx">My Pokémon</a>
+    <a href="Mypokemon.aspx">Catch a pokemon</a>
+    <br />
+     <asp:ContentPlaceHolder ID="ChildContent1" runat="server" />
+</asp:Content>
+
