@@ -8,7 +8,7 @@ using System.Web;
 /// This class is responsible for handling Persons
 /// </summary>
 /// 
-//code snippet som bruger class information til at restore class
+//allows object serialization
 [Serializable]
 public abstract class Person
 {

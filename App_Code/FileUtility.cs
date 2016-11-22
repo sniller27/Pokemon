@@ -14,11 +14,11 @@ public class FileUtility
     //write method
     public static void WriteFile(ArrayList a, string filename)
     {
-        //filestream path, create file, writefile
+        //make filestream path, create file, writefile
         FileStream fs = new FileStream(filename, FileMode.Create, FileAccess.Write, FileShare.None);
-        //bruges til transformation mellem objects and binary data
+        //used for transformation between objects and binary data
         BinaryFormatter bf = new BinaryFormatter();
-        //Serialize ... object to binaries? ... aka. marshalling object?
+        //Serializing
         bf.Serialize(fs, a);
         //clean up
         fs.Close();
@@ -28,9 +28,9 @@ public class FileUtility
     public static ArrayList ReadFile(string filename)
     {
         FileStream fs = new FileStream(filename, FileMode.Open, FileAccess.Read, FileShare.None);
-        //bruges til transformation mellem objects and binary data
+        ///used for transformation between objects and binary data
         BinaryFormatter bf = new BinaryFormatter();
-        //Deserialize ... binary til objects? aka. unmarshalling object?
+        //Deserialize
         ArrayList a = (ArrayList)bf.Deserialize(fs);
         //clean up
         fs.Close();

@@ -21,8 +21,6 @@
                 <asp:BoundField DataField="password" HeaderText="password" SortExpression="password" />
                 <asp:CommandField ButtonType="Button" ShowDeleteButton="True" />
             </Columns>
-            <%--<selectedrowstyle BackColor="lightblue"/>--%>
-
         </asp:GridView>
         
         <h2>Pokehunters</h2>
@@ -40,10 +38,7 @@
                 <asp:BoundField DataField="FavoritePokemon" HeaderText="FavoritePokemon" SortExpression="FavoritePokemon" />
                 <asp:CommandField ButtonType="Button" ShowDeleteButton="True" />
             </Columns>
-            <%--<selectedrowstyle BackColor="lightblue"/>--%>
-            
         </asp:GridView>
-
     </div>
 
         <div>
@@ -90,7 +85,6 @@
             <br />
             <asp:Button ID="ButtonUpdate" runat="server" Text="Update" CssClass="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" OnClick="ButtonUpdate_Click" Enabled="False" />
             <br />
-
         </div>
     </form>
 </asp:Content>
