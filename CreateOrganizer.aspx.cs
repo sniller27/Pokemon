@@ -46,6 +46,7 @@ public partial class CreateOrganizer : System.Web.UI.Page
 
     protected void Unnamed1_SelectedIndexChanged(object sender, EventArgs e)
     {
+        //selected dropdown option
         if (DropdownlistCreateParticipant.Text == "Pokehunter")
         {
             TextBoxFavorite.Enabled = true;
@@ -72,7 +73,7 @@ public partial class CreateOrganizer : System.Web.UI.Page
     }
 
     public void AddPersonToFile(ArrayList list, string session, string filepath, Person pers) {
-        //virker men jeg fatter det ikke???
+        //I'm not quite sure why this method works
         list = (ArrayList)Application[session];
         ////add to list
         list.Add(pers);
@@ -87,7 +88,7 @@ public partial class CreateOrganizer : System.Web.UI.Page
     }
 
     public void CreateNewOrganizer() {
-        //virker men jeg fatter det ikke??? jeg har allerede gjort dette i pageloadmetoden gennem sessioncheck();
+        //updates list again?
         organizerlist = (ArrayList)Application["Organizercollection"];
 
         //if list is empty
@@ -132,7 +133,6 @@ public partial class CreateOrganizer : System.Web.UI.Page
                         LabelAddOrganizerFeedbackNegative.Text = "An organizers mail must end with @poke.dk";
                         TextBoxFavorite.Enabled = false;
                     }
-
                     break;
                 }
             }
@@ -140,7 +140,7 @@ public partial class CreateOrganizer : System.Web.UI.Page
     }
 
     public void CreateNewPokehunter() {
-        //virker men jeg fatter det ikke??? jeg har allerede gjort dette i pageloadmetoden gennem sessioncheck();
+        //updates list again?
         pokehunterlist = (ArrayList)Application["Pokehuntercollection"];
 
         if (pokehunterlist.Count == 0)

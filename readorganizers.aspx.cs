@@ -14,6 +14,7 @@ public partial class readorganizers : System.Web.UI.Page
 
     protected void Page_Load(object sender, EventArgs e)
     {
+        //try to get data from Organizer file
             try
             {
                 organizerlist = FileUtility.ReadFile(Server.MapPath("~/App_Data/Organizers.ser"));
@@ -25,6 +26,7 @@ public partial class readorganizers : System.Web.UI.Page
                 }
                 else
                 {
+                //bind grid
                     GridViewOrganizers.DataSource = organizerlist;
                     GridViewOrganizers.DataBind();
                 }
@@ -35,7 +37,7 @@ public partial class readorganizers : System.Web.UI.Page
                 //not necessarily file problem
                 LabelReadOrganizersInfo.Text = "File not created";
             }
-
+        //try to get data from Organizer file
             try
             {
                 pokehunterlist = FileUtility.ReadFile(Server.MapPath("~/App_Data/Pokehunters.ser"));
@@ -48,6 +50,7 @@ public partial class readorganizers : System.Web.UI.Page
                 }
                 else
                 {
+                //bind grid
                     GridViewPokehunters.DataSource = pokehunterlist;
                     GridViewPokehunters.DataBind();
                 }
@@ -74,20 +77,13 @@ public partial class readorganizers : System.Web.UI.Page
         LabelUpdateShowType.Text = "";
 
         //disable and disable fields
-        TextBoxUpdateAlias.Enabled = true;
-        TextBoxUpdateName.Enabled = true;
-        TextBoxUpdateAge.Enabled = true;
-        RadioButtonListUpdate.Enabled = true;
-        TextBoxUpdateEmail.Enabled = true;
-        TextBoxUpdatePassword.Enabled = true;
-        TextBoxUpdateFavorite.Enabled = true;
-        ButtonUpdate.Enabled = true;
+        EnableUpdateForm();
         TextBoxUpdateFavorite.Enabled = false;
 
         //deactivate validation label for favoritepokemon
         RequiredFieldValidatorUpdateFavorite.Enabled = false;
 
-        //can be done in a smarter way?
+        //populate update form
         TextBoxUpdateAlias.Text = GridViewOrganizers.SelectedRow.Cells[1].Text;
         TextBoxUpdateName.Text = GridViewOrganizers.SelectedRow.Cells[2].Text;
         TextBoxUpdateAge.Text = GridViewOrganizers.SelectedRow.Cells[3].Text;
@@ -110,19 +106,12 @@ public partial class readorganizers : System.Web.UI.Page
         LabelUpdateShowType.Text = "";
 
         //enable favorite pokemon textbox
-        TextBoxUpdateAlias.Enabled = true;
-        TextBoxUpdateName.Enabled = true;
-        TextBoxUpdateAge.Enabled = true;
-        RadioButtonListUpdate.Enabled = true;
-        TextBoxUpdateEmail.Enabled = true;
-        TextBoxUpdatePassword.Enabled = true;
-        TextBoxUpdateFavorite.Enabled = true;
-        ButtonUpdate.Enabled = true;
+        EnableUpdateForm();
 
         //activate validation label for favoritepokemon
         RequiredFieldValidatorUpdateFavorite.Enabled = true;
-
-        //can be done in a smarter way?
+        
+        //populate update form
         TextBoxUpdateAlias.Text = GridViewPokehunters.SelectedRow.Cells[1].Text;
         TextBoxUpdateName.Text = GridViewPokehunters.SelectedRow.Cells[2].Text;
         TextBoxUpdateAge.Text = GridViewPokehunters.SelectedRow.Cells[3].Text;
@@ -139,6 +128,7 @@ public partial class readorganizers : System.Web.UI.Page
     //UPDATE BUTTON METHOD
     protected void ButtonUpdate_Click(object sender, EventArgs e)
     {
+        //form validation
         if (Page.IsValid)
         {
             if (LabelUpdateShowType.Text.Contains("Organizer"))
@@ -274,8 +264,6 @@ public partial class readorganizers : System.Web.UI.Page
     //DELETE FROM ORGANIZER
     public void GridViewOrganizers_RowDeleting(Object sender, GridViewDeleteEventArgs e)
     {
-        //int index = GridViewOrganizers.SelectedIndex;   //this one not workin properly. needs a selected field already
-
         //get alias (unique)
         string organizernamerow = GridViewOrganizers.DataKeys[e.RowIndex].Value.ToString();
         
@@ -344,5 +332,17 @@ public partial class readorganizers : System.Web.UI.Page
         TextBoxUpdatePassword.Enabled = false;
         TextBoxUpdateFavorite.Enabled = false;
         ButtonUpdate.Enabled = false;
+    }
+
+    private void EnableUpdateForm()
+    {
+        TextBoxUpdateAlias.Enabled = true;
+        TextBoxUpdateName.Enabled = true;
+        TextBoxUpdateAge.Enabled = true;
+        RadioButtonListUpdate.Enabled = true;
+        TextBoxUpdateEmail.Enabled = true;
+        TextBoxUpdatePassword.Enabled = true;
+        TextBoxUpdateFavorite.Enabled = true;
+        ButtonUpdate.Enabled = true;
     }
 }
