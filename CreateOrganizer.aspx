@@ -2,11 +2,8 @@
 
 <asp:Content ID="Content2" ContentPlaceHolderID="content" Runat="Server">
     <h2>Sign up</h2>
-
     <form id="createorganizerform" runat="server">
-    <div>
-        <asp:Label ID="Label1" runat="server" Text="Create Organizer"></asp:Label>
-        <br />
+        <div>
 
         <asp:TextBox ID="TextBoxAlias" runat="server"></asp:TextBox>
         <asp:Label ID="LabelAlias" runat="server" Text="Alias"></asp:Label>
