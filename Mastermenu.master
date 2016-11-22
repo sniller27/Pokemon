@@ -76,7 +76,7 @@
 
 
         <br />
-        <asp:ContentPlaceHolder id="ContentPlaceHolder1" runat="server">
+        <asp:ContentPlaceHolder id="content" runat="server">
         
         </asp:ContentPlaceHolder>
     </div>
@@ -87,14 +87,18 @@
         })
     </script>
 
-    <hr>
-
-    <div class="container">
+<%--    <div class="container">
 	    <div class="row">
           <div class="col-md-12">Copyright ©</div>
             <br />
             <br />
         </div>
-    </div>
+    </div>--%>
+
+    <footer class="footer">
+      <div class="container">
+        <p class="text-muted">Pokémon event 2016 - Copyright ©</p>
+      </div>
+    </footer>
 </body>
 </html>

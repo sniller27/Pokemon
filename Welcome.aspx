@@ -1,8 +1,10 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Mastermenu.master" AutoEventWireup="true" CodeFile="Welcome.aspx.cs" Inherits="Welcome" %>
+﻿<%@ Page Title="Welcome to Pokémon event 2016" Language="C#" MasterPageFile="~/Mastermenu.master" AutoEventWireup="true" CodeFile="Welcome.aspx.cs" Inherits="Welcome" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
+    <%--css falbacks--%>
+    <script src="http://s.codepen.io/assets/libs/modernizr.js" type="text/javascript"></script>
 </asp:Content>
-<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
+<asp:Content ID="Content2" ContentPlaceHolderID="content" Runat="Server">
 
 <div class="bg"></div>
 <div class="jumbotron text-center">
@@ -11,55 +13,26 @@
 </div>
 
 <div class="container">
-  <div class="row">
-    <h2>Page Content</h2>
-    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis pharetra varius quam sit amet vulputate. 
-    Quisque mauris augue, molestie tincidunt condimentum vitae, gravida a libero. Aenean sit amet felis 
-    dolor, in sagittis nisi. Sed ac orci quis tortor imperdiet venenatis. Duis elementum auctor accumsan. 
-    Aliquam in felis sit amet augue.
-    <br>
-    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis pharetra varius quam sit amet vulputate. 
-    Quisque mauris augue, molestie tincidunt condimentum vitae, gravida a libero. Aenean sit amet felis 
-    dolor, in sagittis nisi. Sed ac orci quis tortor imperdiet venenatis. Duis elementum auctor accumsan. 
-    Aliquam in felis sit amet augue.
-    <br>
-    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis pharetra varius quam sit amet vulputate. 
-    Quisque mauris augue, molestie tincidunt condimentum vitae, gravida a libero. Aenean sit amet felis 
-    dolor, in sagittis nisi. Sed ac orci quis tortor imperdiet venenatis. Duis elementum auctor accumsan. 
-    Aliquam in felis sit amet augue.
-    <br>
-    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis pharetra varius quam sit amet vulputate. 
-    Quisque mauris augue, molestie tincidunt condimentum vitae, gravida a libero. Aenean sit amet felis 
-    dolor, in sagittis nisi. Sed ac orci quis tortor imperdiet venenatis. Duis elementum auctor accumsan. 
-    Aliquam in felis sit amet augue.
-  </div>
-  <hr>
-  <div class="row">
-    <h2>Page Content</h2>
-    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis pharetra varius quam sit amet vulputate. 
-    Quisque mauris augue, molestie tincidunt condimentum vitae, gravida a libero. Aenean sit amet felis 
-    dolor, in sagittis nisi. Sed ac orci quis tortor imperdiet venenatis. Duis elementum auctor accumsan. 
-    Aliquam in felis sit amet augue.
-    <h2>Page Content</h2>
-    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis pharetra varius quam sit amet vulputate. 
-    Quisque mauris augue, molestie tincidunt condimentum vitae, gravida a libero. Aenean sit amet felis 
-    dolor, in sagittis nisi. Sed ac orci quis tortor imperdiet venenatis. Duis elementum auctor accumsan. 
-    Aliquam in felis sit amet augue.
-    <h2>Page Content</h2>
-    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis pharetra varius quam sit amet vulputate. 
-    Quisque mauris augue, molestie tincidunt condimentum vitae, gravida a libero. Aenean sit amet felis 
-    dolor, in sagittis nisi. Sed ac orci quis tortor imperdiet venenatis. Duis elementum auctor accumsan. 
-    Aliquam in felis sit amet augue.
-    
-  </div>
-  <hr>
-  <div class="row">
-    <h2>Page Content</h2>
-    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis pharetra varius quam sit amet vulputate. 
-    Quisque mauris augue, molestie tincidunt condimentum vitae, gravida a libero. Aenean sit amet felis 
-    dolor, in sagittis nisi. Sed ac orci quis tortor imperdiet venenatis. Duis elementum auctor accumsan. 
-    Aliquam in felis sit amet augue.
-  </div>
+    <div class="row">
+        <div class="jumbotron text-center jumofixheight">
+            <h2>These are the current wild Pokémon</h2>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+                <div class="carouselcontainer">
+                    <div class="mycarousel">
+                        <asp:datalist runat="server" id="datalistpokemoncarousel">
+                            <ItemTemplate>
+                                <img class="mycarouselitem slide<%#Eval("PokemonId") %>" src="Images/<%#Eval("Image") %>" />
+                            </ItemTemplate>
+                        </asp:datalist>
+                    </div>
+                </div>
+                <div class="next">Next</div>
+                <div class="prev">Prev</div>
+        </div>
+    </div>
 </div>
 
     <script>
@@ -74,5 +47,30 @@
             parallax();
         });
     </script>
+
+    <%--CAROUSEL--%>
+    <script type="text/javascript">
+        var mycarousel = $(".mycarousel"),
+            currdeg  = 0;
+
+        $(".next").on("click", { d: "n" }, rotate);
+        $(".prev").on("click", { d: "p" }, rotate);
+
+        function rotate(e){
+          if(e.data.d=="n"){
+            currdeg = currdeg - 60;
+          }
+          if(e.data.d=="p"){
+            currdeg = currdeg + 60;
+          }
+          mycarousel.css({
+            "-webkit-transform": "rotateY("+currdeg+"deg)",
+            "-moz-transform": "rotateY("+currdeg+"deg)",
+            "-o-transform": "rotateY("+currdeg+"deg)",
+            "transform": "rotateY("+currdeg+"deg)"
+          });
+        }
+    </script>
+
 </asp:Content>
 
