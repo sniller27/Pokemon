@@ -9,9 +9,6 @@
         <h2>Organizers</h2>
     
         <asp:Label ID="LabelReadOrganizersInfo" runat="server"></asp:Label>
-    
-        <%--<asp:TextBox ID="TextBoxReadOrganizers" runat="server" Height="145px" TextMode="MultiLine" Width="734px"></asp:TextBox>--%>
-        
 
         <asp:GridView ID="GridViewOrganizers" runat="server" Width="730px" AutoGenerateColumns="False" OnSelectedIndexChanged="GridViewOrganizers_SelectedIndexChanged" OnRowDeleting="GridViewOrganizers_RowDeleting" datakeynames="alias">
             <Columns>

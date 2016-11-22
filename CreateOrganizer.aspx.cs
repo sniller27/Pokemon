@@ -16,56 +16,17 @@ public partial class CreateOrganizer : System.Web.UI.Page
 
     protected void Page_Load(object sender, EventArgs e)
     {
-
-        //Application["Organizercollection"] = null;
-        //Application["Pokehuntercollection"] = null;
-
         //initialize arraylists
         organizerlist = new ArrayList();
         pokehunterlist = new ArrayList();
 
-        //VIRKER!!!
-        ////check if "session"/global arraylist exists (Organizer)
-        //if (Application["Pokehuntercollection"] == null)
-        //{
-        //    //if not. then new arraylist
-        //    pokehunterlist = new ArrayList();
-        //    //declare or assign "session"/global arraylist
-        //    Application["Pokehuntercollection"] = pokehunterlist;
-        //}
-
-        ////check if "session"/global arraylist exists (Organizer)
-        //if (Application["Organizercollection"] == null)
-        //{
-        //    //if not. then new arraylist
-        //    organizerlist = new ArrayList();
-        //    //declare or assign "session"/global arraylist
-        //    Application["Organizercollection"] = organizerlist;
-        //}
-
-        ////update arraylists
-        //organizerlist = (ArrayList)Application["Organizercollection"];
-        //pokehunterlist = (ArrayList)Application["Pokehuntercollection"];
-
-        //FORSØG
+        //session checks
         SessionCheck(organizerlist, "Organizercollection");
         SessionCheck(pokehunterlist, "Pokehuntercollection");
-
-
-        //DER MÅ IKKE HENTES HVIS DER IKKE ER NOGET! MEN SKAL HENTES FOR AT TJEKKE OM ALIAS ER TAGET!
-        //try
-        //{
-        //    pokehunterlist = FileUtility.ReadFile(Server.MapPath("~/App_Data/Pokehunters.ser"));
-        //    Application["Pokehuntercollection"] = pokehunterlist;
-        //}
-        //catch (Exception)
-        //{
-        //}
 
         //clear labels on pageload (submit)
         LabelAddOrganizerFeedbackPositive.Text = "";
         LabelAddOrganizerFeedbackNegative.Text = "";
-
     }
 
     protected void ButtonCreateOrganizer_Click(object sender, EventArgs e)
@@ -100,23 +61,6 @@ public partial class CreateOrganizer : System.Web.UI.Page
 
     public void SessionCheck(ArrayList list, string sessionname)
     {
-        //NOT WORKING PART
-        //if (Application[sessionname] == null)
-        //{
-            //try
-            //{
-            //    list = FileUtility.ReadFile(Server.MapPath(filepath));
-            //    Application[sessionname] = list;
-            //}
-            //catch (Exception)
-            //{
-            //}
-        //}
-        //else
-        //{
-        //    list = (ArrayList)Application[sessionname];
-        //}
-
         if (Application[sessionname] == null)
         {
             //if not. then new arraylist
@@ -124,9 +68,7 @@ public partial class CreateOrganizer : System.Web.UI.Page
             //declare or assign "session"/global arraylist
             Application[sessionname] = list;
         }
-
         list = (ArrayList)Application[sessionname];
-
     }
 
     public void AddPersonToFile(ArrayList list, string session, string filepath, Person pers) {
@@ -135,9 +77,6 @@ public partial class CreateOrganizer : System.Web.UI.Page
         ////add to list
         list.Add(pers);
         list = (ArrayList)Application[session];
-
-        //updates "session" variable  //var ikke så smart
-        //Application["Organizercollection"] = organizerlist;
 
         //saves to file
         FileUtility.WriteFile(list, Server.MapPath(filepath));
@@ -156,33 +95,17 @@ public partial class CreateOrganizer : System.Web.UI.Page
         {
             //make instance of pokehunter object in order to check (and change) email
             organizer = new Organizer(TextBoxAlias.Text, TextBoxName.Text, Convert.ToInt32(TextBoxAge.Text), RadioButtonListOrganizerGender.Text, TextBoxEmail.Text, TextBoxPassword.Text);
-            //-----------------------
+
             //checks if emails has extension @poke.dk
             if (organizer.ChangeEmail(TextBoxEmail.Text))
             {
                 AddPersonToFile(organizerlist, "Organizercollection", "~/App_Data/Organizers.ser", organizer);
-
-                ////adds to list
-                //organizerlist.Add(organizer);
-                ////virker men jeg fatter det ikke???
-                //organizerlist = (ArrayList)Application["Organizercollection"];
-
-                ////updates "session" variable
-                ////Application["Organizercollection"] = organizerlist;
-
-                ////write to file and feedback
-                //FileUtility.WriteFile(organizerlist, Server.MapPath("~/App_Data/Organizers.ser"));
-                //LabelAddOrganizerFeedbackPositive.Text = "You have been signed up1";
-
-                ////clearform
-                //Formcleaner.ClearForm(createorganizerform);
             }
             else
             {
                 LabelAddOrganizerFeedbackNegative.Text = "An organizers mail must end with @poke.dk";
                 TextBoxFavorite.Enabled = false;
             }
-            //-----------------------
         }
         else
         {
@@ -198,34 +121,18 @@ public partial class CreateOrganizer : System.Web.UI.Page
                 {
                     ////make instance of pokehunter object in order to check (and change) email
                     organizer = new Organizer(TextBoxAlias.Text, TextBoxName.Text, Convert.ToInt32(TextBoxAge.Text), RadioButtonListOrganizerGender.Text, TextBoxEmail.Text, TextBoxPassword.Text);
-                    //-----------------------
+
                     //checks if emails has extension @poke.dk
                     if (organizer.ChangeEmail(TextBoxEmail.Text))
                     {
                         AddPersonToFile(organizerlist, "Organizercollection", "~/App_Data/Organizers.ser", organizer);
-
-                        ////virker men jeg fatter det ikke???
-                        //organizerlist = (ArrayList)Application["Organizercollection"];
-                        //////add to list
-                        //organizerlist.Add(organizer);
-                        //organizerlist = (ArrayList)Application["Organizercollection"];
-
-                        ////updates "session" variable
-                        ////Application["Organizercollection"] = organizerlist;
-
-                        ////saves to file
-                        //FileUtility.WriteFile(organizerlist, Server.MapPath("~/App_Data/Organizers.ser"));
-                        //LabelAddOrganizerFeedbackPositive.Text = "You have been signed up2";
-
-                        ////clearform
-                        //Formcleaner.ClearForm(createorganizerform);
                     }
                     else
                     {
                         LabelAddOrganizerFeedbackNegative.Text = "An organizers mail must end with @poke.dk";
                         TextBoxFavorite.Enabled = false;
                     }
-                    //-----------------------
+
                     break;
                 }
             }
@@ -245,21 +152,6 @@ public partial class CreateOrganizer : System.Web.UI.Page
             if (pokehunter.ChangeEmail(TextBoxEmail.Text))
             {
                 AddPersonToFile(pokehunterlist, "Pokehuntercollection", "~/App_Data/Pokehunters.ser", pokehunter);
-
-                ////getting the arraylist before inserting
-                //pokehunterlist = (ArrayList)Application["Pokehuntercollection"];
-                ////add to list
-                //pokehunterlist.Add(pokehunter);
-
-                //pokehunterlist = (ArrayList)Application["Pokehuntercollection"];
-
-                ////saves to file
-                //FileUtility.WriteFile(pokehunterlist, Server.MapPath("~/App_Data/Pokehunters.ser"));
-
-                //LabelAddOrganizerFeedbackPositive.Text = "You have been signed up1";
-
-                ////clearform
-                //Formcleaner.ClearForm(createorganizerform);
 
                 //resetform
                 DropdownlistCreateParticipant.SelectedValue = "Organizer";
@@ -290,20 +182,6 @@ public partial class CreateOrganizer : System.Web.UI.Page
                     if (pokehunter.ChangeEmail(TextBoxEmail.Text))
                     {
                         AddPersonToFile(pokehunterlist, "Pokehuntercollection", "~/App_Data/Pokehunters.ser", pokehunter);
-                        ////getting the arraylist before inserting
-                        //pokehunterlist = (ArrayList)Application["Pokehuntercollection"];
-                        ////add to list
-                        //pokehunterlist.Add(pokehunter);
-
-                        //pokehunterlist = (ArrayList)Application["Pokehuntercollection"];
-
-                        ////saves to file
-                        //FileUtility.WriteFile(pokehunterlist, Server.MapPath("~/App_Data/Pokehunters.ser"));
-
-                        //LabelAddOrganizerFeedbackPositive.Text = "You have been signed up2";
-
-                        ////clearform
-                        //Formcleaner.ClearForm(createorganizerform);
 
                         //resetform
                         DropdownlistCreateParticipant.SelectedValue = "Organizer";

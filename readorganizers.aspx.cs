@@ -14,9 +14,6 @@ public partial class readorganizers : System.Web.UI.Page
 
     protected void Page_Load(object sender, EventArgs e)
     {
-        //session check and population of "session" and lists (Organizers)
-        //if (Application["Organizercollection"] == null)
-        //{
             try
             {
                 organizerlist = FileUtility.ReadFile(Server.MapPath("~/App_Data/Organizers.ser"));
@@ -38,17 +35,7 @@ public partial class readorganizers : System.Web.UI.Page
                 //not necessarily file problem
                 LabelReadOrganizersInfo.Text = "File not created";
             }
-        //}
-        //else
-        //{
-        //    organizerlist = (ArrayList)Application["Organizercollection"];
-        //    GridViewOrganizers.DataSource = organizerlist;
-        //    GridViewOrganizers.DataBind();
-        //}
 
-        //session check and population of "session" and lists (Pokehunters)
-        //if (Application["Pokehuntercollection"] == null)
-        //{
             try
             {
                 pokehunterlist = FileUtility.ReadFile(Server.MapPath("~/App_Data/Pokehunters.ser"));
@@ -71,13 +58,6 @@ public partial class readorganizers : System.Web.UI.Page
                 //not necessarily file problem
                 LabelReadPokehuntersInfo.Text = "File not created";
             }
-        //}
-        //else
-        //{
-        //    pokehunterlist = (ArrayList)Application["Pokehuntercollection"];
-        //    GridViewPokehunters.DataSource = pokehunterlist;
-        //    GridViewPokehunters.DataBind();
-        //}
 
         //clear labels on pageload
         LabelUpdateFeedbackNegative.Text = "";
@@ -154,7 +134,6 @@ public partial class readorganizers : System.Web.UI.Page
         LabelUpdateInfoFor.Text = "Information about: ";
         LabelUpdateInfoAlias.Text = GridViewPokehunters.SelectedRow.Cells[1].Text;
         LabelUpdateShowType.Text = "(Pokehunter)";
-
     }
 
     //UPDATE BUTTON METHOD
@@ -327,8 +306,6 @@ public partial class readorganizers : System.Web.UI.Page
     //DELETE FROM POKEHUNTERS
     public void GridViewPokehunters_RowDeleting(Object sender, GridViewDeleteEventArgs e)
     {
-        //int index = GridViewPokehunters.SelectedIndex;   //this one not workin properly. needs a selected field already
-
         //get alias (unique)
         string pokehunternamerow = GridViewPokehunters.DataKeys[e.RowIndex].Value.ToString();
         
