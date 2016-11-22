@@ -178,98 +178,118 @@ public partial class readorganizers : System.Web.UI.Page
     //UPDATE ORGANIZER METHOD
     public void UpdateOrganizer()
     {
+        //check if alias is taken
         foreach (Organizer item in organizerlist)
         {
-            //find match in arraylist
-            if (LabelUpdateInfoAlias.Text == item.alias.ToString())
+            if (item.alias == TextBoxUpdateAlias.Text && !item.alias.Contains(LabelUpdateInfoAlias.Text))
             {
-                if (item.ChangeEmail(TextBoxUpdateEmail.Text))
-                {
-                    item.alias = TextBoxUpdateAlias.Text;
-                    item.name = TextBoxUpdateName.Text;
-                    item.age = Convert.ToInt32(TextBoxUpdateAge.Text);
-                    item.gender = RadioButtonListUpdate.SelectedValue;
-                    item.email = TextBoxUpdateEmail.Text;
-                    item.password = TextBoxUpdatePassword.Text;
-
-                    //write to file
-                    FileUtility.WriteFile(organizerlist, Server.MapPath("~/App_Data/Organizers.ser"));
-
-                    //populate gridview
-                    GridViewOrganizers.DataSource = organizerlist;
-                    GridViewOrganizers.DataBind();
-
-                    //clear form
-                    Formcleaner.ClearForm(participantform);
-                    LabelUpdateInfoFor.Text = "";
-                    LabelUpdateInfoAlias.Text = "";
-                    LabelUpdateShowType.Text = "";
-
-                    //feedback message
-                    LabelUpdateFeedbackPositive.Text = "Information has been changed";
-                    DisableUpdateForm();
-
-                    break;
-                }
-                
+                LabelUpdateFeedbackNegative.Text = "Alias is already taken";
+                break;
             }
-            else if(item == organizerlist[organizerlist.Count - 1])
+            else if (item == organizerlist[organizerlist.Count - 1])
             {
-                LabelUpdateFeedbackNegative.Text = "Person not found";
+                foreach (Organizer searchorganizer in organizerlist)
+                {
+                    //find match in arraylist
+                    if (LabelUpdateInfoAlias.Text == searchorganizer.alias.ToString())
+                    {
+                        if (searchorganizer.ChangeEmail(TextBoxUpdateEmail.Text))
+                        {
+                            searchorganizer.alias = TextBoxUpdateAlias.Text;
+                            searchorganizer.name = TextBoxUpdateName.Text;
+                            searchorganizer.age = Convert.ToInt32(TextBoxUpdateAge.Text);
+                            searchorganizer.gender = RadioButtonListUpdate.SelectedValue;
+                            searchorganizer.email = TextBoxUpdateEmail.Text;
+                            searchorganizer.password = TextBoxUpdatePassword.Text;
 
+                            //write to file
+                            FileUtility.WriteFile(organizerlist, Server.MapPath("~/App_Data/Organizers.ser"));
+
+                            //populate gridview
+                            GridViewOrganizers.DataSource = organizerlist;
+                            GridViewOrganizers.DataBind();
+
+                            //clear form
+                            Formcleaner.ClearForm(participantform);
+                            LabelUpdateInfoFor.Text = "";
+                            LabelUpdateInfoAlias.Text = "";
+                            LabelUpdateShowType.Text = "";
+
+                            //feedback message
+                            LabelUpdateFeedbackPositive.Text = "Information has been changed";
+                            DisableUpdateForm();
+                        }
+                        else
+                        {
+                            LabelUpdateFeedbackNegative.Text = "An organizers mail must end with @poke.dk";
+                        }
+                        break;
+                    }
+                    else if (searchorganizer == organizerlist[organizerlist.Count - 1])
+                    {
+                        LabelUpdateFeedbackNegative.Text = "Person not found";
+                    }
+                }
+                break;
             }
         }
     }
     
     //UPDATE POKEHUNTER METHOD
     public void UpdatePokehunter() {
-        //going through list
+        //check if alias is taken
         foreach (Pokehunter item in pokehunterlist)
         {
-            //find match in arraylist
-            if (LabelUpdateInfoAlias.Text == item.alias.ToString())
+            if (item.alias == TextBoxUpdateAlias.Text && !item.alias.Contains(LabelUpdateInfoAlias.Text))
             {
-                if (item.ChangeEmail(TextBoxUpdateEmail.Text))
-                {
-                    item.alias = TextBoxUpdateAlias.Text;
-                    item.name = TextBoxUpdateName.Text;
-                    item.age = Convert.ToInt32(TextBoxUpdateAge.Text);
-                    item.gender = RadioButtonListUpdate.SelectedValue;
-                    item.email = TextBoxUpdateEmail.Text;
-                    item.password = TextBoxUpdatePassword.Text;
-                    item.FavoritePokemon = TextBoxUpdateFavorite.Text;
-
-                    //write to file
-                    FileUtility.WriteFile(pokehunterlist, Server.MapPath("~/App_Data/Pokehunters.ser"));
-
-                    //populate gridview
-                    GridViewPokehunters.DataSource = pokehunterlist;
-                    GridViewPokehunters.DataBind();
-
-                    //clear form
-                    Formcleaner.ClearForm(participantform);
-                    LabelUpdateInfoFor.Text = "";
-                    LabelUpdateInfoAlias.Text = "";
-                    LabelUpdateShowType.Text = "";
-
-                    //feedback message
-                    LabelUpdateFeedbackPositive.Text = "Information has been changed";
-                    DisableUpdateForm();
-                }
-                else
-                {
-                    LabelUpdateFeedbackNegative.Text = "A pokehunters mail must end with @poke.dk";
-                }
-
+                LabelUpdateFeedbackNegative.Text = "Alias is already taken";
                 break;
             }
             else if (item == pokehunterlist[pokehunterlist.Count - 1])
             {
-                //if no of the elements in the list is found
-                LabelUpdateFeedbackNegative.Text = "Person not found";
+                //going through list
+                foreach (Pokehunter searchpokehunter in pokehunterlist)
+                {
+                    //find match in arraylist
+                    if (LabelUpdateInfoAlias.Text == searchpokehunter.alias.ToString())
+                    {
+                        if (searchpokehunter.ChangeEmail(TextBoxUpdateEmail.Text))
+                        {
+                            searchpokehunter.alias = TextBoxUpdateAlias.Text;
+                            searchpokehunter.name = TextBoxUpdateName.Text;
+                            searchpokehunter.age = Convert.ToInt32(TextBoxUpdateAge.Text);
+                            searchpokehunter.gender = RadioButtonListUpdate.SelectedValue;
+                            searchpokehunter.email = TextBoxUpdateEmail.Text;
+                            searchpokehunter.password = TextBoxUpdatePassword.Text;
+                            searchpokehunter.FavoritePokemon = TextBoxUpdateFavorite.Text;
+
+                            //write to file
+                            FileUtility.WriteFile(pokehunterlist, Server.MapPath("~/App_Data/Pokehunters.ser"));
+
+                            //populate gridview
+                            GridViewPokehunters.DataSource = pokehunterlist;
+                            GridViewPokehunters.DataBind();
+
+                            //clear form
+                            Formcleaner.ClearForm(participantform);
+                            LabelUpdateInfoFor.Text = "";
+                            LabelUpdateInfoAlias.Text = "";
+                            LabelUpdateShowType.Text = "";
+
+                            //feedback message
+                            LabelUpdateFeedbackPositive.Text = "Information has been changed";
+                            DisableUpdateForm();
+                        }
+                        break;
+                    }
+                    else if (searchpokehunter == pokehunterlist[pokehunterlist.Count - 1])
+                    {
+                        //if no of the elements in the list is found
+                        LabelUpdateFeedbackNegative.Text = "Person not found";
+                    }
+                }
             }
         }
-
     }
 
     //DELETE FROM ORGANIZER
@@ -293,7 +313,6 @@ public partial class readorganizers : System.Web.UI.Page
             else if(item == organizerlist[organizerlist.Count - 1])
             {
                 LabelUpdateFeedbackNegative.Text = "Person not found";
-
             }
         }
 
