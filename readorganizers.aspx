@@ -5,6 +5,7 @@
     <form id="participantform" runat="server">
    
     <div>
+        <asp:Label ID="LabelUpdateFeedbackPositive" runat="server" CssClass="successcolor" Font-Size="20px"></asp:Label>
         <h2>Organizers</h2>
     
         <asp:Label ID="LabelReadOrganizersInfo" runat="server"></asp:Label>
@@ -50,8 +51,6 @@
 
         <div>
             <h2>Change information</h2>
-            <asp:Label ID="LabelUpdateFeedbackPositive" runat="server" CssClass="successcolor" Font-Size="20px"></asp:Label>
-
             <asp:Label ID="LabelUpdateFeedbackNegative" runat="server" CssClass="errorcolor" Font-Size="20px"></asp:Label>
             <br />
 

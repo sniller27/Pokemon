@@ -11,7 +11,6 @@ using System.Web;
 public class Pokehunter : Person
 {
     public string FavoritePokemon { get; set; }
-    private string mailrequirement = "@poke.dk";
 
     public Pokehunter(string alias, string name, int age, string gender, string email, string password, string FavoritePokemon) : base(alias, name, age, gender, email, password)
     {
@@ -20,15 +19,8 @@ public class Pokehunter : Person
 
     public override bool ChangeEmail(string email)
     {
-        if (email.EndsWith(mailrequirement))
-        {
-            this.email = email;
-            return true;
-        }
-        else
-        {
-            return false;
-        }
+        this.email = email;
+        return true;
     }
 
     public override string ToString()

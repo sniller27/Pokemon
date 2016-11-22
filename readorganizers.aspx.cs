@@ -11,60 +11,75 @@ public partial class readorganizers : System.Web.UI.Page
     //declare arraylists
     private ArrayList organizerlist;
     private ArrayList pokehunterlist;
-    private Pokehunter pokehunter;
 
-
-    //PAGE LOAD METHOD
     protected void Page_Load(object sender, EventArgs e)
     {
-        //read organizers from file
-        try
-        {
-            organizerlist = FileUtility.ReadFile(Server.MapPath("~/App_Data/Organizers.ser"));
-
-            Application["Organizercollection"] = organizerlist;
-
-            if (organizerlist.Count == 0)
+        //session check and population of "session" and lists (Organizers)
+        //if (Application["Organizercollection"] == null)
+        //{
+            try
             {
-                LabelReadOrganizersInfo.Text = "No data available at the moment";
+                organizerlist = FileUtility.ReadFile(Server.MapPath("~/App_Data/Organizers.ser"));
+                Application["Organizercollection"] = organizerlist;
+
+                if (organizerlist.Count == 0)
+                {
+                    LabelReadOrganizersInfo.Text = "No data available at the moment";
+                }
+                else
+                {
+                    GridViewOrganizers.DataSource = organizerlist;
+                    GridViewOrganizers.DataBind();
+                }
+
             }
-            else
+            catch (Exception)
             {
-                GridViewOrganizers.DataSource = organizerlist;
-                GridViewOrganizers.DataBind();
+                //not necessarily file problem
+                LabelReadOrganizersInfo.Text = "File not created";
             }
+        //}
+        //else
+        //{
+        //    organizerlist = (ArrayList)Application["Organizercollection"];
+        //    GridViewOrganizers.DataSource = organizerlist;
+        //    GridViewOrganizers.DataBind();
+        //}
 
-        }
-        catch (Exception)
-        {
-            LabelReadOrganizersInfo.Text = "File not created";
-        }
-
-
-        //read pokehunters from file
-        try
-        {
-            pokehunterlist = FileUtility.ReadFile(Server.MapPath("~/App_Data/Pokehunters.ser"));
-
-            Application["Pokehuntercollection"] = pokehunterlist;
-
-            if (pokehunterlist.Count == 0)
+        //session check and population of "session" and lists (Pokehunters)
+        //if (Application["Pokehuntercollection"] == null)
+        //{
+            try
             {
-                LabelReadPokehuntersInfo.Text = "No data available at the moment";
+                pokehunterlist = FileUtility.ReadFile(Server.MapPath("~/App_Data/Pokehunters.ser"));
+
+                Application["Pokehuntercollection"] = pokehunterlist;
+
+                if (pokehunterlist.Count == 0)
+                {
+                    LabelReadPokehuntersInfo.Text = "No data available at the moment";
+                }
+                else
+                {
+                    GridViewPokehunters.DataSource = pokehunterlist;
+                    GridViewPokehunters.DataBind();
+                }
+
             }
-            else
+            catch (Exception)
             {
-                GridViewPokehunters.DataSource = pokehunterlist;
-                GridViewPokehunters.DataBind();
+                //not necessarily file problem
+                LabelReadPokehuntersInfo.Text = "File not created";
             }
+        //}
+        //else
+        //{
+        //    pokehunterlist = (ArrayList)Application["Pokehuntercollection"];
+        //    GridViewPokehunters.DataSource = pokehunterlist;
+        //    GridViewPokehunters.DataBind();
+        //}
 
-        }
-        catch (Exception)
-        {
-            LabelReadPokehuntersInfo.Text = "File not created";
-        }
-
-        //reset label
+        //clear labels on pageload
         LabelUpdateFeedbackNegative.Text = "";
         LabelUpdateFeedbackPositive.Text = "";
     }
@@ -168,32 +183,35 @@ public partial class readorganizers : System.Web.UI.Page
             //find match in arraylist
             if (LabelUpdateInfoAlias.Text == item.alias.ToString())
             {
-                item.alias = TextBoxUpdateAlias.Text;
-                item.name = TextBoxUpdateName.Text;
-                item.age = Convert.ToInt32(TextBoxUpdateAge.Text);
-                item.gender = RadioButtonListUpdate.SelectedValue;
-                item.email = TextBoxUpdateEmail.Text;
-                item.password = TextBoxUpdatePassword.Text;
+                if (item.ChangeEmail(TextBoxUpdateEmail.Text))
+                {
+                    item.alias = TextBoxUpdateAlias.Text;
+                    item.name = TextBoxUpdateName.Text;
+                    item.age = Convert.ToInt32(TextBoxUpdateAge.Text);
+                    item.gender = RadioButtonListUpdate.SelectedValue;
+                    item.email = TextBoxUpdateEmail.Text;
+                    item.password = TextBoxUpdatePassword.Text;
 
-                //write to file
-                FileUtility.WriteFile(organizerlist, Server.MapPath("~/App_Data/Organizers.ser"));
+                    //write to file
+                    FileUtility.WriteFile(organizerlist, Server.MapPath("~/App_Data/Organizers.ser"));
 
-                //populate gridview
-                GridViewOrganizers.DataSource = organizerlist;
-                GridViewOrganizers.DataBind();
+                    //populate gridview
+                    GridViewOrganizers.DataSource = organizerlist;
+                    GridViewOrganizers.DataBind();
 
-                //clear form
-                Formcleaner.ClearForm(participantform);
-                LabelUpdateInfoFor.Text = "";
-                LabelUpdateInfoAlias.Text = "";
-                LabelUpdateShowType.Text = "";
+                    //clear form
+                    Formcleaner.ClearForm(participantform);
+                    LabelUpdateInfoFor.Text = "";
+                    LabelUpdateInfoAlias.Text = "";
+                    LabelUpdateShowType.Text = "";
 
-                //feedback message
-                LabelUpdateFeedbackPositive.Text = "Information has been changed";
+                    //feedback message
+                    LabelUpdateFeedbackPositive.Text = "Information has been changed";
+                    DisableUpdateForm();
 
-                DisableUpdateForm();
-
-                break;
+                    break;
+                }
+                
             }
             else if(item == organizerlist[organizerlist.Count - 1])
             {
@@ -205,17 +223,13 @@ public partial class readorganizers : System.Web.UI.Page
     
     //UPDATE POKEHUNTER METHOD
     public void UpdatePokehunter() {
-        //going through list and checks if mail is valid.
-        pokehunter = new Pokehunter(TextBoxUpdateAlias.Text, TextBoxUpdateName.Text, Convert.ToInt32(TextBoxUpdateAge.Text), RadioButtonListUpdate.SelectedValue, TextBoxUpdateEmail.Text, TextBoxUpdatePassword.Text, TextBoxUpdateFavorite.Text);
-
-        //checks valid email
-        if (pokehunter.ChangeEmail(TextBoxUpdateEmail.Text))
+        //going through list
+        foreach (Pokehunter item in pokehunterlist)
         {
-            //going through list
-            foreach (Pokehunter item in pokehunterlist)
+            //find match in arraylist
+            if (LabelUpdateInfoAlias.Text == item.alias.ToString())
             {
-                //find match in arraylist
-                if (LabelUpdateInfoAlias.Text == item.alias.ToString())
+                if (item.ChangeEmail(TextBoxUpdateEmail.Text))
                 {
                     item.alias = TextBoxUpdateAlias.Text;
                     item.name = TextBoxUpdateName.Text;
@@ -240,24 +254,22 @@ public partial class readorganizers : System.Web.UI.Page
 
                     //feedback message
                     LabelUpdateFeedbackPositive.Text = "Information has been changed";
-
                     DisableUpdateForm();
-
-                    break;
                 }
-                else if(item == pokehunterlist[pokehunterlist.Count-1])
+                else
                 {
-                    //if no of the elements in the list is found
-                    LabelUpdateFeedbackNegative.Text = "Person not found";
-
+                    LabelUpdateFeedbackNegative.Text = "A pokehunters mail must end with @poke.dk";
                 }
+
+                break;
+            }
+            else if (item == pokehunterlist[pokehunterlist.Count - 1])
+            {
+                //if no of the elements in the list is found
+                LabelUpdateFeedbackNegative.Text = "Person not found";
             }
         }
-        else
-        {
-            LabelUpdateFeedbackNegative.Text = "A pokehunters mail must end with @poke.dk";
-        }
-   
+
     }
 
     //DELETE FROM ORGANIZER

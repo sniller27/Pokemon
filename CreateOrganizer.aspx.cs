@@ -16,32 +16,56 @@ public partial class CreateOrganizer : System.Web.UI.Page
 
     protected void Page_Load(object sender, EventArgs e)
     {
+
+        //Application["Organizercollection"] = null;
+        //Application["Pokehuntercollection"] = null;
+
+        //initialize arraylists
         organizerlist = new ArrayList();
         pokehunterlist = new ArrayList();
 
-        //check if "session"/global arraylist exists (Organizer)
-        if (Application["Organizercollection"] == null)
-        {
-            //if not. then new arraylist
-            organizerlist = new ArrayList();
-            //declare or assign "session"/global arraylist
-            Application["Organizercollection"] = organizerlist;
-        }
-        //check if "session"/global arraylist exists (Pokehunter)
-        if (Application["Pokehuntercollection"] == null)
-        {
-            //if not. then new arraylist
-            pokehunterlist = new ArrayList();
-            //declare or assign "session"/global arraylist
-            Application["Pokehuntercollection"] = pokehunterlist;
-        }
+        //VIRKER!!!
+        ////check if "session"/global arraylist exists (Organizer)
+        //if (Application["Pokehuntercollection"] == null)
+        //{
+        //    //if not. then new arraylist
+        //    pokehunterlist = new ArrayList();
+        //    //declare or assign "session"/global arraylist
+        //    Application["Pokehuntercollection"] = pokehunterlist;
+        //}
 
-        ////hvorfor gør vi dette?
+        ////check if "session"/global arraylist exists (Organizer)
+        //if (Application["Organizercollection"] == null)
+        //{
+        //    //if not. then new arraylist
+        //    organizerlist = new ArrayList();
+        //    //declare or assign "session"/global arraylist
+        //    Application["Organizercollection"] = organizerlist;
+        //}
+
+        ////update arraylists
         //organizerlist = (ArrayList)Application["Organizercollection"];
+        //pokehunterlist = (ArrayList)Application["Pokehuntercollection"];
 
-        //reset labels
+        //FORSØG
+        SessionCheck(organizerlist, "Organizercollection");
+        SessionCheck(pokehunterlist, "Pokehuntercollection");
+
+
+        //DER MÅ IKKE HENTES HVIS DER IKKE ER NOGET! MEN SKAL HENTES FOR AT TJEKKE OM ALIAS ER TAGET!
+        //try
+        //{
+        //    pokehunterlist = FileUtility.ReadFile(Server.MapPath("~/App_Data/Pokehunters.ser"));
+        //    Application["Pokehuntercollection"] = pokehunterlist;
+        //}
+        //catch (Exception)
+        //{
+        //}
+
+        //clear labels on pageload (submit)
         LabelAddOrganizerFeedbackPositive.Text = "";
         LabelAddOrganizerFeedbackNegative.Text = "";
+
     }
 
     protected void ButtonCreateOrganizer_Click(object sender, EventArgs e)
@@ -49,59 +73,12 @@ public partial class CreateOrganizer : System.Web.UI.Page
         //form validation
         if (Page.IsValid)
         {
-            //checks if you are an Organizer
             if (DropdownlistCreateParticipant.Text == "Organizer")
             {
-                //make instance of Organizer object
-                organizer = new Organizer(TextBoxAlias.Text, TextBoxName.Text, Convert.ToInt32(TextBoxAge.Text), RadioButtonListOrganizerGender.Text, TextBoxEmail.Text, TextBoxPassword.Text);
-                //getting the arraylist before inserting
-                organizerlist = (ArrayList)Application["Organizercollection"];
-                //add to list
-                organizerlist.Add(organizer);
-
-                organizerlist = (ArrayList)Application["Organizercollection"];
-
-                //saves to file
-                FileUtility.WriteFile(organizerlist, Server.MapPath("~/App_Data/Organizers.ser"));
-                LabelAddOrganizerFeedbackPositive.Text = "You have been signed up";
-
-                //clearform
-                Formcleaner.ClearForm(createorganizerform);
-            }
-
-            //checks if you are a Pokehunter
-            if (DropdownlistCreateParticipant.Text == "Pokehunter")
+                CreateNewOrganizer();
+            }else if (DropdownlistCreateParticipant.Text == "Pokehunter")
             {
-                //make instance of pokehunter object
-                pokehunter = new Pokehunter(TextBoxAlias.Text, TextBoxName.Text, Convert.ToInt32(TextBoxAge.Text), RadioButtonListOrganizerGender.Text, TextBoxEmail.Text, TextBoxPassword.Text, TextBoxFavorite.Text);
-
-                //checks mail by using instance of object
-                if (pokehunter.ChangeEmail(TextBoxEmail.Text))
-                {
-                    //getting the arraylist before inserting
-                    pokehunterlist = (ArrayList)Application["Pokehuntercollection"];
-                    //add to list
-                    pokehunterlist.Add(pokehunter);
-
-                    pokehunterlist = (ArrayList)Application["Pokehuntercollection"];
-
-                    //saves to file
-                    FileUtility.WriteFile(pokehunterlist, Server.MapPath("~/App_Data/Pokehunters.ser"));
-
-                    LabelAddOrganizerFeedbackPositive.Text = "You have been signed up";
-
-                    //resetform
-                    DropdownlistCreateParticipant.SelectedValue = "Organizer";
-                    RequiredFieldValidatorCreateFavorite.Enabled = false;
-
-                    //clearform
-                    Formcleaner.ClearForm(createorganizerform);
-                }
-                else
-                {
-                    LabelAddOrganizerFeedbackNegative.Text = "A pokehunters mail must end with @poke.dk";
-                    TextBoxFavorite.Enabled = true;
-                }
+                CreateNewPokehunter();
             }
         }
     }
@@ -113,11 +90,234 @@ public partial class CreateOrganizer : System.Web.UI.Page
             TextBoxFavorite.Enabled = true;
             RequiredFieldValidatorCreateFavorite.Enabled = true;
         }
-        else
+        else if (DropdownlistCreateParticipant.Text == "Organizer")
         {
             TextBoxFavorite.Text = "";
             TextBoxFavorite.Enabled = false;
             RequiredFieldValidatorCreateFavorite.Enabled = false;
+        }
+    }
+
+    public void SessionCheck(ArrayList list, string sessionname)
+    {
+        //NOT WORKING PART
+        //if (Application[sessionname] == null)
+        //{
+            //try
+            //{
+            //    list = FileUtility.ReadFile(Server.MapPath(filepath));
+            //    Application[sessionname] = list;
+            //}
+            //catch (Exception)
+            //{
+            //}
+        //}
+        //else
+        //{
+        //    list = (ArrayList)Application[sessionname];
+        //}
+
+        if (Application[sessionname] == null)
+        {
+            //if not. then new arraylist
+            list = new ArrayList();
+            //declare or assign "session"/global arraylist
+            Application[sessionname] = list;
+        }
+
+        list = (ArrayList)Application[sessionname];
+
+    }
+
+    public void AddPersonToFile(ArrayList list, string session, string filepath, Person pers) {
+        //virker men jeg fatter det ikke???
+        list = (ArrayList)Application[session];
+        ////add to list
+        list.Add(pers);
+        list = (ArrayList)Application[session];
+
+        //updates "session" variable  //var ikke så smart
+        //Application["Organizercollection"] = organizerlist;
+
+        //saves to file
+        FileUtility.WriteFile(list, Server.MapPath(filepath));
+        LabelAddOrganizerFeedbackPositive.Text = "You have been signed up";
+
+        //clearform
+        Formcleaner.ClearForm(createorganizerform);
+    }
+
+    public void CreateNewOrganizer() {
+        //virker men jeg fatter det ikke??? jeg har allerede gjort dette i pageloadmetoden gennem sessioncheck();
+        organizerlist = (ArrayList)Application["Organizercollection"];
+
+        //if list is empty
+        if (organizerlist.Count == 0)
+        {
+            //make instance of pokehunter object in order to check (and change) email
+            organizer = new Organizer(TextBoxAlias.Text, TextBoxName.Text, Convert.ToInt32(TextBoxAge.Text), RadioButtonListOrganizerGender.Text, TextBoxEmail.Text, TextBoxPassword.Text);
+            //-----------------------
+            //checks if emails has extension @poke.dk
+            if (organizer.ChangeEmail(TextBoxEmail.Text))
+            {
+                AddPersonToFile(organizerlist, "Organizercollection", "~/App_Data/Organizers.ser", organizer);
+
+                ////adds to list
+                //organizerlist.Add(organizer);
+                ////virker men jeg fatter det ikke???
+                //organizerlist = (ArrayList)Application["Organizercollection"];
+
+                ////updates "session" variable
+                ////Application["Organizercollection"] = organizerlist;
+
+                ////write to file and feedback
+                //FileUtility.WriteFile(organizerlist, Server.MapPath("~/App_Data/Organizers.ser"));
+                //LabelAddOrganizerFeedbackPositive.Text = "You have been signed up1";
+
+                ////clearform
+                //Formcleaner.ClearForm(createorganizerform);
+            }
+            else
+            {
+                LabelAddOrganizerFeedbackNegative.Text = "An organizers mail must end with @poke.dk";
+                TextBoxFavorite.Enabled = false;
+            }
+            //-----------------------
+        }
+        else
+        {
+            //checks if alias already exists
+            foreach (Organizer item in organizerlist)
+            {
+                if (item.alias == TextBoxAlias.Text)
+                {
+                    LabelAddOrganizerFeedbackNegative.Text = "Alias already exists";
+                    break;
+                }
+                else if (item == organizerlist[organizerlist.Count - 1])
+                {
+                    ////make instance of pokehunter object in order to check (and change) email
+                    organizer = new Organizer(TextBoxAlias.Text, TextBoxName.Text, Convert.ToInt32(TextBoxAge.Text), RadioButtonListOrganizerGender.Text, TextBoxEmail.Text, TextBoxPassword.Text);
+                    //-----------------------
+                    //checks if emails has extension @poke.dk
+                    if (organizer.ChangeEmail(TextBoxEmail.Text))
+                    {
+                        AddPersonToFile(organizerlist, "Organizercollection", "~/App_Data/Organizers.ser", organizer);
+
+                        ////virker men jeg fatter det ikke???
+                        //organizerlist = (ArrayList)Application["Organizercollection"];
+                        //////add to list
+                        //organizerlist.Add(organizer);
+                        //organizerlist = (ArrayList)Application["Organizercollection"];
+
+                        ////updates "session" variable
+                        ////Application["Organizercollection"] = organizerlist;
+
+                        ////saves to file
+                        //FileUtility.WriteFile(organizerlist, Server.MapPath("~/App_Data/Organizers.ser"));
+                        //LabelAddOrganizerFeedbackPositive.Text = "You have been signed up2";
+
+                        ////clearform
+                        //Formcleaner.ClearForm(createorganizerform);
+                    }
+                    else
+                    {
+                        LabelAddOrganizerFeedbackNegative.Text = "An organizers mail must end with @poke.dk";
+                        TextBoxFavorite.Enabled = false;
+                    }
+                    //-----------------------
+                    break;
+                }
+            }
+        }
+    }
+
+    public void CreateNewPokehunter() {
+        //virker men jeg fatter det ikke??? jeg har allerede gjort dette i pageloadmetoden gennem sessioncheck();
+        pokehunterlist = (ArrayList)Application["Pokehuntercollection"];
+
+        if (pokehunterlist.Count == 0)
+        {
+            //make instance of pokehunter object
+            pokehunter = new Pokehunter(TextBoxAlias.Text, TextBoxName.Text, Convert.ToInt32(TextBoxAge.Text), RadioButtonListOrganizerGender.Text, TextBoxEmail.Text, TextBoxPassword.Text, TextBoxFavorite.Text);
+
+            //checks mail by using instance of object
+            if (pokehunter.ChangeEmail(TextBoxEmail.Text))
+            {
+                AddPersonToFile(pokehunterlist, "Pokehuntercollection", "~/App_Data/Pokehunters.ser", pokehunter);
+
+                ////getting the arraylist before inserting
+                //pokehunterlist = (ArrayList)Application["Pokehuntercollection"];
+                ////add to list
+                //pokehunterlist.Add(pokehunter);
+
+                //pokehunterlist = (ArrayList)Application["Pokehuntercollection"];
+
+                ////saves to file
+                //FileUtility.WriteFile(pokehunterlist, Server.MapPath("~/App_Data/Pokehunters.ser"));
+
+                //LabelAddOrganizerFeedbackPositive.Text = "You have been signed up1";
+
+                ////clearform
+                //Formcleaner.ClearForm(createorganizerform);
+
+                //resetform
+                DropdownlistCreateParticipant.SelectedValue = "Organizer";
+                RequiredFieldValidatorCreateFavorite.Enabled = false;
+                TextBoxFavorite.Enabled = false;
+            }
+            else
+            {
+                TextBoxFavorite.Enabled = true;
+            }
+        }
+        else
+        {
+            //checks if alias already exists
+            foreach (Pokehunter item in pokehunterlist)
+            {
+                if (item.alias == TextBoxAlias.Text)
+                {
+                    LabelAddOrganizerFeedbackNegative.Text = "Alias already exists";
+                    break;
+                }
+                else if (item == pokehunterlist[pokehunterlist.Count - 1])
+                {
+                    //make instance of pokehunter object
+                    pokehunter = new Pokehunter(TextBoxAlias.Text, TextBoxName.Text, Convert.ToInt32(TextBoxAge.Text), RadioButtonListOrganizerGender.Text, TextBoxEmail.Text, TextBoxPassword.Text, TextBoxFavorite.Text);
+
+                    //checks mail by using instance of object
+                    if (pokehunter.ChangeEmail(TextBoxEmail.Text))
+                    {
+                        AddPersonToFile(pokehunterlist, "Pokehuntercollection", "~/App_Data/Pokehunters.ser", pokehunter);
+                        ////getting the arraylist before inserting
+                        //pokehunterlist = (ArrayList)Application["Pokehuntercollection"];
+                        ////add to list
+                        //pokehunterlist.Add(pokehunter);
+
+                        //pokehunterlist = (ArrayList)Application["Pokehuntercollection"];
+
+                        ////saves to file
+                        //FileUtility.WriteFile(pokehunterlist, Server.MapPath("~/App_Data/Pokehunters.ser"));
+
+                        //LabelAddOrganizerFeedbackPositive.Text = "You have been signed up2";
+
+                        ////clearform
+                        //Formcleaner.ClearForm(createorganizerform);
+
+                        //resetform
+                        DropdownlistCreateParticipant.SelectedValue = "Organizer";
+                        RequiredFieldValidatorCreateFavorite.Enabled = false;
+                        TextBoxFavorite.Enabled = false;
+                        break;
+                    }
+                    else
+                    {
+                        TextBoxFavorite.Enabled = true;
+                        break;
+                    }
+                }
+            }
         }
     }
 }

@@ -12,13 +12,23 @@ using System.Web;
 [Serializable]
 public class Organizer : Person
 {
+    private string mailrequirement = "@poke.dk";
+
     public Organizer(string alias, string name, int age, string gender, string email, string password) : base(alias, name, age, gender, email, password)
     {
     }
 
     public override bool ChangeEmail(string email)
     {
-        throw new NotImplementedException();
+        if (email.EndsWith(this.mailrequirement))
+        {
+            this.email = email;
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 
     public override string ToString()
