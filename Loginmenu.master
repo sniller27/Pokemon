@@ -5,7 +5,7 @@
 <asp:Content ID="logincontent" ContentPlaceHolderID="content" Runat="Server">
     <div id="loginmenu" runat="server">
         <a href="Mypokemon.aspx">My Pokémon</a>
-        <a href="Mypokemon.aspx">Catch a pokemon</a>
+        <a href="CatchPokemon.aspx">Catch a pokemon</a>
     </div>
     
     <br />

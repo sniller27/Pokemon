@@ -9,6 +9,7 @@ public partial class Loginmenu : System.Web.UI.MasterPage
 {
     protected void Page_Load(object sender, EventArgs e)
     {
+        Session["Pokefight"] = null;
         if (Session["Pokehunter"] == null)
         {
             loginmenu.Visible = false;
