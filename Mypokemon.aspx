@@ -4,5 +4,30 @@
 <asp:Content id="Content11" ContentPlaceholderID="ChildContent1" runat="server">
     <asp:Label runat="server" id="Label1" 
         text="Child label1" font-bold="true" />
+    
    <br />
+
+    <asp:gridview runat="server" id="gridviewUserReadpokemon" AutoGenerateColumns="false">
+        <Columns>
+
+                <asp:TemplateField HeaderText="Image">
+                <ItemTemplate>
+                    <asp:Image ID="Image1" runat="server" ImageUrl='<%# "Images/" + Eval("Image") %>' />
+                </ItemTemplate>
+                </asp:TemplateField>
+
+                <asp:BoundField DataField="catchName" HeaderText="Name" SortExpression="alias" />
+                <asp:BoundField DataField="Lvl" HeaderText="Level" SortExpression="name" />
+                <asp:BoundField DataField="CurrentExp" HeaderText="Current exp." SortExpression="age" />
+                <asp:BoundField DataField="NextLvlExp" HeaderText="Exp to next level" SortExpression="gender" />
+                <asp:BoundField DataField="PokemonGender" HeaderText="Gender" SortExpression="email" />
+                <asp:BoundField DataField="Number" HeaderText="Pokedex number" SortExpression="password" />
+                <asp:BoundField DataField="Name" HeaderText="Official Pokemon name" SortExpression="password" />
+                <asp:BoundField DataField="NextEvolution" HeaderText="Next Evolution" SortExpression="password" />
+                <asp:BoundField DataField="Type" HeaderText="Type" SortExpression="password" />
+
+
+        </Columns>
+    </asp:gridview>
+
 </asp:Content>

@@ -3,8 +3,11 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
 </asp:Content>
 <asp:Content ID="logincontent" ContentPlaceHolderID="content" Runat="Server">
-    <a href="Mypokemon.aspx">My Pokémon</a>
-    <a href="Mypokemon.aspx">Catch a pokemon</a>
+    <div id="loginmenu" runat="server">
+        <a href="Mypokemon.aspx">My Pokémon</a>
+        <a href="Mypokemon.aspx">Catch a pokemon</a>
+    </div>
+    
     <br />
      <asp:ContentPlaceHolder ID="ChildContent1" runat="server" />
 </asp:Content>

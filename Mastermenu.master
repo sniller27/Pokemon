@@ -30,6 +30,7 @@
                   <h4 class="modal-title">Login</h4>
                 </div>
                 <div class="modal-body">
+                    <asp:Label ID="LabelLoginError" runat="server" Text="Label"></asp:Label>
                     <div class="form-group">
                     <asp:TextBox ID="TextBoxUsernameLogin" runat="server" class="form-control" placeholder="Username"></asp:TextBox>
                     </div>
@@ -41,10 +42,11 @@
                 </div>
                 <div class="modal-footer">
                     <%--<asp:Button ID="buttonlogin" runat="server" Text="Login" class="btn btn-primary" OnClick="buttonlogin_Click" />--%>
-                    <asp:Button ID="buttonlogin" runat="server" OnClick="buttonlogin_Click" Text="Button" class="btn btn-primary" />                  
+                    <asp:Button ID="buttonlogin" runat="server" OnClick="buttonlogin_Click" Text="Login" class="btn btn-primary" />                  
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                 </div>
                   <asp:Label ID="Labelcheck" runat="server" Text="Label"></asp:Label>
+                  <asp:Label ID="Labelcheck1" runat="server" Text="Label"></asp:Label>
               </div>
       
             </div>
