@@ -4,8 +4,6 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="content" Runat="Server">
 
-    
-
     <div class="container">
         <div class="col-md-12">
             <asp:Label ID="Label1" runat="server" Text="Sign Up" Font-Size="30px"></asp:Label>

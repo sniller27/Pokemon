@@ -12,7 +12,7 @@ public partial class Mastermenu : System.Web.UI.MasterPage
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-
+        CheckSession();
     }
 
     public string IsCurrentPage(string itemName)
@@ -87,18 +87,26 @@ public partial class Mastermenu : System.Web.UI.MasterPage
         }
     }
 
-    public string ShowLogoutLink()
+    protected void ButtonLogout_Click(object sender, EventArgs e)
     {
-        if (Session["Pokehunter"] != null)
+        Session["Pokehunter"] = null;
+        Response.Redirect("Welcome.aspx");
+    }
+
+    public void CheckSession() {
+        //check session and set login/logout links i menu
+        if (Session["Pokehunter"] == null)
         {
-            return "logged in";
+            ButtonLogout.Visible = false;
+            loginmodalhyperlink.Visible = true;
             //return "< li >< a href = '#' data - toggle = 'modal' data - target = '#myModal' >< span class='glyphicon glyphicon-log-in'></span> Logout</a></li>";
         }
         else
         {
-            return "logged out";
+            ButtonLogout.Visible = true;
+            loginmodalhyperlink.Visible = false;
             //return "< li >< a href = '#' data - toggle = 'modal' data - target = '#myModal' >< span class='glyphicon glyphicon-log-in'></span> Login</a></li>";
         }
-
     }
+
 }
