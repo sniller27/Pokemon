@@ -31,18 +31,20 @@
                 </div>
                 <div class="modal-body">
                     <div class="form-group">
-                    <asp:TextBox ID="TextBox1" runat="server" class="form-control" placeholder="Username"></asp:TextBox>
+                    <asp:TextBox ID="TextBoxUsernameLogin" runat="server" class="form-control" placeholder="Username"></asp:TextBox>
                     </div>
                     <div class="form-group">
-                    <asp:TextBox ID="TextBox2" runat="server" class="form-control" placeholder="Password"></asp:TextBox>                    
+                    <asp:TextBox ID="TextBoxPasswordLogin" runat="server" class="form-control" placeholder="Password"></asp:TextBox>                    
                     </div>
                     <br />
                     <a href="#">Sign up now!</a>
                 </div>
                 <div class="modal-footer">
-                  <button type="button" class="btn btn-primary">Login</button>
-                  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <%--<asp:Button ID="buttonlogin" runat="server" Text="Login" class="btn btn-primary" OnClick="buttonlogin_Click" />--%>
+                    <asp:Button ID="buttonlogin" runat="server" OnClick="buttonlogin_Click" Text="Button" class="btn btn-primary" />                  
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                 </div>
+                  <asp:Label ID="Labelcheck" runat="server" Text="Label"></asp:Label>
               </div>
       
             </div>
@@ -67,6 +69,7 @@
           </ul>
           <ul class="nav navbar-nav navbar-right">
               <!-- Trigger the modal with a button -->
+              <%= ShowLogoutLink()  %>
             <li><a href="#" data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
           </ul>
         </div><!--/.nav-collapse -->
@@ -80,7 +83,6 @@
         
         </asp:ContentPlaceHolder>
     </div>
-    </form>
     <script>
         $('#myModal').on('shown.bs.modal', function () {
             $('#TextBox1').focus()
@@ -100,5 +102,6 @@
         <p class="text-muted">Pokémon event 2016 - Copyright ©</p>
       </div>
     </footer>
-</body>
+    </form>
+    </body>
 </html>

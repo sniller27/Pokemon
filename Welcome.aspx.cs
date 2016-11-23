@@ -41,7 +41,6 @@ public partial class Welcome : System.Web.UI.Page
             //datalist gets data from datatable?
             datalistpokemoncarousel.DataSource = dt;
             datalistpokemoncarousel.DataBind();
-
         }
         catch (Exception ex)
         {

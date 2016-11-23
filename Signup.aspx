@@ -11,24 +11,26 @@
             <asp:Label ID="Label1" runat="server" Text="Sign Up" Font-Size="30px"></asp:Label>
             <br />
             <br />
-            <asp:TextBox ID="TextBox3" runat="server"></asp:TextBox>
+            <asp:TextBox ID="TextBoxSignupAlias" runat="server"></asp:TextBox>
             Alias<br />
-            <asp:TextBox ID="TextBox4" runat="server"></asp:TextBox>
+            <asp:TextBox ID="TextBoxSignupName" runat="server"></asp:TextBox>
             Name<br />
-            Gender<asp:RadioButtonList ID="RadioButtonList1" runat="server">
+            Gender
+            <asp:RadioButtonList ID="RadioButtonListSignupGender" runat="server">
                 <asp:ListItem>Male</asp:ListItem>
                 <asp:ListItem>Female</asp:ListItem>
             </asp:RadioButtonList>
-            <asp:textbox runat="server"></asp:textbox>
+            <asp:textbox runat="server" ID="TextBoxSignupAge"></asp:textbox>
             Age<br />
-            <asp:textbox runat="server"></asp:textbox>
+            <asp:textbox runat="server" ID="TextBoxSignupEmail"></asp:textbox>
             Email<br />
-            <asp:textbox runat="server"></asp:textbox>
+            <asp:textbox runat="server" ID="TextBoxSignupPassword"></asp:textbox>
             Password<br />
-            <asp:textbox runat="server"></asp:textbox>
+            <asp:textbox runat="server" ID="TextBoxSignupPasswordConfirm"></asp:textbox>
             Confirm password<br />
-            <asp:button runat="server" text="Button" />
-
+            <asp:button runat="server" text="Button" ID="buttonsignup" OnClick="buttonsignup_Click" />
+            <br />
+            <asp:Label ID="labelsignupfeedback" runat="server"></asp:Label>
         </div>
     </div>
 
