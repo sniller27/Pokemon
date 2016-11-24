@@ -147,6 +147,4 @@ public partial class Mastermenu : System.Web.UI.MasterPage
         }
     }
 
-
-
 }

@@ -12,7 +12,7 @@
 
                 <asp:TemplateField HeaderText="Image">
                 <ItemTemplate>
-                    <asp:Image ID="Image1" runat="server" ImageUrl='<%# "Images/" + Eval("Image") %>' />
+                    <asp:Image ID="Image1" runat="server" ImageUrl='<%# "Images/" + Eval("Image") %>' CssClass="mypokemonimage" />
                 </ItemTemplate>
                 </asp:TemplateField>
 

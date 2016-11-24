@@ -2,14 +2,16 @@
 
 <asp:Content ID="Content11" ContentPlaceHolderID="ChildContent1" Runat="Server">
     <h1>A wild Pokémon has appeared!</h1>
-    <asp:label runat="server" text="Label" ID="LabelFight"></asp:label>
+    <asp:label runat="server" text="" ID="LabelFight"></asp:label>
     <asp:datalist runat="server" id="datalistcatchpokemon">
         <ItemTemplate>
-            <img class="<%#Eval("PokemonId") %>" src="Images/<%#Eval("Image") %>" />
+            <asp:HiddenField ID="HiddenFieldPokemonId" runat="server" Value='<%#Eval("PokemonId") %>' />
+            <asp:Label ID="LabelCatchPokemonName" runat="server" Text='<%#Eval("Name") %>'></asp:Label>
+            <asp:Label ID="LabelCatchPokemonLevel" runat="server" Text='<%#Eval("RandomLevel") %>'></asp:Label>
+            <asp:Image runat="server" ImageUrl='<%# "Images/" + Eval("Image") %>' Width="100%" ID="ImageCatchPokemon" />
         </ItemTemplate>
     </asp:datalist>
     <h2>Click the Pokeball to catch it.</h2>
-    <asp:ImageButton ID="ImageButton1" runat="server" Height="61px" ImageUrl="~/Images/Pokeball.png" Width="63px" OnClick="ImageButton1_Click" />
-
+    <asp:ImageButton ID="ImageButtonPokeballCatch" runat="server" Height="61px" ImageUrl="~/Images/Pokeball.png" Width="63px" OnClick="ImageButtonPokeballCatch_Click" />
 </asp:Content>
 

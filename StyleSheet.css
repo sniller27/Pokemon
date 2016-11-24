@@ -1,8 +1,6 @@
 ﻿body {
     background-color: #F8F8F8;
 }
-
-
 .bg {
   background: url(Images/Pokemon-Go-banner.jpg) center center / cover no-repeat;
   position: fixed;
@@ -24,6 +22,19 @@
 {
     width: 450px; /* your width */
 }
+
+
+/** MyPOKEMON **/
+/*images*/
+.mypokemonimage {
+    max-width: 240px;
+}
+
+
+
+
+
+
 
 /* Sticky footer styles
 -------------------------------------------------- */
