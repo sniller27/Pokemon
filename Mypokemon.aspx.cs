@@ -11,6 +11,10 @@ public partial class Mypokemon : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
+        if (Session["Pokebattle"] == "yes")
+        {
+            Session["Pokebattle"] = null;
+        }
         //connection
         SqlConnection conn = new SqlConnection(@"data source = .\SQLEXPRESS; integrated security = true; database = PokemonDB");
         SqlCommand cmd = null;

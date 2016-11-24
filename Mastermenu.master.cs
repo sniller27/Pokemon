@@ -5,6 +5,7 @@ using System.Data.SqlClient;
 using System.IO;
 using System.Linq;
 using System.Web;
+using System.Web.Security;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
@@ -124,7 +125,7 @@ public partial class Mastermenu : System.Web.UI.MasterPage
         }
     }
 
-    protected void ButtonLogout_Click(object sender, EventArgs e)
+    protected void Linklogout_Click(object sender, EventArgs e)
     {
         Session["Pokehunter"] = null;
         Response.Redirect("Welcome.aspx");
@@ -134,16 +135,18 @@ public partial class Mastermenu : System.Web.UI.MasterPage
         //check session and set login/logout links i menu
         if (Session["Pokehunter"] == null)
         {
-            ButtonLogout.Visible = false;
+            Linklogout.Visible = false;
             loginmodalhyperlink.Visible = true;
             //return "< li >< a href = '#' data - toggle = 'modal' data - target = '#myModal' >< span class='glyphicon glyphicon-log-in'></span> Logout</a></li>";
         }
         else
         {
-            ButtonLogout.Visible = true;
+            Linklogout.Visible = true;
             loginmodalhyperlink.Visible = false;
             //return "< li >< a href = '#' data - toggle = 'modal' data - target = '#myModal' >< span class='glyphicon glyphicon-log-in'></span> Login</a></li>";
         }
     }
+
+
 
 }
