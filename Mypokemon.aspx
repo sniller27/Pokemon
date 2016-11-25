@@ -2,12 +2,16 @@
 
 <%-- Add content controls here --%>
 <asp:Content id="Content11" ContentPlaceholderID="ChildContent1" runat="server">
-    <asp:Label runat="server" id="Label1" 
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <asp:Label runat="server" id="Label1" 
         text="Child label1" font-bold="true" />
     
    <br />
 
-    <asp:gridview runat="server" id="gridviewUserReadpokemon" AutoGenerateColumns="false">
+    <asp:gridview runat="server" id="gridviewUserReadpokemon" AutoGenerateColumns="false" OnRowDeleting="gridviewUserReadpokemon_RowDeleting" onrowcommand="gridviewUserReadpokemon_RowCommand" DataKeyNames="CatchId">
         <Columns>
 
                 <asp:TemplateField HeaderText="Image">
@@ -24,10 +28,15 @@
                 <asp:BoundField DataField="Number" HeaderText="Pokedex number" SortExpression="password" />
                 <asp:BoundField DataField="Name" HeaderText="Official Pokemon name" SortExpression="password" />
                 <asp:BoundField DataField="NextEvolution" HeaderText="Next Evolution" SortExpression="password" />
+                <asp:buttonfield buttontype="Button" commandname="buttonlevelchange" text="Evolve" ControlStyle-CssClass="btn btn-primary"/>
                 <asp:BoundField DataField="Type" HeaderText="Type" SortExpression="password" />
-
+                <asp:CommandField ButtonType="Button" ShowDeleteButton="True" ControlStyle-CssClass="btn btn-danger" />
+                <asp:BoundField DataField="CatchId" SortExpression="password" ItemStyle-CssClass="hidden" />
 
         </Columns>
     </asp:gridview>
+            </div>
+        </div>
+    </div>
 
 </asp:Content>

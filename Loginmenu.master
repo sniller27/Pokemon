@@ -3,12 +3,17 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
 </asp:Content>
 <asp:Content ID="logincontent" ContentPlaceHolderID="content" Runat="Server">
-    <div id="loginmenu" runat="server">
-        <a href="Mypokemon.aspx">My Pokémon</a>
-        <a href="CatchPokemon.aspx">Catch a pokemon</a>
+    <div class="container">
+        <div class="row">
+            <div class="md-12">
+                <div id="loginmenu" runat="server">
+                    <a href="Mypokemon.aspx">My Pokémon</a>
+                    <a href="CatchPokemon.aspx">Catch a pokemon</a>
+                </div>
+                <br />
+                <asp:ContentPlaceHolder ID="ChildContent1" runat="server" />
+            </div>
+        </div>
     </div>
-    
-    <br />
-     <asp:ContentPlaceHolder ID="ChildContent1" runat="server" />
 </asp:Content>
 
