@@ -117,14 +117,59 @@ public partial class Mypokemon : System.Web.UI.Page
     //row update/evovle
     public void gridviewUserReadpokemon_RowCommand(Object sender, GridViewCommandEventArgs e)
     {
-        //current row button clicked
-        int currentrowvalue = Convert.ToInt32(e.CommandArgument);
-        //catch id
-        string selectedrow = gridviewUserReadpokemon.DataKeys[currentrowvalue].Value.ToString();
-        //next evolution
-        string nextevolution = gridviewUserReadpokemon.Rows[currentrowvalue].Cells[8].Text;
+        //Button event that only responds to update button
+        if (e.CommandName == "buttonlevelchange")
+        {
+            //connection info
+            SqlConnection conn = new SqlConnection(@"data source = .\sqlexpress; integrated security = true; database = PokemonDB");
+            SqlCommand cmd = null;
 
+            //current row button clicked
+            int currentrowvalue = Convert.ToInt32(e.CommandArgument);
+            //catch id
+            string selectedrow = gridviewUserReadpokemon.DataKeys[currentrowvalue].Value.ToString();
+            //next evolution
+            string nextevolution = gridviewUserReadpokemon.Rows[currentrowvalue].Cells[8].Text;
+            Labelpositivefeedback.Text = selectedrow;
+            Labelnegativefeedback.Text = nextevolution;
+            try
+            {
+                //open connection to db
+                conn.Open();
+                //create command
+                cmd = conn.CreateCommand();
+                //define type of command
+                cmd.CommandType = CommandType.StoredProcedure;
+                //name of procedure
+                cmd.CommandText = "Evolve";
 
+                //add parameters
+                SqlParameter pa1 = cmd.Parameters.Add("@catchid", SqlDbType.Int);
+                //direction input/output/return value
+                pa1.Direction = ParameterDirection.Input;
+                //parameter value
+                pa1.Value = Convert.ToInt32(selectedrow);
+
+                SqlParameter pa2 = cmd.Parameters.Add("@nextevolve", SqlDbType.Text);
+                pa2.Direction = ParameterDirection.Input;
+                pa2.Value = nextevolution;
+
+                //execute and update
+                cmd.ExecuteNonQuery();
+                Labelpositivefeedback.Text = "Your Pokémon has evolved";
+                UpdateGridView();
+            }
+            catch (Exception ex)
+            {
+                Labelpositivefeedback.Text = ex.Message;
+                throw;
+            }
+            finally
+            {
+                //close connection
+                conn.Close();
+            }
+        }
     }
 
     //Remove Evolve buttons method

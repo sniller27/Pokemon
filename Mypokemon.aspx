@@ -6,8 +6,8 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <asp:Label runat="server" id="Label1" 
-        text="Child label1" font-bold="true" />
+                <asp:Label runat="server" id="Labelpositivefeedback" text="" font-bold="true" />
+                <asp:Label runat="server" id="Labelnegativefeedback" text="" font-bold="true" />
     
    <br />
 
