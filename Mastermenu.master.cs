@@ -70,17 +70,6 @@ public partial class Mastermenu : System.Web.UI.MasterPage
             //cmd.ExecuteNonQuery();
             rdr = cmd.ExecuteReader();
 
-            //fra internet
-            //string retunvalue = cmd.Parameters["@rowcounts"].Value.ToString();
-
-            //torben
-            Labelcheck.Text = "Resultat: " + cmd.Parameters["return_value"].Value;
-            Labelcheck1.Text = "Resultat: " + cmd.Parameters["@totalrowsfound"].Value;
-
-
-            //ved ikke?
-            //cmd.ExecuteNonQuery();
-
             //close reader
             rdr.Close();
 
@@ -100,24 +89,28 @@ public partial class Mastermenu : System.Web.UI.MasterPage
                 cmd.Parameters["@username"].Value = TextBoxUsernameLogin.Text;
                 cmd.Parameters["@password"].Value = TextBoxPasswordLogin.Text;
 
+                //grabbing id from first row
                 Int32 id = (Int32)cmd.ExecuteScalar();
                 //rdr = cmd.ExecuteReader();
 
-                //found username and password match
-                Labelcheck.Text = "found " + id;
                 //start login session
-                Session["Pokehunter"] = id;
-                Response.Redirect("Mypokemon.aspx");
-            }
-            else
-            {
-                Labelcheck.Text = "not found";
+                if (cmd.Parameters["@username"].Value.ToString() == "Webmaster")
+                {
+                    Session["Webmaster"] = id;
+                    Response.Redirect("Webmaster.aspx");
+                }
+                else
+                {
+                    Session["Pokehunter"] = id;
+                    Response.Redirect("Mypokemon.aspx");
+                }
+
             }
 
         }
         catch (Exception ex)
         {
-            Labelcheck.Text = ex.Message;
+            LabelLoginError.Text = ex.Message;
         }
         finally
         {

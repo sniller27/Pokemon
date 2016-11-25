@@ -7,8 +7,20 @@
         <div class="row">
             <div class="md-12">
                 <div id="loginmenu" runat="server">
+
+                    <% if (Session["Pokehunter"] != null) { %>
                     <a href="Mypokemon.aspx">My Pokémon</a>
                     <a href="CatchPokemon.aspx">Catch a pokemon</a>
+                    <% } %>
+
+                </div>
+                <div id="loginwebmaster" runat="server">
+
+                    <% if (Session["Webmaster"] != null) { %>
+                    <a href="Webmaster.aspx">Create Pokémon</a>
+                    <a href="Webmaster.aspx">Edit Pokémon</a>
+                    <% } %>
+
                 </div>
                 <br />
                 <asp:ContentPlaceHolder ID="ChildContent1" runat="server" />

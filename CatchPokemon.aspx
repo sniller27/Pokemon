@@ -6,7 +6,8 @@
     <asp:datalist runat="server" id="datalistcatchpokemon">
         <ItemTemplate>
             <asp:HiddenField ID="HiddenFieldPokemonId" runat="server" Value='<%#Eval("PokemonId") %>' />
-            <asp:Label ID="LabelCatchPokemonName" runat="server" Text='<%#Eval("Name") %>'></asp:Label>
+            <asp:Label ID="LabelCatchPokemonName" runat="server" Text='<%#Eval("Name") %>'></asp:Label> 
+            - Level:
             <asp:Label ID="LabelCatchPokemonLevel" runat="server" Text='<%#Eval("RandomLevel") %>'></asp:Label>
             <asp:Image runat="server" ImageUrl='<%# "Images/" + Eval("Image") %>' Width="100%" ID="ImageCatchPokemon" />
         </ItemTemplate>

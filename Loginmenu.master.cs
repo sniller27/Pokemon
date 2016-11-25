@@ -18,5 +18,14 @@ public partial class Loginmenu : System.Web.UI.MasterPage
         {
             loginmenu.Visible = true;
         }
+
+        if (Session["Webmaster"] == null)
+        {
+            loginwebmaster.Visible = false;
+        }
+        else
+        {
+            loginwebmaster.Visible = true;
+        }
     }
 }
