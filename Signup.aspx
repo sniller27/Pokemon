@@ -1,8 +1,16 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Mastermenu.master" AutoEventWireup="true" CodeFile="Signup.aspx.cs" Inherits="Signup" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Loginmenu.master" AutoEventWireup="true" CodeFile="Signup.aspx.cs" Inherits="Signup" %>
 
-<asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
+
+
+
+
+
+
+<asp:Content ID="Content3" ContentPlaceHolderID="ContentPlaceHolderhead" Runat="Server">
+
 </asp:Content>
-<asp:Content ID="Content2" ContentPlaceHolderID="content" Runat="Server">
+
+<asp:Content ID="Content4" ContentPlaceHolderID="ChildContent1" Runat="Server">
 
     <div class="container">
         <div class="col-md-12">

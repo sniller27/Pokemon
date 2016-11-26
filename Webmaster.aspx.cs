@@ -12,15 +12,48 @@ using System.Web.UI.WebControls;
 public partial class Webmaster : System.Web.UI.Page
 {
     private string fileName;
+    private string Tranfiles, ProcessedFiles;
 
     protected void Page_Load(object sender, EventArgs e)
     {
+        //upload listener
+        FileUploadImage.Attributes["onchange"] = "UploadFile(this)";
 
+
+        //////checks if file has been chosen on postback
+        //if (IsPostBack && FileUploadImage.HasFile != null)
+        //{
+        //    //upload file to temp
+        //    ImageUpload();
+
+        //    //display image
+        //    ImageToUpload.ImageUrl = @"~\temp\" + fileName;
+
+        //    //display image title
+        //    LabelChooseImage.Text = fileName;
+        //}
     }
 
-    protected void ButtonBrowseImage_Click(object sender, EventArgs e)
+    protected void Upload(object sender, EventArgs e)
     {
-        
+        //FileUploadImage.SaveAs(Server.MapPath("~/Uploads/" + Path.GetFileName(FileUpload1.FileName)));
+
+        if (FileUploadImage.HasFile)
+        {
+            //getting filename
+            fileName = Path.GetFileName(FileUploadImage.PostedFile.FileName);
+            //save in images folder
+            FileUploadImage.PostedFile.SaveAs(Server.MapPath("~/temp/") + fileName);
+            //en redirect?
+            //Response.Redirect(Request.Url.AbsoluteUri);
+
+        Labelpositivefeedback.Text = "uploaded to temp";
+        }
+
+        //show image
+        ImageToUpload.ImageUrl = @"~\temp\" + fileName;
+
+        LabelChooseImage.Text = fileName;
     }
 
     protected void ButtonCreatePokemon_Click(object sender, EventArgs e)
@@ -53,9 +86,9 @@ public partial class Webmaster : System.Web.UI.Page
             newrow["Name"] = TextBoxName.Text;
             newrow["NextEvolution"] = TextBoxNextEvolution.Text;
             newrow["Type"] = TextBoxType.Text;
-            if (ImageUpload())
+            if (LabelChooseImage.Text != "")
             {
-                newrow["Image"] = fileName;
+                newrow["Image"] = LabelChooseImage.Text;
             }
             else
             {
@@ -82,6 +115,11 @@ public partial class Webmaster : System.Web.UI.Page
 
             Labelpositivefeedback.Text = "Pokemon created";
 
+            //movefile
+            if (LabelChooseImage.Text != "") {
+            MoveFile(LabelChooseImage.Text);
+            }
+
         }
         catch (Exception ex)
         {
@@ -95,73 +133,20 @@ public partial class Webmaster : System.Web.UI.Page
         }
     }
 
-    public bool ImageUpload()
+    public void MoveFile(string filename)
     {
-        if (FileUploadImage.HasFile)
+        //send image to image folder
+        //Tranfiles = Server.MapPath(@"~\godurian\sth100\transfiles\" + Filename);
+
+        Tranfiles = Server.MapPath(@"~\temp\" + filename);
+        if (File.Exists(Server.MapPath(@"~\temp\" + filename)))
         {
-            //int length = FileUploadImage.PostedFile.ContentLength;
-            //byte[] pic = new byte[length];
-
-            //FileUploadImage.PostedFile.InputStream.Read(pic, 0, length);
-
-            //getting filename
-            fileName = Path.GetFileName(FileUploadImage.PostedFile.FileName);
-            //save in images folder
-            FileUploadImage.PostedFile.SaveAs(Server.MapPath("~/Images/") + fileName);
-            //en redirect?
-            //Response.Redirect(Request.Url.AbsoluteUri);
-
-            return true;
+            // File.Delete(Server.MapPath(@"~\Images\" + Filename));
         }
-        else
-        {
-            return false;
-        }
-        /////
 
+        //ProcessedFiles = Server.MapPath(@"~\godurian\sth100\ProcessedFiles");
+        ProcessedFiles = Server.MapPath(@"~\Images\" + filename);
 
-
-        //SqlConnection connection = null;
-        //try
-        //{
-        //    //fileupload
-        //    FileUpload img = (FileUpload)FileUploadImage;
-        //    //byte
-        //    Byte[] imgByte = null;
-
-        //    //check
-        //    if (img.HasFile && img.PostedFile != null)
-        //    {
-        //        //To create a PostedFile
-        //        HttpPostedFile File = FileUploadImage.PostedFile;
-        //        //Create byte Array with file length
-        //        imgByte = new Byte[File.ContentLength];
-        //        //force the control to load data in array
-        //        File.InputStream.Read(imgByte, 0, File.ContentLength);
-        //    }
-        //    // Insert the employee name and image into db
-        //    //string conn = ConfigurationManager.ConnectionStrings["EmployeeConnString"].ConnectionString;
-
-        //    connection = new SqlConnection(@"data source = .\sqlexpress; integrated security = true; database = PokemonDB");
-
-        //    //connection = new SqlConnection(conn);
-
-        //    connection.Open();
-        //    string sql = "INSERT INTO EmpDetails(empname,empimg) VALUES(@enm, @eimg) SELECT @@IDENTITY";
-        //    SqlCommand cmd = new SqlCommand(sql, connection);
-        //    cmd.Parameters.AddWithValue("@enm", txtEName.Text.Trim());
-        //    cmd.Parameters.AddWithValue("@eimg", imgByte);
-        //    int id = Convert.ToInt32(cmd.ExecuteScalar());
-        //    lblResult.Text = String.Format("Employee ID is {0}", id);
-        //}
-        //catch
-        //{
-        //    lblResult.Text = "There was an error";
-        //}
-        //finally
-        //{
-        //    connection.Close();
-        //}
-
+        File.Move(Tranfiles, ProcessedFiles);
     }
 }

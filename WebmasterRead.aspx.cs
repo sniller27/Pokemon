@@ -109,4 +109,9 @@ public partial class WebmasterRead : System.Web.UI.Page
         //update gridview
         UpdateGridview();
     }
+
+    protected void ButtonUploadImage_Click(object sender, EventArgs e)
+    {
+
+    }
 }

@@ -29,7 +29,29 @@
             </div>
             <div class="col-md-3">
 
-                <h2>Update Pokémon</h2>
+                <div class="row">
+
+                    <div class="col-md-12">
+                        <h2>Update Pokémon</h2>
+                        <asp:textbox runat="server"></asp:textbox>
+                        <asp:textbox runat="server"></asp:textbox>
+                        <asp:textbox runat="server"></asp:textbox>
+                        <asp:textbox runat="server"></asp:textbox>
+                        <asp:textbox runat="server"></asp:textbox>
+                        <br />
+                        <br />
+                        <asp:button runat="server" text="Button" />
+                    </div>
+
+                    <div class="col-md-12">
+                        <h2>Upload image</h2>
+                        <asp:fileupload runat="server" ID="FileUploadImage"></asp:fileupload>
+                        <br />
+                        <br />
+                        <asp:button runat="server" text="Button" ID="ButtonUploadImage" OnClick="ButtonUploadImage_Click" />
+                    </div>
+
+                </div>
 
             </div>
         </div>

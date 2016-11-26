@@ -121,12 +121,13 @@ public partial class Mastermenu : System.Web.UI.MasterPage
     protected void Linklogout_Click(object sender, EventArgs e)
     {
         Session["Pokehunter"] = null;
+        Session["Webmaster"] = null;
         Response.Redirect("Welcome.aspx");
     }
 
     public void CheckSession() {
         //check session and set login/logout links i menu
-        if (Session["Pokehunter"] == null)
+        if (Session["Pokehunter"] == null && Session["Webmaster"] == null)
         {
             Linklogout.Visible = false;
             loginmodalhyperlink.Visible = true;
