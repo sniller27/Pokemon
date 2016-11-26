@@ -2,14 +2,14 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="ChildContent1" Runat="Server">
 
-    <asp:Label ID="Labelpositivefeedback" runat="server" Text="Label"></asp:Label>
-    <asp:Label ID="Labelnegativefeedback" runat="server" Text="Label"></asp:Label>
+    <asp:Label ID="Labelpositivefeedback" runat="server"></asp:Label>
+    <asp:Label ID="Labelnegativefeedback" runat="server"></asp:Label>
     <h2>Create Pokemon</h2>
     <asp:TextBox ID="TextBoxNumber" runat="server"></asp:TextBox><asp:Label ID="LabelNumber" runat="server" Text="Pokedex number"></asp:Label>
     <br />
     <asp:TextBox ID="TextBoxName" runat="server"></asp:TextBox><asp:Label ID="LabelName" runat="server" Text="Pokémon name"></asp:Label>
     <br />
-    <asp:TextBox ID="TextBoxNextEvolution" runat="server"></asp:TextBox><asp:Label ID="LabelNextEvolution" runat="server" Text="Next evolution"></asp:Label>
+    <asp:TextBox ID="TextBoxNextEvolution" runat="server"></asp:TextBox><asp:Label ID="LabelNextEvolution" runat="server" Text="Next evolution (empty field if none)"></asp:Label>
     <br />
     <asp:TextBox ID="TextBoxType" runat="server"></asp:TextBox><asp:Label ID="LabelType" runat="server" Text="Type"></asp:Label>
     <br />

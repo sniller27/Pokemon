@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -9,6 +11,8 @@ using System.Web.UI.WebControls;
 
 public partial class Webmaster : System.Web.UI.Page
 {
+    private string fileName;
+
     protected void Page_Load(object sender, EventArgs e)
     {
 
@@ -48,8 +52,15 @@ public partial class Webmaster : System.Web.UI.Page
             newrow["Number"] = TextBoxNumber.Text;
             newrow["Name"] = TextBoxName.Text;
             newrow["NextEvolution"] = TextBoxNextEvolution.Text;
-            newrow["Image"] = "default.jpg";
             newrow["Type"] = TextBoxType.Text;
+            if (ImageUpload())
+            {
+                newrow["Image"] = fileName;
+            }
+            else
+            {
+                newrow["Image"] = null;
+            }
             dt.Rows.Add(newrow);
 
             //insert command
@@ -82,5 +93,75 @@ public partial class Webmaster : System.Web.UI.Page
             //close connection just to be sure
             conn.Close();
         }
+    }
+
+    public bool ImageUpload()
+    {
+        if (FileUploadImage.HasFile)
+        {
+            //int length = FileUploadImage.PostedFile.ContentLength;
+            //byte[] pic = new byte[length];
+
+            //FileUploadImage.PostedFile.InputStream.Read(pic, 0, length);
+
+            //getting filename
+            fileName = Path.GetFileName(FileUploadImage.PostedFile.FileName);
+            //save in images folder
+            FileUploadImage.PostedFile.SaveAs(Server.MapPath("~/Images/") + fileName);
+            //en redirect?
+            //Response.Redirect(Request.Url.AbsoluteUri);
+
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+        /////
+
+
+
+        //SqlConnection connection = null;
+        //try
+        //{
+        //    //fileupload
+        //    FileUpload img = (FileUpload)FileUploadImage;
+        //    //byte
+        //    Byte[] imgByte = null;
+
+        //    //check
+        //    if (img.HasFile && img.PostedFile != null)
+        //    {
+        //        //To create a PostedFile
+        //        HttpPostedFile File = FileUploadImage.PostedFile;
+        //        //Create byte Array with file length
+        //        imgByte = new Byte[File.ContentLength];
+        //        //force the control to load data in array
+        //        File.InputStream.Read(imgByte, 0, File.ContentLength);
+        //    }
+        //    // Insert the employee name and image into db
+        //    //string conn = ConfigurationManager.ConnectionStrings["EmployeeConnString"].ConnectionString;
+
+        //    connection = new SqlConnection(@"data source = .\sqlexpress; integrated security = true; database = PokemonDB");
+
+        //    //connection = new SqlConnection(conn);
+
+        //    connection.Open();
+        //    string sql = "INSERT INTO EmpDetails(empname,empimg) VALUES(@enm, @eimg) SELECT @@IDENTITY";
+        //    SqlCommand cmd = new SqlCommand(sql, connection);
+        //    cmd.Parameters.AddWithValue("@enm", txtEName.Text.Trim());
+        //    cmd.Parameters.AddWithValue("@eimg", imgByte);
+        //    int id = Convert.ToInt32(cmd.ExecuteScalar());
+        //    lblResult.Text = String.Format("Employee ID is {0}", id);
+        //}
+        //catch
+        //{
+        //    lblResult.Text = "There was an error";
+        //}
+        //finally
+        //{
+        //    connection.Close();
+        //}
+
     }
 }
