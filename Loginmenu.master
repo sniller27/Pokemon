@@ -18,7 +18,7 @@
 
                     <% if (Session["Webmaster"] != null) { %>
                     <a href="Webmaster.aspx">Create Pokémon</a>
-                    <a href="Webmaster.aspx">Edit Pokémon</a>
+                    <a href="WebmasterRead.aspx">Edit Pokémon</a>
                     <% } %>
 
                 </div>
