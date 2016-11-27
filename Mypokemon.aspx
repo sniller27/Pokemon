@@ -31,7 +31,7 @@
                 <asp:buttonfield buttontype="Button" commandname="buttonlevelchange" text="Evolve" ControlStyle-CssClass="btn btn-primary"/>
                 <asp:BoundField DataField="Type" HeaderText="Type" SortExpression="password" />
                 <asp:CommandField ButtonType="Button" ShowDeleteButton="True" ControlStyle-CssClass="btn btn-danger" />
-                <asp:BoundField DataField="CatchId" SortExpression="password" ItemStyle-CssClass="hidden" />
+                <asp:BoundField DataField="CatchId" SortExpression="CatchId" ItemStyle-CssClass="hidden" />
 
         </Columns>
     </asp:gridview>

@@ -11,36 +11,40 @@ public partial class MyPokemonUpdate : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-        if (!Page.IsPostBack)
-        {
-        UpdateDropDownList();
-        }
+        //hide catchid's
+        GridviewUpdateCatches.Columns[6].Visible = false;
+
+        UpdateGridView();
     }
 
-    public void UpdateDropDownList() {
+    public void UpdateGridView()
+    {
         //connection
         SqlConnection conn = new SqlConnection(@"data source = .\SQLEXPRESS; integrated security = true; database = PokemonDB");
         SqlCommand cmd = null;
         SqlDataReader rdr = null;
-        string sqlselpokemons = "select * from Pokemon join PokemonCatches on PokemonId = PokemonId_FK where HunderId_FK = @hunterid";
+        string sqlselpokemons = "select * from PokemonCatches where HunderId_FK = @hunterid";
 
         try
         {
             conn.Open();
+
+            //cmd = new SqlCommand(sqlselcheck, conn);
             cmd = new SqlCommand(sqlselpokemons, conn);
 
-            //parameters
-            cmd.Parameters.Add("@hunterid", SqlDbType.Int);
-
-            cmd.Parameters["@hunterid"].Value = Convert.ToInt32(Session["Pokehunter"]);
+            //hunter id parameter
+            SqlParameter pa1 = cmd.Parameters.Add("@hunterid", SqlDbType.Int);
+            pa1.Direction = ParameterDirection.Input;
+            pa1.Value = Session["Pokehunter"];
 
             rdr = cmd.ExecuteReader();
-            DropDownListPokemons.DataSource = rdr;
-            DropDownListPokemons.DataTextField = "Name";
-            DropDownListPokemons.DataValueField = "CatchId";
-            DropDownListPokemons.DataBind();
 
+            GridviewUpdateCatches.DataSource = rdr;
+            GridviewUpdateCatches.DataBind();
+
+            //close reader
             rdr.Close();
+
         }
         catch (Exception ex)
         {
@@ -52,102 +56,73 @@ public partial class MyPokemonUpdate : System.Web.UI.Page
         }
     }
 
-    protected void DropDownListPokemons_SelectedIndexChanged(object sender, EventArgs e)
-    {
-        //SqlConnection conn = new SqlConnection(@"data source = .\sqlexpress; integrated security = true; database = PokemonDB");
-        ////
-        //SqlDataAdapter da = null;
-        //DataSet ds = null;
-        //DataTable dt = null;
-        ////
-        //string sqlsel = "select * from Pokemon join PokemonCatches on PokemonId = PokemonId_FK where CatchId = @catchid";
-
-        //try
-        //{
-        //    da = new SqlDataAdapter();
-
-        //    da.SelectCommand = new SqlCommand(sqlsel, conn);
-        //    ds = new DataSet();
-        //    da.Fill(ds, "SelectCatch");
-        //    dt = ds.Tables["SelectCatch"];
-
-        //    //gridview bind
-        //    GridViewshippers.DataSource = dt;
-        //    GridViewshippers.DataBind();
-
-        //}
-        //catch (Exception ex)
-        //{
-        //    Labelmessage.Text = ex.Message;
-        //    throw;
-        //}
-        //finally
-        //{
-        //    conn.Close(); //sqldataadapter connection closes automaticly. but let's close it since it can fail... just in case
-        //}
-    }
-
     protected void ButtonUpdatePokecatch_Click(object sender, EventArgs e)
     {
-        //SqlConnection conn = new SqlConnection(@"data source = .\sqlexpress; integrated security = true; database = PokemonDB");
-        //SqlDataAdapter da = null;
-        //DataSet ds = null;
-        //DataTable dt = null;
-        //SqlCommand cmd = null;
-        //string sqlsel = "select * from Pokemon join PokemonCatches on PokemonId = PokemonId_FK where CatchId = @catchid";
-        ////string sqlupd = "update pokemon set Number = @pokedex, Name = @pokename, NextEvolution = @nextevolution, Image = @image, Type = @type where PokemonId = @pokemonid";
-        //string sqlupd = "update PokemonCatches set CatchName = @catchname, Lvl = @lvl, CurrentExp = @curexp, NextLvlExp = @nextexp, PokemonGender = @gender  where CatchId = @catchid";
+        //connection
+        SqlConnection conn = new SqlConnection(@"data source = .\SQLEXPRESS; integrated security = true; database = PokemonDB");
+        SqlCommand cmd = null;
+        string sqlupd = "update PokemonCatches set CatchName = @catchname, Lvl = @lvl, CurrentExp = @curexp, NextLvlExp = @nextexp, PokemonGender = @gender  where CatchId = @catchid";
 
-        //try
-        //{
-        //    //instantiate
-        //    da = new SqlDataAdapter();
+        try
+        {
+            conn.Open();
+            cmd = new SqlCommand(sqlupd, conn);
 
-        //    //fill data table with data
-        //    da.SelectCommand = new SqlCommand(sqlsel, conn);
-        //    ds = new DataSet();
-        //    da.Fill(ds, "UpdateCatch");
-        //    dt = ds.Tables["UpdateCatch"];
+            SqlParameter pa1 = cmd.Parameters.Add("@catchname", SqlDbType.Text);
+            pa1.Direction = ParameterDirection.Input;
+            pa1.Value = TextBoxPokemonName.Text;
 
-        //    //change rows in data table
-        //    dt.Rows[0]["CatchName"] = TextBoxPokemonName.Text;
-        //    dt.Rows[0]["Lvl"] = TextBoxPokemonLevel.Text;
-        //    dt.Rows[0]["CurrentExp"] = TextBoxPokemonCurExp.Text;
-        //    dt.Rows[0]["NextLvlExp"] = TextBoxNextLvlExp.Text;
-        //    dt.Rows[0]["PokemonGender"] = RadioButtonListPokemonGender.SelectedValue;
+            SqlParameter pa2 = cmd.Parameters.Add("@lvl", SqlDbType.Int);
+            pa2.Direction = ParameterDirection.Input;
+            pa2.Value = Convert.ToInt32(TextBoxPokemonLevel.Text);
 
-        //    //new sqlcommand
-        //    cmd = new SqlCommand(sqlupd, conn);
-        //    //add parameters
-        //    cmd.Parameters.Add("@pokedex", SqlDbType.Int, 50, "Number");
-        //    cmd.Parameters.Add("@pokename", SqlDbType.Text, 50, "Name");
-        //    cmd.Parameters.Add("@nextevolution", SqlDbType.Text, 50, "NextEvolution");
-        //    cmd.Parameters.Add("@image", SqlDbType.Text, 50, "Image");
-        //    cmd.Parameters.Add("@type", SqlDbType.Text, 50, "Type");
-        //    cmd.Parameters.Add("@pokemonid", SqlDbType.Int, 50, "PokemonId");
+            SqlParameter pa3 = cmd.Parameters.Add("@curexp", SqlDbType.Int);
+            pa3.Direction = ParameterDirection.Input;
+            pa3.Value = Convert.ToInt32(TextBoxPokemonCurExp.Text);
 
-        //    //extra parameter for security reasons. if someone changes id by mistake.
-        //    //SqlParameter parm = cmd.Parameters.Add("@shipperid", SqlDbType.Int, 4, "shipperid");
-        //    //parm.SourceVersion = DataRowVersion.Original;
+            SqlParameter pa4 = cmd.Parameters.Add("@nextexp", SqlDbType.Int);
+            pa4.Direction = ParameterDirection.Input;
+            pa4.Value = Convert.ToInt32(TextBoxNextLvlExp.Text);
 
-        //    //set command for adapter
-        //    da.UpdateCommand = cmd;
-        //    //adapter sync
-        //    da.Update(ds, "UpdateCatch");
+            SqlParameter pa5 = cmd.Parameters.Add("@gender", SqlDbType.Text);
+            pa5.Direction = ParameterDirection.Input;
+            pa5.Value = RadioButtonListPokemonGender.SelectedValue;
 
-        //    //update gridview
-        //    UpdateGridview();
+            SqlParameter pa6 = cmd.Parameters.Add("@catchid", SqlDbType.Int);
+            pa6.Direction = ParameterDirection.Input;
+            pa6.Value = Convert.ToUInt32(HiddenFieldCatchId.Value);
 
-        //    LabelSucces.Text = "Updated";
-        //}
-        //catch (Exception ex)
-        //{
-        //    LabelNegativeFeedback.Text = ex.Message;
-        //}
-        //finally
-        //{
-        //    //close just in case
-        //    conn.Close();
-        //}
+            //execute non query for update
+            cmd.ExecuteNonQuery();
+
+            //feedback
+            LabelPositiveFeedback.Text = "Pokémoninfo has been updated";
+
+            //update gridview
+            UpdateGridView();
+        }
+        catch (Exception ex)
+        {
+            LabelNegativeFeedback.Text = ex.Message;
+        }
+        finally
+        {
+            conn.Close();
+        }
+    }
+
+    protected void GridviewUpdateCatches_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        //populate update fields
+        TextBoxPokemonName.Text = GridviewUpdateCatches.SelectedRow.Cells[1].Text;
+        TextBoxPokemonLevel.Text = GridviewUpdateCatches.SelectedRow.Cells[2].Text;
+        TextBoxPokemonCurExp.Text = GridviewUpdateCatches.SelectedRow.Cells[3].Text;
+        TextBoxNextLvlExp.Text = GridviewUpdateCatches.SelectedRow.Cells[4].Text;
+        RadioButtonListPokemonGender.SelectedValue = GridviewUpdateCatches.SelectedRow.Cells[5].Text;
+
+        //set catch id for hidden field
+        int rowid = GridviewUpdateCatches.SelectedRow.DataItemIndex;
+        string catchidrow = GridviewUpdateCatches.DataKeys[rowid].Value.ToString();
+        HiddenFieldCatchId.Value = catchidrow;
     }
 }
