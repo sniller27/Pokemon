@@ -11,8 +11,7 @@ using System.Web.UI.WebControls;
 
 public partial class Webmaster : System.Web.UI.Page
 {
-    private string fileName;
-    private string Tranfiles, ProcessedFiles;
+    private string fileName, Tranfiles, ProcessedFiles;
 
     protected void Page_Load(object sender, EventArgs e)
     {

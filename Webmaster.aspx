@@ -24,7 +24,7 @@
     <br />
     <br />
     <p>Image</p>
-    <asp:Image ID="ImageToUpload" runat="server" Height="152px" Width="189px" />
+    <asp:Image ID="ImageToUpload" runat="server" CssClass="mypokemonimage" />
     <br />
     <asp:Label ID="LabelChooseImage" runat="server"></asp:Label>
     <br />

@@ -27,7 +27,8 @@
 /** MyPOKEMON **/
 /*images*/
 .mypokemonimage {
-    max-width: 240px;
+    width: 240px;
+    height: 240px;
 }
 
 /**Hide catch id column**/
