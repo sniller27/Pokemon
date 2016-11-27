@@ -32,7 +32,7 @@
     <asp:Button ID="btnUpload" Text="Upload" runat="server" OnClick="Upload" Style="display: none" />
     <br />
     <br />
-    <asp:Button ID="ButtonCreatePokemon" runat="server" Text="Create" OnClick="ButtonCreatePokemon_Click" />
+    <asp:Button ID="ButtonCreatePokemon" runat="server" Text="Create" OnClick="ButtonCreatePokemon_Click" CssClass="btn btn-primary" />
     <br />
     <br />
     <br />

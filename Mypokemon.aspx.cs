@@ -12,6 +12,13 @@ public partial class Mypokemon : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
+        //redirects you if you don't have access to this page
+        if (Session["Pokehunter"] == null)
+        {
+            Response.Redirect("Index.aspx");
+        }
+
+        //check if you are battling
         if (Session["Pokebattle"] == "yes")
         {
             Session["Pokebattle"] = null;

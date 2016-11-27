@@ -13,6 +13,6 @@
         </ItemTemplate>
     </asp:datalist>
     <h2>Click the Pokeball to catch it.</h2>
-    <asp:ImageButton ID="ImageButtonPokeballCatch" runat="server" Height="61px" ImageUrl="~/Images/Pokeball.png" Width="63px" OnClick="ImageButtonPokeballCatch_Click" />
+    <asp:ImageButton ID="ImageButtonPokeballCatch" runat="server" Height="61px" ImageUrl="~/Websiteimages/Pokeball.png" Width="63px" OnClick="ImageButtonPokeballCatch_Click" />
 </asp:Content>
 

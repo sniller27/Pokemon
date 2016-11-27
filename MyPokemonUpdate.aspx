@@ -7,6 +7,7 @@
     <asp:Label ID="LabelPositiveFeedback" runat="server" Text=""></asp:Label>
     <asp:Label ID="LabelNegativeFeedback" runat="server" Text=""></asp:Label>
     <h2>Update my Pokémon</h2>
+    <p>Select the Pokémon you want to update</p>
 
     <asp:gridview runat="server" ID="GridviewUpdateCatches" AutoGenerateColumns="false" OnSelectedIndexChanged="GridviewUpdateCatches_SelectedIndexChanged" DataKeyNames="CatchId">
 
@@ -50,7 +51,7 @@
     </asp:RadioButtonList>
     <asp:HiddenField ID="HiddenFieldCatchId" runat="server" />
     <br />
-    <asp:Button ID="ButtonUpdatePokecatch" runat="server" Text="Update" OnClick="ButtonUpdatePokecatch_Click" />
+    <asp:Button ID="ButtonUpdatePokecatch" runat="server" Text="Update" OnClick="ButtonUpdatePokecatch_Click" CssClass="btn btn-primary" />
 
 </asp:Content>
 

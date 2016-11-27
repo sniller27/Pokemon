@@ -13,6 +13,9 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <link href="css/StyleSheet.css" rel="stylesheet" type="text/css" />
 
+    <%--favicon--%>
+    <link rel="shortcut icon" type="image/png" href="Websiteimages/favicon.png"/>
+
     <asp:ContentPlaceHolder id="head" runat="server">
     </asp:ContentPlaceHolder>
 </head>
@@ -30,7 +33,7 @@
                   <h4 class="modal-title">Login</h4>
                 </div>
                 <div class="modal-body">
-                    <asp:Label ID="LabelLoginError" runat="server" Text="Label"></asp:Label>
+                    <asp:Label ID="LabelLoginError" runat="server"></asp:Label>
                     <div class="form-group">
                     <asp:TextBox ID="TextBoxUsernameLogin" runat="server" class="form-control" placeholder="Username"></asp:TextBox>
                     </div>

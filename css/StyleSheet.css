@@ -2,7 +2,7 @@
     background-color: #F8F8F8;
 }
 .bg {
-  background: url(../Images/Pokemon-Go-banner.jpg) center center / cover no-repeat;
+  background: url(../Websiteimages/Pokemon-Go-banner.jpg) center center / cover no-repeat;
   position: fixed;
   width: 100%;
   height: 400px; /*same height as jumbotron */
@@ -150,5 +150,17 @@ body {
 
 /** navbar fix **/
 .navbar {
-    
+    margin-bottom: 0px !important;
+}
+/** login menu **/
+#content_loginmenu, #content_loginwebmaster {
+    background-color: #F8F8F8;
+    border-bottom-left-radius: 2px;
+    border-bottom-right-radius: 2px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+#content_loginmenu a, #content_loginwebmaster a {
+    margin-right: 12px;
+    margin-left: 13px;
 }

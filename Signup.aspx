@@ -33,8 +33,10 @@
             <asp:textbox runat="server" ID="TextBoxSignupPassword"></asp:textbox>
             Password<br />
             <asp:textbox runat="server" ID="TextBoxSignupPasswordConfirm"></asp:textbox>
-            Confirm password<br />
-            <asp:button runat="server" text="Button" ID="buttonsignup" OnClick="buttonsignup_Click" />
+            Confirm password
+            <br />
+            <br />
+            <asp:button runat="server" text="Button" ID="buttonsignup" OnClick="buttonsignup_Click" class="btn btn-primary" />
             <br />
             <asp:Label ID="labelsignupfeedback" runat="server"></asp:Label>
         </div>

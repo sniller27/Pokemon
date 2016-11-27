@@ -17,48 +17,54 @@ public partial class CatchPokemon : System.Web.UI.Page
 
     protected void Page_Load(object sender, EventArgs e)
     {
-        if (Session["Pokebattle"] != "yes")
+        //redirects you if you don't have access to this page
+        if (Session["Pokehunter"] == null)
         {
-            //connection
-            SqlConnection conn = new SqlConnection(@"data source = .\SQLEXPRESS; integrated security = true; database = PokemonDB");
-            SqlCommand cmd = null;
-            SqlDataReader rdr = null;
-            string sqlsel = "select TOP 1 *,CEILING(99*RAND()) as RandomLevel from Pokemon order by NEWID()";
-
-            try
-            {
-                //populate datalist
-                conn.Open();
-                cmd = conn.CreateCommand();
-                cmd.CommandType = CommandType.Text;
-                //datalistpokemoncarousel.DataSource
-                cmd.CommandText = sqlsel;
-                cmd.ExecuteNonQuery();
-
-                //create datatable and uses sqldataadapter to sync data from db(SqlCommand?)
-                DataTable dt = new DataTable();
-                SqlDataAdapter da = new SqlDataAdapter(cmd);
-                //binds data to table?
-                da.Fill(dt);
-                //datalist gets data from datatable?
-                datalistcatchpokemon.DataSource = dt;
-                datalistcatchpokemon.DataBind();
-            }
-            catch (Exception ex)
-            {
-            }
-            finally
-            {
-                //4. Close connection
-                conn.Close();
-            }
-
-            //genereate random level 1-99
-            
-
-            //start battle
-            Session["Pokebattle"] = "yes";
+            Response.Redirect("Index.aspx");
         }
+
+        //check for postback
+        if (!Page.IsPostBack)
+        {
+                //connection
+                SqlConnection conn = new SqlConnection(@"data source = .\SQLEXPRESS; integrated security = true; database = PokemonDB");
+                SqlCommand cmd = null;
+                SqlDataReader rdr = null;
+                string sqlsel = "select TOP 1 *,CEILING(99*RAND()) as RandomLevel from Pokemon order by NEWID()";
+
+                try
+                {
+                    //populate datalist
+                    conn.Open();
+                    cmd = conn.CreateCommand();
+                    cmd.CommandType = CommandType.Text;
+                    //datalistpokemoncarousel.DataSource
+                    cmd.CommandText = sqlsel;
+                    rdr = cmd.ExecuteReader();
+
+                    datalistcatchpokemon.DataSource = rdr;
+                    datalistcatchpokemon.DataBind();
+                }
+                catch (Exception ex)
+                {
+                    LabelFight.Text = ex.Message;
+                }
+                finally
+                {
+                    //4. Close connection
+                    conn.Close();
+                }
+
+                //genereate random level 1-99
+
+
+                //start battle
+                Session["Pokebattle"] = "yes";
+      
+
+        }
+
+        
     }
 
     protected void ImageButtonPokeballCatch_Click(object sender, ImageClickEventArgs e)

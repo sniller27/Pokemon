@@ -11,6 +11,18 @@ public partial class MyPokemonUpdate : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
+        //redirects you if you don't have access to this page
+        if (Session["Pokehunter"] == null)
+        {
+            Response.Redirect("Index.aspx");
+        }
+
+        //check if you are battling
+        if (Session["Pokebattle"] == "yes")
+        {
+            Session["Pokebattle"] = null;
+        }
+
         //hide catchid's
         GridviewUpdateCatches.Columns[6].Visible = false;
 
