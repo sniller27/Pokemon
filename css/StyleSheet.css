@@ -2,7 +2,7 @@
     background-color: #F8F8F8;
 }
 .bg {
-  background: url(Images/Pokemon-Go-banner.jpg) center center / cover no-repeat;
+  background: url(../Images/Pokemon-Go-banner.jpg) center center / cover no-repeat;
   position: fixed;
   width: 100%;
   height: 400px; /*same height as jumbotron */

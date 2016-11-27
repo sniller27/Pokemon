@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Loginmenu.master" AutoEventWireup="true" CodeFile="Mypokemon.aspx.cs" Inherits="Mypokemon" %>
+﻿<%@ Page Title="Pokémon catches" Language="C#" MasterPageFile="~/Loginmenu.master" AutoEventWireup="true" CodeFile="Mypokemon.aspx.cs" Inherits="Mypokemon" %>
 
 <%-- Add content controls here --%>
 <asp:Content id="Content11" ContentPlaceholderID="ChildContent1" runat="server">

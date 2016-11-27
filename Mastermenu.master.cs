@@ -122,7 +122,7 @@ public partial class Mastermenu : System.Web.UI.MasterPage
     {
         Session["Pokehunter"] = null;
         Session["Webmaster"] = null;
-        Response.Redirect("Welcome.aspx");
+        Response.Redirect("Index.aspx");
     }
 
     public void CheckSession() {

@@ -12,6 +12,7 @@
                     <% if (Session["Pokehunter"] != null) { %>
                     <a href="Mypokemon.aspx">My Pokémon</a>
                     <a href="CatchPokemon.aspx">Catch a pokemon</a>
+                    <a href="MyPokemonUpdate.aspx">My Pokémon updates</a>
                     <% } %>
 
                 </div>

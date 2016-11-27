@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Loginmenu.master" AutoEventWireup="true" CodeFile="CatchPokemon.aspx.cs" Inherits="CatchPokemon" %>
+﻿<%@ Page Title="Pokemon battle" Language="C#" MasterPageFile="~/Loginmenu.master" AutoEventWireup="true" CodeFile="CatchPokemon.aspx.cs" Inherits="CatchPokemon" %>
 
 <asp:Content ID="Content11" ContentPlaceHolderID="ChildContent1" Runat="Server">
     <h1>A wild Pokémon has appeared!</h1>

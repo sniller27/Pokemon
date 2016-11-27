@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Loginmenu.master" AutoEventWireup="true" CodeFile="Signup.aspx.cs" Inherits="Signup" %>
+﻿<%@ Page Title="Sign up" Language="C#" MasterPageFile="~/Loginmenu.master" AutoEventWireup="true" CodeFile="Signup.aspx.cs" Inherits="Signup" %>
 
 
 
