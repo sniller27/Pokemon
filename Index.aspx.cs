@@ -9,14 +9,15 @@ using System.Web.UI.WebControls;
 
 public partial class Index : System.Web.UI.Page
 {
+    //connection info
     SqlConnection conn = new SqlConnection(@"data source = .\SQLEXPRESS; integrated security = true; database = PokemonDB");
-
     SqlCommand cmd = null;
     SqlDataReader rdr = null;
     String sqlsel = "";
 
     protected void Page_Load(object sender, EventArgs e)
     {
+        //query
         sqlsel = "select * from Pokemon";
         showData();
     }
@@ -29,16 +30,17 @@ public partial class Index : System.Web.UI.Page
             conn.Open();
             SqlCommand cmd = conn.CreateCommand();
             cmd.CommandType = CommandType.Text;
-            //datalistpokemoncarousel.DataSource
+            //set command
             cmd.CommandText = sqlsel;
+            //execute query
             cmd.ExecuteNonQuery();
 
-            //create datatable and uses sqldataadapter to sync data from db(SqlCommand?)
+            //create datatable
             DataTable dt = new DataTable();
             SqlDataAdapter da = new SqlDataAdapter(cmd);
-            //binds data to table?
+            //gives data to data table
             da.Fill(dt);
-            //datalist gets data from datatable?
+            //populates datalist
             datalistpokemoncarousel.DataSource = dt;
             datalistpokemoncarousel.DataBind();
         }
@@ -47,7 +49,7 @@ public partial class Index : System.Web.UI.Page
         }
         finally
         {
-            //4. Close connection
+            //close connection
             conn.Close();
         }
     }

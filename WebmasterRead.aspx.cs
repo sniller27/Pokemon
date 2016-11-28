@@ -23,7 +23,10 @@ public partial class WebmasterRead : System.Web.UI.Page
         //upload listener
         FileUploadImage.Attributes["onchange"] = "UploadFile(this)";
 
+        //update gridview
         UpdateGridview();
+
+        //populates dropdownlist if it is empty
         if (DropdownlistImages.Items.Count == 0)
         {
             UpdateDropdownlist();
@@ -32,34 +35,36 @@ public partial class WebmasterRead : System.Web.UI.Page
 
     public void UpdateGridview()
     {
+        //connection info
         SqlConnection conn = new SqlConnection(@"data source = .\sqlexpress; integrated security = true; database = PokemonDB");
         SqlDataAdapter da = null;
         DataSet ds = null;
         DataTable dt = null;
+        //query
         string sqlsel = "select * from Pokemon order by PokemonId";
 
         try
         {
-            //new adapter
+            //new data adapter
             da = new SqlDataAdapter();
 
-            //fill data table
+            //new command
             da.SelectCommand = new SqlCommand(sqlsel, conn);
 
             //new dataset
             ds = new DataSet();
-            //get data from DB
+            //get data from DB to dataset
             da.Fill(ds, "Pokemontable");
-            //create datatable from data set
+            //create datatable and get data from dataset
             dt = ds.Tables["Pokemontable"];
 
+            //populate gridview by using data in data table
             GridViewPokemonTable.DataSource = dt;
             GridViewPokemonTable.DataBind();
         }
         catch (Exception ex)
         {
             LabelError.Text = ex.Message;
-            throw;
         }
         finally
         {
@@ -68,7 +73,6 @@ public partial class WebmasterRead : System.Web.UI.Page
         }
     }
 
-    //delete buttons
     public void GridViewPokemonTable_RowDeleting(Object sender, GridViewDeleteEventArgs e) {
         //setup
         SqlConnection conn = new SqlConnection(@"data source = .\sqlexpress; integrated security = true; database = PokemonDB");
@@ -90,7 +94,6 @@ public partial class WebmasterRead : System.Web.UI.Page
             //define command
             da.SelectCommand = new SqlCommand(sqlsel, conn);
 
-            //??? it does something, but what?
             cb = new SqlCommandBuilder(da);
 
             //new data set
@@ -100,7 +103,7 @@ public partial class WebmasterRead : System.Web.UI.Page
             //fill data table
             dt = ds.Tables["Pokemontable"];
 
-            //deletes row with PokemonId
+            //deletes row with PokemonId by iterating rows
             foreach (DataRow myrow in dt.Select("PokemonId =" + Convert.ToInt32(chosenrow)))
             {
                 myrow.Delete();
@@ -109,6 +112,7 @@ public partial class WebmasterRead : System.Web.UI.Page
             //update DA
             da.Update(ds, "Pokemontable");
 
+            //feedback
             LabelSucces.Text = "Pokémon deleted";
         }
         catch (Exception ex)
@@ -144,24 +148,28 @@ public partial class WebmasterRead : System.Web.UI.Page
 
     protected void ButtonUpdate_Click(object sender, EventArgs e)
     {
+        //connection info
         SqlConnection conn = new SqlConnection(@"data source = .\sqlexpress; integrated security = true; database = PokemonDB");
         SqlDataAdapter da = null;
         DataSet ds = null;
         DataTable dt = null;
         SqlCommand cmd = null;
+        //SQL queries
         string sqlsel = "select * from pokemon";
-        //string sqlupd = "update shippers set companyname = @companyname, phone = @phone where shipperid = @shipperid";
         string sqlupd = "update pokemon set Number = @pokedex, Name = @pokename, NextEvolution = @nextevolution, Image = @image, Type = @type where PokemonId = @pokemonid";
 
         try
         {
-            //instantiate
+            //new DA
             da = new SqlDataAdapter();
 
-            //fill data table with data
+            //new command
             da.SelectCommand = new SqlCommand(sqlsel, conn);
+            //new dataset
             ds = new DataSet();
+            //fill dataset
             da.Fill(ds, "AdminPokemon");
+            //fill data table
             dt = ds.Tables["AdminPokemon"];
 
             //change rows in data table
@@ -174,6 +182,7 @@ public partial class WebmasterRead : System.Web.UI.Page
 
             //new sqlcommand
             cmd = new SqlCommand(sqlupd, conn);
+
             //add parameters
             cmd.Parameters.Add("@pokedex", SqlDbType.Int, 50, "Number");
             cmd.Parameters.Add("@pokename", SqlDbType.Text, 50, "Name");
@@ -182,18 +191,16 @@ public partial class WebmasterRead : System.Web.UI.Page
             cmd.Parameters.Add("@type", SqlDbType.Text, 50, "Type");
             cmd.Parameters.Add("@pokemonid", SqlDbType.Int, 50, "PokemonId");
 
-            //extra parameter for security reasons. if someone changes id by mistake.
-            //SqlParameter parm = cmd.Parameters.Add("@shipperid", SqlDbType.Int, 4, "shipperid");
-            //parm.SourceVersion = DataRowVersion.Original;
-
             //set command for adapter
             da.UpdateCommand = cmd;
+
             //adapter sync
             da.Update(ds, "AdminPokemon");
 
             //update gridview
             UpdateGridview();
 
+            //feedback
             LabelSucces.Text = "Updated";
 
             //clear form
@@ -218,8 +225,7 @@ public partial class WebmasterRead : System.Web.UI.Page
 
         DropdownlistImages.Items.Clear();
 
-
-        //giver lange urls
+        //gets file urls, shortens them and adds to dropdownlist
         try
         {
             DirectoryInfo Dir = new DirectoryInfo(Server.MapPath("~/Images/"));
@@ -237,42 +243,42 @@ public partial class WebmasterRead : System.Web.UI.Page
 
     protected void Upload(object sender, EventArgs e)
     {
-        //FileUploadImage.SaveAs(Server.MapPath("~/Uploads/" + Path.GetFileName(FileUpload1.FileName)));
-
+        //if file is chosen then get file name and upload to temp
         if (FileUploadImage.HasFile)
         {
             //getting filename
             fileName = Path.GetFileName(FileUploadImage.PostedFile.FileName);
             //save in images folder
             FileUploadImage.PostedFile.SaveAs(Server.MapPath("~/temp/") + fileName);
-            //en redirect?
-            //Response.Redirect(Request.Url.AbsoluteUri);
         }
 
-        //show image
+        //show chosen image
         ImageToUpload.ImageUrl = @"~\temp\" + fileName;
 
+        //show filename
         LabelChooseImage.Text = fileName;
     }
 
     public void MoveFile(string filename)
     {
+        //if file is chosen
         if (LabelChooseImage.Text != "")
         {
-        //send image to image folder
-        //Tranfiles = Server.MapPath(@"~\godurian\sth100\transfiles\" + Filename);
-
+        //define current file location
         Tranfiles = Server.MapPath(@"~\temp\" + filename);
+        //delete file
         if (File.Exists(Server.MapPath(@"~\temp\" + filename)))
         {
             // File.Delete(Server.MapPath(@"~\Images\" + Filename));
         }
 
-        //ProcessedFiles = Server.MapPath(@"~\godurian\sth100\ProcessedFiles");
+        //define new file location
         ProcessedFiles = Server.MapPath(@"~\Images\" + filename);
-
+        
+        //move file
         File.Move(Tranfiles, ProcessedFiles);
-
+        
+        //update dropdownlist
         UpdateDropdownlist();
         }
     }

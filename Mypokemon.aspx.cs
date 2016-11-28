@@ -41,35 +41,25 @@ public partial class Mypokemon : System.Web.UI.Page
 
         try
         {
+            //open connection
             conn.Open();
 
-            //cmd = new SqlCommand(sqlselcheck, conn);
+            //new command
             cmd = conn.CreateCommand();
             cmd.CommandType = CommandType.StoredProcedure;
             cmd.CommandText = "readusercatches";
 
+            //add paramter
             SqlParameter in2 = cmd.Parameters.Add("@hunterid", SqlDbType.Int);
             in2.Direction = ParameterDirection.Input;
             in2.Value = (int)Session["Pokehunter"];
 
-            //output parameter
-            //SqlParameter out1 = cmd.Parameters.Add("@totalrowsfound", SqlDbType.Int);
-            //out1.Direction = ParameterDirection.Output;
-
-            //return value
-            //SqlParameter returnval = cmd.Parameters.Add("return_value", SqlDbType.Int);
-            //returnval.Direction = ParameterDirection.ReturnValue;
-
-            //bruger reader
-            //cmd.ExecuteNonQuery();
+            //execute
             rdr = cmd.ExecuteReader();
 
+            //populate
             gridviewUserReadpokemon.DataSource = rdr;
             gridviewUserReadpokemon.DataBind();
-
-
-            //ved ikke?
-            //cmd.ExecuteNonQuery();
 
             //close reader
             rdr.Close();
@@ -79,6 +69,7 @@ public partial class Mypokemon : System.Web.UI.Page
         }
         catch (Exception ex)
         {
+            Labelnegativefeedback.Text = ex.Message;
         }
         finally
         {
@@ -86,15 +77,13 @@ public partial class Mypokemon : System.Web.UI.Page
         }
     }
 
-    //row delete
     public void gridviewUserReadpokemon_RowDeleting(Object sender, GridViewDeleteEventArgs e)
     {
-        //connection
+        //connection info
         SqlConnection conn = new SqlConnection(@"data source = .\SQLEXPRESS; integrated security = true; database = PokemonDB");
         SqlCommand cmd = null;
-        SqlDataReader rdr = null;
 
-        //select row
+        //select gridview row
         string catchidrow = gridviewUserReadpokemon.DataKeys[e.RowIndex].Value.ToString();
         //sql string
         string sqldelpokemon = "delete from PokemonCatches where CatchId = @CatchId";
@@ -118,16 +107,15 @@ public partial class Mypokemon : System.Web.UI.Page
             UpdateGridView();
 
         }
-        catch (Exception)
+        catch (Exception ex)
         {
-            throw;
+            Labelnegativefeedback.Text = ex.Message;
         }
     }
 
-    //row update/evovle
     public void gridviewUserReadpokemon_RowCommand(Object sender, GridViewCommandEventArgs e)
     {
-        //Button event that only responds to update button
+        //code that only responds to update button
         if (e.CommandName == "buttonlevelchange")
         {
             //connection info
@@ -172,7 +160,6 @@ public partial class Mypokemon : System.Web.UI.Page
             catch (Exception ex)
             {
                 Labelpositivefeedback.Text = ex.Message;
-                throw;
             }
             finally
             {
@@ -182,7 +169,6 @@ public partial class Mypokemon : System.Web.UI.Page
         }
     }
 
-    //Remove Evolve buttons method
     public void RemoveEvolveButtons()
     {
         string nextevolutionrow = "";

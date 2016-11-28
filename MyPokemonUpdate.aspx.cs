@@ -26,6 +26,7 @@ public partial class MyPokemonUpdate : System.Web.UI.Page
         //hide catchid's
         GridviewUpdateCatches.Columns[6].Visible = false;
 
+        //update gridview
         UpdateGridView();
     }
 
@@ -39,18 +40,21 @@ public partial class MyPokemonUpdate : System.Web.UI.Page
 
         try
         {
+            //open connection
             conn.Open();
 
-            //cmd = new SqlCommand(sqlselcheck, conn);
+            //new command
             cmd = new SqlCommand(sqlselpokemons, conn);
 
-            //hunter id parameter
+            //add hunter id parameter
             SqlParameter pa1 = cmd.Parameters.Add("@hunterid", SqlDbType.Int);
             pa1.Direction = ParameterDirection.Input;
             pa1.Value = Session["Pokehunter"];
 
+            //execute reader
             rdr = cmd.ExecuteReader();
 
+            //populate gridview
             GridviewUpdateCatches.DataSource = rdr;
             GridviewUpdateCatches.DataBind();
 
@@ -77,9 +81,13 @@ public partial class MyPokemonUpdate : System.Web.UI.Page
 
         try
         {
+            //open connection
             conn.Open();
+
+            //new command
             cmd = new SqlCommand(sqlupd, conn);
 
+            //add parameters
             SqlParameter pa1 = cmd.Parameters.Add("@catchname", SqlDbType.Text);
             pa1.Direction = ParameterDirection.Input;
             pa1.Value = TextBoxPokemonName.Text;

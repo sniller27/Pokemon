@@ -11,14 +11,17 @@
             <asp:Label ID="Label1" runat="server" Text="Sign Up" Font-Size="30px"></asp:Label>
             <br />
             <br />
+
             <div class="form-group">
                 <asp:TextBox ID="TextBoxSignupAlias" runat="server" CssClass="form-control mediumfield"></asp:TextBox>
                 Alias
             </div>
+
             <div class="form-group">
                 <asp:TextBox ID="TextBoxSignupName" runat="server" CssClass="form-control mediumfield"></asp:TextBox>
                 Name    
             </div>
+
             Gender
             <asp:RadioButtonList ID="RadioButtonListSignupGender" runat="server">
                 <asp:ListItem>Male</asp:ListItem>
@@ -36,7 +39,7 @@
             </div>
 
             <div class="form-group">
-                <asp:textbox runat="server" ID="TextBoxSignupPassword" CssClass="form-control mediumfield"></asp:textbox>
+                <asp:textbox runat="server" ID="TextBoxSignupPassword" CssClass="form-control mediumfield" TextMode="Password"></asp:textbox>
                 Password    
             </div>
 

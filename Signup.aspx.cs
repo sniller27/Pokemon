@@ -15,17 +15,21 @@ public partial class Signup : System.Web.UI.Page
 
     protected void buttonsignup_Click(object sender, EventArgs e)
     {
+        //connection info
         SqlConnection conn = new SqlConnection(@"data source = .\SQLEXPRESS; integrated security = true; database = PokemonDB");
         SqlCommand cmd = null;
-        //update with paramters @xxx
+        //query
         string sqlins = "insert into PokemonHunters values (@Alias, @Name, @Gender, @Age, @Email, @Password)";
 
         try
         {
+            //open connection
             conn.Open();
 
+            //new command
             cmd = new SqlCommand(sqlins, conn);
-            //for parameters aka. prepared statments
+
+            //add parameters
             cmd.Parameters.Add("@Alias", SqlDbType.Text);
             cmd.Parameters.Add("@Name", SqlDbType.Text);
             cmd.Parameters.Add("@Gender", SqlDbType.Text);
@@ -33,6 +37,7 @@ public partial class Signup : System.Web.UI.Page
             cmd.Parameters.Add("@Email", SqlDbType.Text);
             cmd.Parameters.Add("@Password", SqlDbType.Text);
 
+            //assign parameters
             cmd.Parameters["@Alias"].Value = TextBoxSignupAlias.Text;
             cmd.Parameters["@Name"].Value = TextBoxSignupName.Text;
             cmd.Parameters["@Gender"].Value = RadioButtonListSignupGender.Text;
@@ -40,7 +45,10 @@ public partial class Signup : System.Web.UI.Page
             cmd.Parameters["@Email"].Value = TextBoxSignupEmail.Text;
             cmd.Parameters["@Password"].Value = TextBoxSignupPassword.Text;
 
+            //execute query
             cmd.ExecuteNonQuery();
+
+            //feedback
             labelsignupfeedback.Text = "Your account has been created";
 
             //clear form

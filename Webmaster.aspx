@@ -1,7 +1,6 @@
 ﻿<%@ Page Title="Admin" Language="C#" MasterPageFile="~/Loginmenu.master" AutoEventWireup="true" CodeFile="Webmaster.aspx.cs" Inherits="Webmaster" %>
 
-<asp:Content ID="Content1" ContentPlaceHolderID="ChildContent1" Runat="Server">
-
+<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolderhead" Runat="Server">
     <%--important javascript for fileupload --%>
     <script type="text/javascript">
     function UploadFile(fileUpload) {
@@ -10,9 +9,13 @@
         }
     }
     </script>
+</asp:Content>
+
+<asp:Content ID="Content1" ContentPlaceHolderID="ChildContent1" Runat="Server">
 
     <asp:Label ID="Labelpositivefeedback" runat="server"></asp:Label>
     <asp:Label ID="Labelnegativefeedback" runat="server"></asp:Label>
+
     <h2>Create Pokemon</h2>
 
     <div class="form-group">
@@ -47,30 +50,6 @@
     <asp:Button ID="ButtonCreatePokemon" runat="server" Text="Create" OnClick="ButtonCreatePokemon_Click" CssClass="btn btn-primary" />
     <br />
     <br />
-    <br />
-    <br />
-    <br />
 
-    <%-- <img id="image_upload_preview" src="http://placehold.it/100x100" alt="your image" />
-    <input type='file' id="inputFile" />--%>
-
-    <%--Show uploaded image--%>
-    <script>
-        //function readURL(input) {
-        //    if (input.files && input.files[0]) {
-        //        var reader = new FileReader();
-
-        //        reader.onload = function (e) {
-        //            $('#image_upload_preview').attr('src', e.target.result);
-        //        }
-
-        //        reader.readAsDataURL(input.files[0]);
-        //    }
-        //}
-
-        //$("#inputFile").change(function () {
-        //    readURL(this);
-        //});
-    </script>
 </asp:Content>
 

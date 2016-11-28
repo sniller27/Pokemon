@@ -19,6 +19,5 @@
         <asp:ImageButton ID="ImageButtonPokeballCatch" runat="server" Height="61px" ImageUrl="~/Websiteimages/Pokeball.png" Width="63px" OnClick="ImageButtonPokeballCatch_Click" />
     </div>
 
-
 </asp:Content>
 

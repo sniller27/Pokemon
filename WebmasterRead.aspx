@@ -1,7 +1,6 @@
 ﻿<%@ Page Title="Admin Pokémon list" Language="C#" MasterPageFile="~/Loginmenu.master" AutoEventWireup="true" CodeFile="WebmasterRead.aspx.cs" Inherits="WebmasterRead" %>
 
-<asp:Content ID="Content1" ContentPlaceHolderID="ChildContent1" Runat="Server">
-
+<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolderhead" Runat="Server">
     <%--important javascript for fileupload --%>
     <script type="text/javascript">
     function UploadFile(fileUpload) {
@@ -10,6 +9,9 @@
         }
     }
     </script>
+</asp:Content>
+
+<asp:Content ID="Content1" ContentPlaceHolderID="ChildContent1" Runat="Server">
 
     <div class="container">
         <div class="row">
@@ -86,6 +88,8 @@
             </div>
         </div>
     </div>
+    <br />
+    <br />
 
 </asp:Content>
 

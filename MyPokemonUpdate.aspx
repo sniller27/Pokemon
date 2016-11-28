@@ -6,7 +6,6 @@
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ChildContent1" Runat="Server">
 
-    <div>
         <asp:Label ID="LabelPositiveFeedback" runat="server" Text=""></asp:Label>
         <asp:Label ID="LabelNegativeFeedback" runat="server" Text=""></asp:Label>
         <h2>Update my Pokémon</h2>
@@ -30,15 +29,14 @@
                         <asp:BoundField DataField="CatchId" HeaderText="CatchId" SortExpression="CatchId" />
                 </Columns>
 
-
             </asp:gridview>
         </div>
 
         <br />
         <br />
         <div class="form-group">
-        <asp:TextBox ID="TextBoxPokemonName" runat="server" class="form-control mediumfield"></asp:TextBox>
-        <asp:Label ID="LabelPokemonName" runat="server" Text="Pokémon name"></asp:Label>
+            <asp:TextBox ID="TextBoxPokemonName" runat="server" class="form-control mediumfield"></asp:TextBox>
+            <asp:Label ID="LabelPokemonName" runat="server" Text="Pokémon name"></asp:Label>
         </div>
 
         <div class="form-group">
@@ -65,8 +63,6 @@
         <asp:HiddenField ID="HiddenFieldCatchId" runat="server" />
         <br />
         <asp:Button ID="ButtonUpdatePokecatch" runat="server" Text="Update" OnClick="ButtonUpdatePokecatch_Click" CssClass="btn btn-primary" />
-
-    </div>
 
 </asp:Content>
 

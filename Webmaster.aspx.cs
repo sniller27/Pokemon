@@ -23,51 +23,34 @@ public partial class Webmaster : System.Web.UI.Page
 
         //upload listener
         FileUploadImage.Attributes["onchange"] = "UploadFile(this)";
-
-
-        //////checks if file has been chosen on postback
-        //if (IsPostBack && FileUploadImage.HasFile != null)
-        //{
-        //    //upload file to temp
-        //    ImageUpload();
-
-        //    //display image
-        //    ImageToUpload.ImageUrl = @"~\temp\" + fileName;
-
-        //    //display image title
-        //    LabelChooseImage.Text = fileName;
-        //}
     }
 
     protected void Upload(object sender, EventArgs e)
     {
-        //FileUploadImage.SaveAs(Server.MapPath("~/Uploads/" + Path.GetFileName(FileUpload1.FileName)));
-
         if (FileUploadImage.HasFile)
         {
             //getting filename
             fileName = Path.GetFileName(FileUploadImage.PostedFile.FileName);
             //save in images folder
             FileUploadImage.PostedFile.SaveAs(Server.MapPath("~/temp/") + fileName);
-            //en redirect?
-            //Response.Redirect(Request.Url.AbsoluteUri);
-
-        Labelpositivefeedback.Text = "uploaded to temp";
         }
 
         //show image
         ImageToUpload.ImageUrl = @"~\temp\" + fileName;
 
+        //show filename
         LabelChooseImage.Text = fileName;
     }
 
     protected void ButtonCreatePokemon_Click(object sender, EventArgs e)
     {
+        //database connection info
         SqlConnection conn = new SqlConnection(@"data source = .\sqlexpress; integrated security = true; database = PokemonDB");
         SqlDataAdapter da = null;
         DataSet ds = null;
         DataTable dt = null;
         SqlCommand cmd = null;
+        //SQL queries
         string sqlsel = "select * from pokemon";
         string sqlins = "insert into Pokemon values (@pokedex, @pokename, @nextevolution, @image, @type)";
 
@@ -91,6 +74,7 @@ public partial class Webmaster : System.Web.UI.Page
             newrow["Name"] = TextBoxName.Text;
             newrow["NextEvolution"] = TextBoxNextEvolution.Text;
             newrow["Type"] = TextBoxType.Text;
+            //check if image is chosen
             if (LabelChooseImage.Text != "")
             {
                 newrow["Image"] = LabelChooseImage.Text;
@@ -99,6 +83,8 @@ public partial class Webmaster : System.Web.UI.Page
             {
                 newrow["Image"] = null;
             }
+            
+            //add new row to data table
             dt.Rows.Add(newrow);
 
             //insert command
@@ -111,7 +97,6 @@ public partial class Webmaster : System.Web.UI.Page
             cmd.Parameters.Add("@image", SqlDbType.Text, 50, "Image");
             cmd.Parameters.Add("@type", SqlDbType.Text, 50, "Type");
 
-
             //set insert command to adapter
             da.InsertCommand = cmd;
 
@@ -120,7 +105,7 @@ public partial class Webmaster : System.Web.UI.Page
 
             Labelpositivefeedback.Text = "Pokemon created";
 
-            //movefile
+            //movefile if file is chosen
             if (LabelChooseImage.Text != "") {
             MoveFile(LabelChooseImage.Text);
             }
@@ -135,7 +120,6 @@ public partial class Webmaster : System.Web.UI.Page
         catch (Exception ex)
         {
             Labelnegativefeedback.Text = ex.Message;
-            throw;
         }
         finally
         {
@@ -146,18 +130,19 @@ public partial class Webmaster : System.Web.UI.Page
 
     public void MoveFile(string filename)
     {
-        //send image to image folder
-        //Tranfiles = Server.MapPath(@"~\godurian\sth100\transfiles\" + Filename);
-
+        //current file path
         Tranfiles = Server.MapPath(@"~\temp\" + filename);
+
+        //delete file if it exists
         if (File.Exists(Server.MapPath(@"~\temp\" + filename)))
         {
             // File.Delete(Server.MapPath(@"~\Images\" + Filename));
         }
 
-        //ProcessedFiles = Server.MapPath(@"~\godurian\sth100\ProcessedFiles");
+        //new file path
         ProcessedFiles = Server.MapPath(@"~\Images\" + filename);
 
+        //move file
         File.Move(Tranfiles, ProcessedFiles);
     }
 }

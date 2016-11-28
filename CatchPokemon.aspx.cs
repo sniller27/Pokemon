@@ -97,11 +97,12 @@ public partial class CatchPokemon : System.Web.UI.Page
         //update with paramters @xxx
         string insertpokemon = "insert into PokemonCatches values (@level, @nickname, @curexp, @nextexp, @gender, @pokemonid, @pokehunterid)";
 
-
         try
         {
+            //open connection
             conn.Open();
 
+            //new command
             cmd = new SqlCommand(insertpokemon, conn);
 
             //create parameter with datatypes
@@ -141,6 +142,7 @@ public partial class CatchPokemon : System.Web.UI.Page
         }
         catch (Exception ex)
         {
+            LabelFight.Text = ex.Message;
         }
         finally
         {

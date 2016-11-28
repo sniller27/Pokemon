@@ -19,37 +19,25 @@ public partial class Mastermenu : System.Web.UI.MasterPage
     public string IsCurrentPage(string itemName)
     {
         return Path.GetFileName(Request.Url.AbsolutePath) == itemName ? "class='active'" : string.Empty;
-        //return "class='"+ Path.GetFileName(Request.Url.AbsolutePath) + "'";
-
     }
 
     protected void buttonlogin_Click(object sender, EventArgs e)
     {
-        //connection
+        //connection info
         SqlConnection conn = new SqlConnection(@"data source = .\SQLEXPRESS; integrated security = true; database = PokemonDB");
         SqlCommand cmd = null;
         SqlDataReader rdr = null;
-        //string sqlselcheck = "select count(*) from PokemonHunters where Alias = @username and Password = @password";
         string sqlselid = "select HunterId from PokemonHunters where Alias = @username and Password = @password";
-        //string sqlselcheck = "select Alias, count(*) from PokemonHunters where Alias = @username and Password = @password group by Alias;";
 
         try
         {
             conn.Open();
 
-            //cmd = new SqlCommand(sqlselcheck, conn);
             cmd = conn.CreateCommand();
             cmd.CommandType = CommandType.StoredProcedure;
             cmd.CommandText = "CountAccessRows";
 
-            //cmd.Parameters["@username"].Value = TextBoxUsernameLogin.Text;
-            //cmd.Parameters["@password"].Value = TextBoxPasswordLogin.Text;
-
-            //for parameters aka. prepared statments (i forlængelse af SqlCommand i stedet for SqlParameter)
-            //cmd.Parameters.Add("@username", SqlDbType.NVarChar);
-            //cmd.Parameters.Add("@password", SqlDbType.NVarChar);
-
-            //VIRKER IKKE!?? VARCHAR??
+            //add parameters
             SqlParameter in1 = cmd.Parameters.Add("@username", SqlDbType.Text);
             in1.Direction = ParameterDirection.Input;
             in1.Value = TextBoxUsernameLogin.Text;
@@ -62,27 +50,19 @@ public partial class Mastermenu : System.Web.UI.MasterPage
             SqlParameter out1 = cmd.Parameters.Add("@totalrowsfound", SqlDbType.Int);
             out1.Direction = ParameterDirection.Output;
 
-            //return value
-            SqlParameter returnval = cmd.Parameters.Add("return_value", SqlDbType.Int);
-            returnval.Direction = ParameterDirection.ReturnValue;
-
-            //bruger reader
-            //cmd.ExecuteNonQuery();
+            //set data reader
             rdr = cmd.ExecuteReader();
 
             //close reader
             rdr.Close();
 
-            //virkede før
-            //int userCount = (int)cmd.ExecuteScalar();
             int userCount = (int)cmd.Parameters["@totalrowsfound"].Value;
 
-            //rdr = cmd.ExecuteReader();
-            //if (rdr.HasRows){...}
             if (userCount > 0)
             {
                 cmd = new SqlCommand(sqlselid, conn);
-                //for parameters aka. prepared statments
+
+                //parameters
                 cmd.Parameters.Add("@username", SqlDbType.NVarChar);
                 cmd.Parameters.Add("@password", SqlDbType.NVarChar);
 
@@ -91,9 +71,8 @@ public partial class Mastermenu : System.Web.UI.MasterPage
 
                 //grabbing id from first row
                 Int32 id = (Int32)cmd.ExecuteScalar();
-                //rdr = cmd.ExecuteReader();
 
-                //start login session
+                //starts login session
                 if (cmd.Parameters["@username"].Value.ToString() == "Webmaster")
                 {
                     Session["Webmaster"] = id;
@@ -104,15 +83,13 @@ public partial class Mastermenu : System.Web.UI.MasterPage
                     Session["Pokehunter"] = id;
                     Response.Redirect("Mypokemon.aspx");
                 }
-
             }
             else
             {
                 LabelLoginError.Text = "Wrong combination of username and password";
-                //call script on load
+                //call script on load that shows login modal
                 ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "script", "$(function () { ShowModal(); });", true);
             }
-
         }
         catch (Exception ex)
         {
@@ -137,14 +114,11 @@ public partial class Mastermenu : System.Web.UI.MasterPage
         {
             Linklogout.Visible = false;
             loginmodalhyperlink.Visible = true;
-            //return "< li >< a href = '#' data - toggle = 'modal' data - target = '#myModal' >< span class='glyphicon glyphicon-log-in'></span> Logout</a></li>";
         }
         else
         {
             Linklogout.Visible = true;
             loginmodalhyperlink.Visible = false;
-            //return "< li >< a href = '#' data - toggle = 'modal' data - target = '#myModal' >< span class='glyphicon glyphicon-log-in'></span> Login</a></li>";
         }
     }
-
 }
