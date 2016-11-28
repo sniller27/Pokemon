@@ -1,11 +1,5 @@
 ﻿<%@ Page Title="Sign up" Language="C#" MasterPageFile="~/Loginmenu.master" AutoEventWireup="true" CodeFile="Signup.aspx.cs" Inherits="Signup" %>
 
-
-
-
-
-
-
 <asp:Content ID="Content3" ContentPlaceHolderID="ContentPlaceHolderhead" Runat="Server">
 
 </asp:Content>
@@ -42,18 +36,19 @@
             </div>
 
             <div class="form-group">
-            <asp:textbox runat="server" ID="TextBoxSignupPassword" CssClass="form-control mediumfield"></asp:textbox>
-            Password    
+                <asp:textbox runat="server" ID="TextBoxSignupPassword" CssClass="form-control mediumfield"></asp:textbox>
+                Password    
             </div>
 
             <div class="form-group">
-            <asp:textbox runat="server" ID="TextBoxSignupPasswordConfirm" CssClass="form-control mediumfield" TextMode="Password"></asp:textbox>
-            Confirm password 
+                <asp:textbox runat="server" ID="TextBoxSignupPasswordConfirm" CssClass="form-control mediumfield" TextMode="Password"></asp:textbox>
+                Confirm password 
             </div>
 
             <br />
 
             <asp:button runat="server" text="Button" ID="buttonsignup" OnClick="buttonsignup_Click" class="btn btn-primary" />
+            <br />
             <br />
             <asp:Label ID="labelsignupfeedback" runat="server"></asp:Label>
         </div>

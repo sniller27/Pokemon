@@ -36,7 +36,6 @@ public partial class WebmasterRead : System.Web.UI.Page
         SqlDataAdapter da = null;
         DataSet ds = null;
         DataTable dt = null;
-        SqlCommand cmd = null;
         string sqlsel = "select * from Pokemon order by PokemonId";
 
         try
@@ -129,6 +128,7 @@ public partial class WebmasterRead : System.Web.UI.Page
     protected void ButtonUploadImage_Click(object sender, EventArgs e)
     {
         MoveFile(LabelChooseImage.Text);
+        ImageToUpload.ImageUrl = "";
     }
 
     protected void GridViewPokemonTable_SelectedIndexChanged(object sender, EventArgs e)
@@ -195,6 +195,13 @@ public partial class WebmasterRead : System.Web.UI.Page
             UpdateGridview();
 
             LabelSucces.Text = "Updated";
+
+            //clear form
+            TextboxPokedex.Text = "";
+            TextboxPokemonName.Text = "";
+            TextboxNextEvolution.Text = "";
+            TextboxType.Text = "";
+            DropdownlistImages.ClearSelection();
         }
         catch (Exception ex)
         {

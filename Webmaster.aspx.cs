@@ -125,6 +125,12 @@ public partial class Webmaster : System.Web.UI.Page
             MoveFile(LabelChooseImage.Text);
             }
 
+            //clear form
+            TextBoxNumber.Text = "";
+            TextBoxName.Text = "";
+            TextBoxNextEvolution.Text = "";
+            TextBoxType.Text = "";
+            ImageToUpload.ImageUrl = "";
         }
         catch (Exception ex)
         {

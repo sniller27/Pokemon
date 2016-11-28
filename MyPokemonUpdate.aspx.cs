@@ -112,6 +112,13 @@ public partial class MyPokemonUpdate : System.Web.UI.Page
 
             //update gridview
             UpdateGridView();
+
+            //clear form
+            TextBoxPokemonName.Text = "";
+            TextBoxPokemonLevel.Text = "";
+            TextBoxPokemonCurExp.Text = "";
+            TextBoxNextLvlExp.Text = "";
+            RadioButtonListPokemonGender.ClearSelection();
         }
         catch (Exception ex)
         {

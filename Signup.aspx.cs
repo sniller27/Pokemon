@@ -42,6 +42,15 @@ public partial class Signup : System.Web.UI.Page
 
             cmd.ExecuteNonQuery();
             labelsignupfeedback.Text = "Your account has been created";
+
+            //clear form
+            TextBoxSignupAlias.Text = "";
+            TextBoxSignupName.Text = "";
+            RadioButtonListSignupGender.ClearSelection();
+            TextBoxSignupAge.Text = "";
+            TextBoxSignupEmail.Text = "";
+            TextBoxSignupPassword.Text = "";
+            TextBoxSignupPasswordConfirm.Text = "";
         }
         catch (Exception ex)
         {
