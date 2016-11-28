@@ -10,17 +10,17 @@
                 <div id="loginmenu" runat="server">
 
                     <% if (Session["Pokehunter"] != null) { %>
-                    <a href="Mypokemon.aspx">My Pokémon</a>
-                    <a href="CatchPokemon.aspx">Catch a pokemon</a>
-                    <a href="MyPokemonUpdate.aspx">My Pokémon updates</a>
+                    <a <%= IsCurrentPage("Mypokemon.aspx")  %> href="Mypokemon.aspx">My Pokémon</a>
+                    <a <%= IsCurrentPage("CatchPokemon.aspx")  %> href="CatchPokemon.aspx">Catch a pokemon</a>
+                    <a <%= IsCurrentPage("MyPokemonUpdate.aspx")  %> href="MyPokemonUpdate.aspx">My Pokémon updates</a>
                     <% } %>
 
                 </div>
                 <div id="loginwebmaster" runat="server">
 
                     <% if (Session["Webmaster"] != null) { %>
-                    <a href="Webmaster.aspx">Create Pokémon</a>
-                    <a href="WebmasterRead.aspx">Edit Pokémon</a>
+                    <a <%= IsCurrentPage("Webmaster.aspx")  %> href="Webmaster.aspx">Create Pokémon</a>
+                    <a <%= IsCurrentPage("WebmasterRead.aspx")  %> href="WebmasterRead.aspx">Edit Pokémon</a>
                     <% } %>
 
                 </div>

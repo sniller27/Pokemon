@@ -159,8 +159,58 @@ body {
     border-bottom-right-radius: 2px;
     padding-top: 5px;
     padding-bottom: 5px;
+    text-align: center;
 }
 #content_loginmenu a, #content_loginwebmaster a {
     margin-right: 12px;
     margin-left: 13px;
+}
+
+/** Block element **/
+.blockelement {
+    display: block;
+}
+
+/** Form fields **/
+.mediumfield, .mydropdown {
+    width: 200px;
+    display: inline-block;
+    margin-right: 5px;
+    margin-top: 5px;
+}
+.form-group {
+    margin-bottom: 8px;
+}
+/** textalign center **/
+.text-center-me {
+    text-align: center;
+}
+.text-center-me table {
+    text-align: center;
+    margin: auto;
+}
+.text-center-me th {
+    text-align: center !important;
+}
+
+/** button space **/
+.buttonspace {
+    margin: 0px 5px;
+}
+
+/** full width **/
+.fullwidth table {
+    width: 100%;
+}
+
+/** active page in login menu **/
+#content_loginmenu .active {
+    text-decoration: underline;
+}
+#content_loginwebmaster .active {
+    text-decoration: underline;
+}
+/** top buffer **/
+.mytopbuffer {
+    margin-top: 20px;
 }

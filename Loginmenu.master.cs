@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -27,5 +28,12 @@ public partial class Loginmenu : System.Web.UI.MasterPage
         {
             loginwebmaster.Visible = true;
         }
+    }
+
+    public string IsCurrentPage(string itemName)
+    {
+        return Path.GetFileName(Request.Url.AbsolutePath) == itemName ? "class='active'" : string.Empty;
+        //return "class='"+ Path.GetFileName(Request.Url.AbsolutePath) + "'";
+
     }
 }

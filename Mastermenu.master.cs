@@ -106,6 +106,12 @@ public partial class Mastermenu : System.Web.UI.MasterPage
                 }
 
             }
+            else
+            {
+                LabelLoginError.Text = "Wrong combination of username and password";
+                //call script on load
+                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "script", "$(function () { ShowModal(); });", true);
+            }
 
         }
         catch (Exception ex)

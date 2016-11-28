@@ -27,6 +27,9 @@ public partial class Mypokemon : System.Web.UI.Page
         //show Pokémon
         UpdateGridView();
         RemoveEvolveButtons();
+
+        //hide catchid's
+        gridviewUserReadpokemon.Columns[12].Visible = false;
     }
 
     public void UpdateGridView()

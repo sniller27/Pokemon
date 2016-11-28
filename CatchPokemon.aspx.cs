@@ -9,11 +9,11 @@ using System.Web.UI.WebControls;
 
 public partial class CatchPokemon : System.Web.UI.Page
 {
+    //variables
     Image datalistimage;
     Label datalistname, datalistlevel;
     HiddenField datalisthiddenfield;
     Random random = new Random();
-
 
     protected void Page_Load(object sender, EventArgs e)
     {
@@ -28,20 +28,25 @@ public partial class CatchPokemon : System.Web.UI.Page
         {
                 //connection
                 SqlConnection conn = new SqlConnection(@"data source = .\SQLEXPRESS; integrated security = true; database = PokemonDB");
+                //cmd
                 SqlCommand cmd = null;
+                //reader
                 SqlDataReader rdr = null;
+                //selects one random row from Pokemon table and a random level between 1 and 99
                 string sqlsel = "select TOP 1 *,CEILING(99*RAND()) as RandomLevel from Pokemon order by NEWID()";
 
                 try
                 {
-                    //populate datalist
+                    //open connection
                     conn.Open();
                     cmd = conn.CreateCommand();
+                    //text command
                     cmd.CommandType = CommandType.Text;
-                    //datalistpokemoncarousel.DataSource
                     cmd.CommandText = sqlsel;
+                    //execute to reader
                     rdr = cmd.ExecuteReader();
-
+                    
+                    //populate datalist
                     datalistcatchpokemon.DataSource = rdr;
                     datalistcatchpokemon.DataBind();
                 }
@@ -51,24 +56,18 @@ public partial class CatchPokemon : System.Web.UI.Page
                 }
                 finally
                 {
-                    //4. Close connection
+                    //close connection
                     conn.Close();
                 }
 
-                //genereate random level 1-99
-
-
                 //start battle
                 Session["Pokebattle"] = "yes";
-      
-
         }
-
-        
     }
 
     protected void ImageButtonPokeballCatch_Click(object sender, ImageClickEventArgs e)
     {
+        //checks if session is set
         if (Session["Pokebattle"] == "yes")
         {
             //generates a random number
@@ -79,6 +78,7 @@ public partial class CatchPokemon : System.Web.UI.Page
                 //pokemon caught
                 LabelFight.Text = "You caught it! <br> Return to 'My Pokemon' to see your catch.";
                 ImageButtonPokeballCatch.Visible = false;
+                LabelClickPokeball.Visible = false;
                 Session["Pokebattle"] = null;
 
                 //insert into db
