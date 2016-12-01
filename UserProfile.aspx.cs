@@ -9,7 +9,7 @@ using System.Web.UI.WebControls;
 public partial class UserProfile : System.Web.UI.Page
 {
     ArrayList personlist, newlist;
-    string filename, chooselist;
+    string filename, chooselist, runningsession;
     bool isorganizer;
 
     protected void Page_Load(object sender, EventArgs e)
@@ -118,7 +118,7 @@ public partial class UserProfile : System.Web.UI.Page
 
         //get Pokemonhunter og Organizer lists (after list iteration)
         chooselist = (isorganizer) ? (chooselist = "organizer") : (chooselist = "pokehunter");
-        newlist = GenerateOrganizerlist(personlist, chooselist);
+        newlist = SplitPersonList(personlist, chooselist);
 
 
         //write to file
@@ -131,7 +131,7 @@ public partial class UserProfile : System.Web.UI.Page
         LabelPositiveFeedback.Text = "Your information has been updated";
     }
 
-    public ArrayList GenerateOrganizerlist(ArrayList personlist, string chooselist) {
+    public ArrayList SplitPersonList(ArrayList personlist, string chooselist) {
 
         ArrayList generatelist = new ArrayList();
 
@@ -145,7 +145,7 @@ public partial class UserProfile : System.Web.UI.Page
                 }
             }
         }
-        else
+        else if (chooselist == "pokehunter")
         {
             foreach (Person p in personlist)
             {
@@ -157,5 +157,44 @@ public partial class UserProfile : System.Web.UI.Page
         }
 
         return generatelist;
+    }
+
+    protected void ButtonDelete_Click(object sender, EventArgs e)
+    {
+        //check what session is running
+        if (Session["Organizer"] != null)
+        {
+            runningsession = "Organizer";
+        }
+        else if (Session["Pokehunter"] != null)
+        {
+            runningsession = "Pokehunter";
+        }
+
+        //reverse for loop for deleting a participant (safe delete and avoiding redundancy)
+        for (int i = personlist.Count-1; i >= 0; i--)
+        {
+            LabelPositiveFeedback.Text = personlist[i].ToString();
+            if (((Person)personlist[i]).alias == Session[runningsession].ToString())
+            {
+                personlist.RemoveAt(i);
+                break;
+            }
+        }
+
+        if (Session["Organizer"] != null)
+        {
+            newlist = SplitPersonList(personlist, "organizer");
+            //write to file
+            FileUtility.WriteFile(newlist, Server.MapPath("~/App_Data/Organizers.ser"));
+        }
+        else if (Session["Pokehunter"] != null)
+        {
+            newlist = SplitPersonList(personlist, "pokehunter");
+            //write to file
+            FileUtility.WriteFile(newlist, Server.MapPath("~/App_Data/Pokehunters.ser"));
+        }
+        Response.Redirect("Logout.aspx");
+        Application["Personcollection"] = personlist;
     }
 }

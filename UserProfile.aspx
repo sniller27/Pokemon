@@ -15,7 +15,7 @@
         <br />
         <asp:TextBox ID="TextBoxAge" runat="server"></asp:TextBox><asp:Label ID="LabelAge" runat="server" Text="Age"></asp:Label>
         <br />
-        <asp:TextBox ID="TextBoxGender" runat="server"></asp:TextBox><asp:Label ID="LabelGender" runat="server" Text="Gender"></asp:Label>
+        <asp:Label ID="LabelGender" runat="server" Text="Gender"></asp:Label>
         <asp:RadioButtonList ID="RadioButtonListGender" runat="server">
             <asp:ListItem>Male</asp:ListItem>
             <asp:ListItem>Female</asp:ListItem>
@@ -34,7 +34,7 @@
         <br />
         <br />
         <p>WARNING: THIS WILL DELETE YOUR PROFILE!</p>
-        <asp:Button ID="ButtonDelete" runat="server" Text="Delete profile" />
+        <asp:Button ID="ButtonDelete" runat="server" Text="Delete profile" OnClick="ButtonDelete_Click" />
 
     </form>
 </asp:Content>
