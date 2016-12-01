@@ -14,8 +14,26 @@ public partial class readorganizers : System.Web.UI.Page
 
     protected void Page_Load(object sender, EventArgs e)
     {
+        //redirects you if you don't have access to this page
+        if (Session["Organizer"] != null)
+        {
+
+        }
+        else if (Session["Pokehunter"] != null)
+        {
+
+        }
+        else
+        {
+            Response.Redirect("Welcome.aspx");
+        }
+
+
+        //////////////////////////////
+
+
         //try to get data from Organizer file
-            try
+        try
             {
                 organizerlist = FileUtility.ReadFile(Server.MapPath("~/App_Data/Organizers.ser"));
                 Application["Organizercollection"] = organizerlist;
