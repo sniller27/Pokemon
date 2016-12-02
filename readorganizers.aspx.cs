@@ -15,15 +15,7 @@ public partial class readorganizers : System.Web.UI.Page
     protected void Page_Load(object sender, EventArgs e)
     {
         //redirects you if you don't have access to this page
-        if (Session["Organizer"] != null)
-        {
-
-        }
-        else if (Session["Pokehunter"] != null)
-        {
-
-        }
-        else
+        if (Session["Organizer"] == null)
         {
             Response.Redirect("Welcome.aspx");
         }
@@ -55,7 +47,7 @@ public partial class readorganizers : System.Web.UI.Page
                 //not necessarily file problem
                 LabelReadOrganizersInfo.Text = "File not created";
             }
-        //try to get data from Organizer file
+        //try to get data from Pokehunter file
             try
             {
                 pokehunterlist = FileUtility.ReadFile(Server.MapPath("~/App_Data/Pokehunters.ser"));

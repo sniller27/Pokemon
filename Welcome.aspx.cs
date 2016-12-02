@@ -70,19 +70,23 @@ public partial class Welcome : System.Web.UI.Page
                 if (typeof(Organizer) == p.GetType())
                 {
                     Session["Organizer"] = p.alias;
+                    Response.Redirect("readorganizers.aspx");
                 }
                 else if (typeof(Pokehunter) == p.GetType())
                 {
                     Session["Pokehunter"] = p.alias;
+                    Response.Redirect("readpokehunters.aspx");
+                }
+                else
+                {
+                    LabelNegativeFeedback.Text = "Wrong username and password";
                 }
 
-                Response.Redirect("readorganizers.aspx");
                 break;
             }
 
         }
 
-        LabelNegativeFeedback.Text = "Wrong username and password";
 
     }
 

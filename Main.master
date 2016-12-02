@@ -15,11 +15,17 @@
 
     <!-- My CSS -->
     <link href="styles.css" rel="stylesheet" type="text/css" />
+
+    <%--Single page scripts--%>
+    <asp:ContentPlaceHolder id="head" runat="server">
+
+    </asp:ContentPlaceHolder>
+
 </head>
 <body>
     <div class="demo-layout-transparent mdl-layout mdl-js-layout">
 
-  <header class="mdl-layout__header mdl-layout__header--transparent">
+  <header class="mdl-layout__header mdl-layout__header">
     <div class="mdl-layout__header-row">
       <!-- Title -->
       <span class="mdl-layout-title">Title</span>
@@ -28,14 +34,17 @@
       <!-- Navigation -->
       <nav class="mdl-navigation">
         
-
-        <% if (Session["Organizer"] != null || Session["Pokehunter"] != null) { %>
+        <% if (Session["Pokehunter"] != null) { %>
+            <a <%= IsCurrentPage("readpokehunters.aspx")  %> href="readpokehunters.aspx" class="mdl-navigation__link">Participants</a>
+            <a <%= IsCurrentPage("UserProfile.aspx")  %> href="UserProfile.aspx" class="mdl-navigation__link">Profile</a>
+            <a href="logout.aspx" class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent">Sign out</a>
+        <% }else if (Session["Organizer"] != null){ %>
             <a <%= IsCurrentPage("readorganizers.aspx")  %> href="readorganizers.aspx" class="mdl-navigation__link">Participants</a>
             <a <%= IsCurrentPage("UserProfile.aspx")  %> href="UserProfile.aspx" class="mdl-navigation__link">Profile</a>
-            <%--<asp:LinkButton ID="Linklogout" runat="server" OnClick="Linklogout_Click">Logout</asp:LinkButton>--%>
-            <a href="logout.aspx">Sign out</a>
+            <a href="logout.aspx" class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent">Sign out</a>
         <% }else {%>
             <a href="Welcome.aspx" class="mdl-navigation__link" <%= IsCurrentPage("Welcome.aspx")  %>>Home</a>
+            <a href="CreateOrganizer.aspx" class="mdl-navigation__link" <%= IsCurrentPage("CreateOrganizer.aspx")  %>>Sign up</a>
         <% }%>
 
       </nav>
@@ -45,13 +54,17 @@
     <span class="mdl-layout-title">Title</span>
     <nav class="mdl-navigation">
 
-        <% if (Session["Organizer"] != null || Session["Pokehunter"] != null) { %>
-        <a <%= IsCurrentPage("readorganizers.aspx")  %> href="readorganizers.aspx" class="mdl-navigation__link">Participants</a>
-        <a <%= IsCurrentPage("UserProfile.aspx")  %> href="UserProfile.aspx" class="mdl-navigation__link">Profile</a>
-
+        <% if (Session["Pokehunter"] != null) { %>
+            <a <%= IsCurrentPage("readpokehunters.aspx")  %> href="readpokehunters.aspx" class="mdl-navigation__link">Participants</a>
+            <a <%= IsCurrentPage("UserProfile.aspx")  %> href="UserProfile.aspx" class="mdl-navigation__link">Profile</a>
+        <% }else if (Session["Organizer"] != null){ %>
+            <a <%= IsCurrentPage("readorganizers.aspx")  %> href="readorganizers.aspx" class="mdl-navigation__link">Participants</a>
+            <a <%= IsCurrentPage("UserProfile.aspx")  %> href="UserProfile.aspx" class="mdl-navigation__link">Profile</a>
         <% }else {%>
             <a href="Welcome.aspx" class="mdl-navigation__link" <%= IsCurrentPage("Welcome.aspx")  %>>Home</a>
+            <a href="CreateOrganizer.aspx" class="mdl-navigation__link" <%= IsCurrentPage("CreateOrganizer.aspx")  %>>Sign up</a>
         <% }%>
+
     </nav>
   </div>
 
@@ -73,5 +86,11 @@
 
     <!-- MDL -->
     <script defer src="https://code.getmdl.io/1.2.1/material.min.js"></script>
+
+    <%--Single page scripts--%>
+    <asp:ContentPlaceHolder id="afterscripts" runat="server">
+
+    </asp:ContentPlaceHolder>
+
 </body>
 </html>

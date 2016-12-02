@@ -1,23 +1,25 @@
-﻿.active, #active {
-
-    color: saddlebrown;
-
+﻿body {
+    font-family: Roboto;
 }
-.demo-layout-transparent {
-  background-color: gray;
+.active, #active {
+
+    color: #FEEA3A;
+
 }
 .demo-layout-transparent .mdl-layout__header,
 .demo-layout-transparent .mdl-layout__drawer-button {
   /* This background is dark, so we set text to white. Use 87% black instead if
      your background is light. */
   color: white;
+  background-color: #2196F3;
+}
+/** LINKS IN NAV **/
+.mdl-navigation a {
+    font-weight: 600;
 }
 
 .visiblebackgroundcolor {
-    
-    background-color: gray;
     margin: 0px 0px 20px 21px;
-
 }
 .errorcolor {
     color: #bc011c;
