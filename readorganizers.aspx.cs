@@ -75,6 +75,19 @@ public partial class readorganizers : System.Web.UI.Page
         //clear labels on pageload
         LabelUpdateFeedbackNegative.Text = "";
         LabelUpdateFeedbackPositive.Text = "";
+
+        //disable textbox on postback (for Material Design Lite)
+        if (!IsPostBack)
+        {
+            TextBoxUpdateAlias.Attributes.Add("disabled", "disabled");
+            TextBoxUpdateName.Attributes.Add("disabled", "disabled");
+            TextBoxUpdateAge.Attributes.Add("disabled", "disabled");
+            radiomale.Attributes.Add("disabled", "disabled");
+            radiofemale.Attributes.Add("disabled", "disabled");
+            TextBoxUpdateEmail.Attributes.Add("disabled", "disabled");
+            TextBoxUpdatePassword.Attributes.Add("disabled", "disabled");
+            TextBoxUpdateFavorite.Attributes.Add("disabled", "disabled");
+        }
     }
 
     //SELECT ROW ORGANIZER METHOD
@@ -85,10 +98,15 @@ public partial class readorganizers : System.Web.UI.Page
         LabelUpdateInfoFor.Text = "";
         LabelUpdateInfoAlias.Text = "";
         LabelUpdateShowType.Text = "";
+        //empty radiobuttons
+        radiomale.Checked = false;
+        radiofemale.Checked = false;
 
         //disable and disable fields
         EnableUpdateForm();
-        TextBoxUpdateFavorite.Enabled = false;
+        TextBoxUpdateFavorite.Attributes.Remove("disabled");
+        radiomale.Attributes.Remove("disabled");
+        radiofemale.Attributes.Remove("disabled");
         TextBoxUpdateFavorite.Visible = false;
         LabelUpdateFavorite.Visible = false;
 
@@ -99,7 +117,7 @@ public partial class readorganizers : System.Web.UI.Page
         TextBoxUpdateAlias.Text = GridViewOrganizers.SelectedRow.Cells[1].Text;
         TextBoxUpdateName.Text = GridViewOrganizers.SelectedRow.Cells[2].Text;
         TextBoxUpdateAge.Text = GridViewOrganizers.SelectedRow.Cells[3].Text;
-        RadioButtonListUpdate.SelectedValue = GridViewOrganizers.SelectedRow.Cells[4].Text;
+        SetCheckedRadio(GridViewOrganizers.SelectedRow.Cells[4].Text);
         TextBoxUpdateEmail.Text = GridViewOrganizers.SelectedRow.Cells[5].Text;
         TextBoxUpdatePassword.Text = GridViewOrganizers.SelectedRow.Cells[6].Text;
 
@@ -116,6 +134,8 @@ public partial class readorganizers : System.Web.UI.Page
         LabelUpdateInfoFor.Text = "";
         LabelUpdateInfoAlias.Text = "";
         LabelUpdateShowType.Text = "";
+        radiomale.Checked = false;
+        radiofemale.Checked = false;
 
         //enable favorite pokemon textbox
         EnableUpdateForm();
@@ -127,7 +147,7 @@ public partial class readorganizers : System.Web.UI.Page
         TextBoxUpdateAlias.Text = GridViewPokehunters.SelectedRow.Cells[1].Text;
         TextBoxUpdateName.Text = GridViewPokehunters.SelectedRow.Cells[2].Text;
         TextBoxUpdateAge.Text = GridViewPokehunters.SelectedRow.Cells[3].Text;
-        RadioButtonListUpdate.SelectedValue = GridViewPokehunters.SelectedRow.Cells[4].Text;
+        SetCheckedRadio(GridViewPokehunters.SelectedRow.Cells[4].Text);
         TextBoxUpdateEmail.Text = GridViewPokehunters.SelectedRow.Cells[5].Text;
         TextBoxUpdatePassword.Text = GridViewPokehunters.SelectedRow.Cells[6].Text;
         TextBoxUpdateFavorite.Text = GridViewPokehunters.SelectedRow.Cells[7].Text;
@@ -179,7 +199,7 @@ public partial class readorganizers : System.Web.UI.Page
                             searchorganizer.alias = TextBoxUpdateAlias.Text;
                             searchorganizer.name = TextBoxUpdateName.Text;
                             searchorganizer.age = Convert.ToInt32(TextBoxUpdateAge.Text);
-                            searchorganizer.gender = RadioButtonListUpdate.SelectedValue;
+                            searchorganizer.gender = GetCheckedRadio();
                             searchorganizer.email = TextBoxUpdateEmail.Text;
                             searchorganizer.password = TextBoxUpdatePassword.Text;
 
@@ -195,6 +215,8 @@ public partial class readorganizers : System.Web.UI.Page
                             LabelUpdateInfoFor.Text = "";
                             LabelUpdateInfoAlias.Text = "";
                             LabelUpdateShowType.Text = "";
+                            radiomale.Checked = false;
+                            radiofemale.Checked = false;
 
                             //feedback message
                             LabelUpdateFeedbackPositive.Text = "Information has been changed";
@@ -239,7 +261,7 @@ public partial class readorganizers : System.Web.UI.Page
                             searchpokehunter.alias = TextBoxUpdateAlias.Text;
                             searchpokehunter.name = TextBoxUpdateName.Text;
                             searchpokehunter.age = Convert.ToInt32(TextBoxUpdateAge.Text);
-                            searchpokehunter.gender = RadioButtonListUpdate.SelectedValue;
+                            searchpokehunter.gender = GetCheckedRadio();
                             searchpokehunter.email = TextBoxUpdateEmail.Text;
                             searchpokehunter.password = TextBoxUpdatePassword.Text;
                             searchpokehunter.FavoritePokemon = TextBoxUpdateFavorite.Text;
@@ -256,6 +278,8 @@ public partial class readorganizers : System.Web.UI.Page
                             LabelUpdateInfoFor.Text = "";
                             LabelUpdateInfoAlias.Text = "";
                             LabelUpdateShowType.Text = "";
+                            radiomale.Checked = false;
+                            radiofemale.Checked = false;
 
                             //feedback message
                             LabelUpdateFeedbackPositive.Text = "Information has been changed";
@@ -336,28 +360,62 @@ public partial class readorganizers : System.Web.UI.Page
 
     private void DisableUpdateForm()
     {
-        TextBoxUpdateAlias.Enabled = false;
-        TextBoxUpdateName.Enabled = false;
-        TextBoxUpdateAge.Enabled = false;
-        RadioButtonListUpdate.Enabled = false;
-        TextBoxUpdateEmail.Enabled = false;
-        TextBoxUpdatePassword.Enabled = false;
-        TextBoxUpdateFavorite.Enabled = false;
+        TextBoxUpdateAlias.Attributes.Add("disabled", "disabled");
+        TextBoxUpdateName.Attributes.Add("disabled", "disabled");
+        TextBoxUpdateAge.Attributes.Add("disabled", "disabled");
+        radiomale.Attributes.Add("disabled", "disabled");
+        radiofemale.Attributes.Add("disabled", "disabled");
+        TextBoxUpdateEmail.Attributes.Add("disabled", "disabled");
+        TextBoxUpdatePassword.Attributes.Add("disabled", "disabled");
+        TextBoxUpdateFavorite.Attributes.Add("disabled", "disabled");
         ButtonUpdate.Enabled = false;
     }
 
     private void EnableUpdateForm()
     {
-        TextBoxUpdateAlias.Enabled = true;
-        TextBoxUpdateName.Enabled = true;
-        TextBoxUpdateAge.Enabled = true;
-        RadioButtonListUpdate.Enabled = true;
-        TextBoxUpdateEmail.Enabled = true;
-        TextBoxUpdatePassword.Enabled = true;
-        TextBoxUpdateFavorite.Enabled = true;
+        TextBoxUpdateAlias.Attributes.Remove("disabled");
+        TextBoxUpdateName.Attributes.Remove("disabled");
+        TextBoxUpdateAge.Attributes.Remove("disabled");
+        radiomale.Attributes.Remove("disabled");
+        radiofemale.Attributes.Remove("disabled");
+        TextBoxUpdateEmail.Attributes.Remove("disabled");
+        TextBoxUpdatePassword.Attributes.Remove("disabled");
+        TextBoxUpdateFavorite.Attributes.Remove("disabled");
         ButtonUpdate.Enabled = true;
 
         TextBoxUpdateFavorite.Visible = true;
         LabelUpdateFavorite.Visible = true;
+    }
+
+    public string GetCheckedRadio()
+    {
+        if (radiomale.Checked == true)
+        {
+            return HiddenFieldmale.Value;
+        }
+        else if (radiofemale.Checked == true)
+        {
+            return HiddenFieldfemale.Value;
+        }
+        else
+        {
+            return HiddenFieldmale.Value;
+        }
+    }
+
+    public void SetCheckedRadio(string radio)
+    {
+        if (HiddenFieldmale.Value == radio)
+        {
+            radiomale.Checked = true;
+        }
+        else if (HiddenFieldfemale.Value == radio)
+        {
+            radiofemale.Checked = true;
+        }
+        else
+        {
+            radiomale.Checked = true;
+        }
     }
 }

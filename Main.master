@@ -38,12 +38,12 @@
       <nav class="mdl-navigation">
         
         <% if (Session["Pokehunter"] != null) { %>
-            <a <%= IsCurrentPage("readpokehunters.aspx")  %> href="readpokehunters.aspx" class="mdl-navigation__link">Participants</a>
-            <a <%= IsCurrentPage("UserProfile.aspx")  %> href="UserProfile.aspx" class="mdl-navigation__link">Profile</a>
+            <a <%= IsCurrentPage("readpokehunters.aspx")  %> href="readpokehunters.aspx" class="mdl-navigation__link"><i class="material-icons">group</i> Participants</a>
+            <a <%= IsCurrentPage("UserProfile.aspx")  %> href="UserProfile.aspx" class="mdl-navigation__link"><i class="material-icons">person</i>Profile</a>
             <a href="logout.aspx" class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent">Sign out</a>
         <% }else if (Session["Organizer"] != null){ %>
-            <a <%= IsCurrentPage("readorganizers.aspx")  %> href="readorganizers.aspx" class="mdl-navigation__link">Participants</a>
-            <a <%= IsCurrentPage("UserProfile.aspx")  %> href="UserProfile.aspx" class="mdl-navigation__link">Profile</a>
+            <a <%= IsCurrentPage("readorganizers.aspx")  %> href="readorganizers.aspx" class="mdl-navigation__link"><i class="material-icons">group</i> Participants</a>
+            <a <%= IsCurrentPage("UserProfile.aspx")  %> href="UserProfile.aspx" class="mdl-navigation__link"><i class="material-icons">person</i>Profile</a>
             <a href="logout.aspx" class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent">Sign out</a>
         <% }else {%>
             <a href="Welcome.aspx" class="mdl-navigation__link" <%= IsCurrentPage("Welcome.aspx")  %>>Home</a>
@@ -73,13 +73,11 @@
 
 
   <main class="mdl-layout__content">
-      <div class="visiblebackgroundcolor">
        
         <asp:ContentPlaceHolder id="content" runat="server">
         
 
         </asp:ContentPlaceHolder>
-    </div>
   </main>
     
         

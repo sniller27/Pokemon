@@ -3,21 +3,27 @@
 
 
 <asp:Content ID="Content1" ContentPlaceHolderID="content" Runat="Server">
-    <form id="form1" runat="server">
     
-        <h2>Pokehunters</h2>
-        <asp:Label ID="LabelReadPokehuntersInfo" runat="server"></asp:Label>
+    <div class="boxmodelbox mediumbox">
 
-        <asp:GridView ID="GridViewPokehunters" runat="server" Width="730px" AutoGenerateColumns="False" datakeynames="alias">
-            <Columns>
-                <asp:BoundField DataField="alias" HeaderText="Alias" SortExpression="alias" />
-                <asp:BoundField DataField="name" HeaderText="Name" SortExpression="name" />
-                <asp:BoundField DataField="age" HeaderText="Age" SortExpression="age" />
-                <asp:BoundField DataField="FavoritePokemon" HeaderText="FavoritePokemon" SortExpression="FavoritePokemon" />
-            </Columns>
-        </asp:GridView>
+        <form id="form1" runat="server">
+    
+            <h2>Attending Pokehunters</h2>
+            <asp:Label ID="LabelReadPokehuntersInfo" runat="server"></asp:Label>
 
-    </form>
+            <asp:GridView ID="GridViewPokehunters" runat="server" Width="730px" AutoGenerateColumns="False" datakeynames="alias">
+                <Columns>
+                    <asp:BoundField DataField="alias" HeaderText="Alias" SortExpression="alias" />
+                    <asp:BoundField DataField="name" HeaderText="Name" SortExpression="name" />
+                    <asp:BoundField DataField="age" HeaderText="Age" SortExpression="age" />
+                    <asp:BoundField DataField="FavoritePokemon" HeaderText="FavoritePokemon" SortExpression="FavoritePokemon" />
+                </Columns>
+            </asp:GridView>
+
+        </form>
+
+    </div>
+
 
 </asp:Content>
 

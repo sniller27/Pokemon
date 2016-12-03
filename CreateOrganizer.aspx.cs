@@ -96,6 +96,10 @@ public partial class CreateOrganizer : System.Web.UI.Page
 
         //clearform
         Formcleaner.ClearForm(createorganizerform);
+        TextBoxFavorite.Enabled = true;
+        TextBoxFavorite.Attributes.Add("disabled", "disabled");
+        radiomale.Checked = false;
+        radiofemale.Checked = false;
     }
 
     public void CreateNewOrganizer() {
@@ -116,7 +120,7 @@ public partial class CreateOrganizer : System.Web.UI.Page
             else
             {
                 LabelAddOrganizerFeedbackNegative.Text = "An organizers mail must end with @poke.dk";
-                TextBoxFavorite.Enabled = false;
+                TextBoxFavorite.Attributes.Add("disabled", "disabled");
             }
         }
         else
@@ -142,7 +146,7 @@ public partial class CreateOrganizer : System.Web.UI.Page
                     else
                     {
                         LabelAddOrganizerFeedbackNegative.Text = "An organizers mail must end with @poke.dk";
-                        TextBoxFavorite.Enabled = false;
+                        TextBoxFavorite.Attributes.Add("disabled", "disabled");
                     }
                     break;
                 }
@@ -167,7 +171,7 @@ public partial class CreateOrganizer : System.Web.UI.Page
                 //resetform
                 DropdownlistCreateParticipant.SelectedValue = "Organizer";
                 RequiredFieldValidatorCreateFavorite.Enabled = false;
-                TextBoxFavorite.Enabled = false;
+                TextBoxFavorite.Attributes.Add("disabled", "disabled");
             }
             else
             {
@@ -197,7 +201,7 @@ public partial class CreateOrganizer : System.Web.UI.Page
                         //resetform
                         DropdownlistCreateParticipant.SelectedValue = "Organizer";
                         RequiredFieldValidatorCreateFavorite.Enabled = false;
-                        TextBoxFavorite.Enabled = false;
+                        TextBoxFavorite.Attributes.Add("disabled", "disabled");
                         break;
                     }
                     else
@@ -220,7 +224,7 @@ public partial class CreateOrganizer : System.Web.UI.Page
         }
         else
         {
-            return "";
+            return HiddenFieldmale.Value;
         }
     }
 }

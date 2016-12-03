@@ -19,6 +19,7 @@
     padding-top: 20px;
     margin-top: 20px;
     padding-bottom: 20px;
+    margin-bottom: 20px;
     background-color: white;
 }
 .contentcenter table {
@@ -36,6 +37,34 @@
 .frontpagebox .contentcenter {
     width: 400px;
 }
+/** SHOW PARTICIPANTS PAGES **/
+.smallbox {
+    width: 600px;
+}
+.smallbox table {
+    margin: auto;
+}
+.mediumbox {
+    width: 800px;
+}
+.bigbox {
+    width: 1000px;
+}
+.boxmodelbox {
+    margin: auto;
+    text-align: center;
+    margin-top: 20px;
+    padding-top: 20px;
+    margin-bottom: 20px;
+    padding-bottom: 50px;
+}
+.boxmodelbox table {
+    text-align: center;
+    margin: auto;
+}
+.whitebackground {
+    background-color: white;
+}
 /** LONG TEXTFIELD **/
 .longtextfield {
     width: 500px !important;
@@ -51,10 +80,7 @@
 .mdl-navigation a {
     font-weight: 600;
 }
-
-.visiblebackgroundcolor {
-    margin: 0px 0px 20px 21px;
-}
+/** OTHERS **/
 .errorcolor {
     color: #bc011c;
 }
@@ -64,7 +90,13 @@
 .passwordstyle {
     -webkit-text-security: disc;
 }
-
+.redbutton {
+    background-color: #F44336;
+    color: white;
+}
+.redbutton:hover {
+    background-color: #B71C1C;
+}
 /** MATERIAL DESIGN LITE DROPDOWN LIST **/
 .mdl-select {
     position: relative;
@@ -291,14 +323,14 @@ cardEnter {  0%, 20%, 40%, 60%, 80%, 100% {
   opacity: 1;
 }
 
-.radio input:checked + .outer { border: 3px solid #f08b3b; }
+.radio input:checked + .outer { border: 3px solid #FEEA3A; }
 
 .radio input:focus + .outer .inner {
   -webkit-transform: scale(1);
   -ms-transform: scale(1);
   transform: scale(1);
   opacity: 1;
-  background-color: #e67012;
+  background-color: #FEEA3A;
 }
 
 .radio .outer {
@@ -323,6 +355,6 @@ cardEnter {  0%, 20%, 40%, 60%, 80%, 100% {
   display: block;
   margin: 2px;
   border-radius: 50%;
-  background-color: #f08b3b;
+  background-color: #FEEA3A;
   opacity: 0;
 }

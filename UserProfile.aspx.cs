@@ -52,7 +52,7 @@ public partial class UserProfile : System.Web.UI.Page
                     TextBoxAlias.Text = p.alias;
                     TextBoxName.Text = p.name;
                     TextBoxAge.Text = p.age.ToString();
-                    RadioButtonListGender.SelectedValue = p.gender;
+                    SetCheckedRadio(p.gender);
                     TextBoxEmail.Text = p.email;
                     TextBoxPassword.Text = p.password;
 
@@ -98,7 +98,7 @@ public partial class UserProfile : System.Web.UI.Page
                 p.alias = TextBoxAlias.Text;
                 p.name = TextBoxName.Text;
                 p.age = Convert.ToInt32(TextBoxAge.Text);
-                p.gender = RadioButtonListGender.SelectedValue;
+                p.gender = GetCheckedRadio();
                 p.email = TextBoxEmail.Text;
                 p.password = TextBoxPassword.Text;
 
@@ -198,5 +198,37 @@ public partial class UserProfile : System.Web.UI.Page
         }
         Response.Redirect("Logout.aspx");
         Application["Personcollection"] = personlist;
+    }
+
+    public string GetCheckedRadio()
+    {
+        if (radiomale.Checked == true)
+        {
+            return HiddenFieldmale.Value;
+        }
+        else if (radiofemale.Checked == true)
+        {
+            return HiddenFieldfemale.Value;
+        }
+        else
+        {
+            return HiddenFieldmale.Value;
+        }
+    }
+
+    public void SetCheckedRadio(string radio)
+    {
+        if (HiddenFieldmale.Value == radio)
+        {
+            radiomale.Checked = true;
+        }
+        else if (HiddenFieldfemale.Value == radio)
+        {
+            radiofemale.Checked = true;
+        }
+        else
+        {
+            radiomale.Checked = true;
+        }
     }
 }
