@@ -27,6 +27,14 @@ public partial class CreateOrganizer : System.Web.UI.Page
         //clear labels on pageload (submit)
         LabelAddOrganizerFeedbackPositive.Text = "";
         LabelAddOrganizerFeedbackNegative.Text = "";
+        
+        //disable textbox on postback (for Material Design Lite)
+        if (!IsPostBack)
+        {
+            TextBoxFavorite.Attributes.Add("disabled", "disabled");
+        }
+
+        GetCheckedRadio();
     }
 
     protected void ButtonCreateOrganizer_Click(object sender, EventArgs e)
@@ -51,12 +59,15 @@ public partial class CreateOrganizer : System.Web.UI.Page
         {
             TextBoxFavorite.Enabled = true;
             RequiredFieldValidatorCreateFavorite.Enabled = true;
+            //remove attribute (for Material Design Lite)
+            TextBoxFavorite.Attributes.Remove("disabled");
         }
         else if (DropdownlistCreateParticipant.Text == "Organizer")
         {
             TextBoxFavorite.Text = "";
-            TextBoxFavorite.Enabled = false;
             RequiredFieldValidatorCreateFavorite.Enabled = false;
+            //add attribute (for Material Design Lite)
+            TextBoxFavorite.Attributes.Add("disabled", "disabled");
         }
     }
 
@@ -95,7 +106,7 @@ public partial class CreateOrganizer : System.Web.UI.Page
         if (organizerlist.Count == 0)
         {
             //make instance of pokehunter object in order to check (and change) email
-            organizer = new Organizer(TextBoxAlias.Text, TextBoxName.Text, Convert.ToInt32(TextBoxAge.Text), RadioButtonListOrganizerGender.Text, TextBoxEmail.Text, TextBoxPassword.Text);
+            organizer = new Organizer(TextBoxAlias.Text, TextBoxName.Text, Convert.ToInt32(TextBoxAge.Text), GetCheckedRadio(), TextBoxEmail.Text, TextBoxPassword.Text);
 
             //checks if emails has extension @poke.dk
             if (organizer.ChangeEmail(TextBoxEmail.Text))
@@ -121,7 +132,7 @@ public partial class CreateOrganizer : System.Web.UI.Page
                 else if (item == organizerlist[organizerlist.Count - 1])
                 {
                     ////make instance of pokehunter object in order to check (and change) email
-                    organizer = new Organizer(TextBoxAlias.Text, TextBoxName.Text, Convert.ToInt32(TextBoxAge.Text), RadioButtonListOrganizerGender.Text, TextBoxEmail.Text, TextBoxPassword.Text);
+                    organizer = new Organizer(TextBoxAlias.Text, TextBoxName.Text, Convert.ToInt32(TextBoxAge.Text), GetCheckedRadio(), TextBoxEmail.Text, TextBoxPassword.Text);
 
                     //checks if emails has extension @poke.dk
                     if (organizer.ChangeEmail(TextBoxEmail.Text))
@@ -146,7 +157,7 @@ public partial class CreateOrganizer : System.Web.UI.Page
         if (pokehunterlist.Count == 0)
         {
             //make instance of pokehunter object
-            pokehunter = new Pokehunter(TextBoxAlias.Text, TextBoxName.Text, Convert.ToInt32(TextBoxAge.Text), RadioButtonListOrganizerGender.Text, TextBoxEmail.Text, TextBoxPassword.Text, TextBoxFavorite.Text);
+            pokehunter = new Pokehunter(TextBoxAlias.Text, TextBoxName.Text, Convert.ToInt32(TextBoxAge.Text), GetCheckedRadio(), TextBoxEmail.Text, TextBoxPassword.Text, TextBoxFavorite.Text);
 
             //checks mail by using instance of object
             if (pokehunter.ChangeEmail(TextBoxEmail.Text))
@@ -176,7 +187,7 @@ public partial class CreateOrganizer : System.Web.UI.Page
                 else if (item == pokehunterlist[pokehunterlist.Count - 1])
                 {
                     //make instance of pokehunter object
-                    pokehunter = new Pokehunter(TextBoxAlias.Text, TextBoxName.Text, Convert.ToInt32(TextBoxAge.Text), RadioButtonListOrganizerGender.Text, TextBoxEmail.Text, TextBoxPassword.Text, TextBoxFavorite.Text);
+                    pokehunter = new Pokehunter(TextBoxAlias.Text, TextBoxName.Text, Convert.ToInt32(TextBoxAge.Text), GetCheckedRadio(), TextBoxEmail.Text, TextBoxPassword.Text, TextBoxFavorite.Text);
 
                     //checks mail by using instance of object
                     if (pokehunter.ChangeEmail(TextBoxEmail.Text))
@@ -196,6 +207,20 @@ public partial class CreateOrganizer : System.Web.UI.Page
                     }
                 }
             }
+        }
+    }
+
+    public string GetCheckedRadio()
+    {
+        if (radiomale.Checked == true)
+        {
+            return HiddenFieldmale.Value;
+        } else if (radiofemale.Checked == true) {
+            return HiddenFieldfemale.Value;
+        }
+        else
+        {
+            return "";
         }
     }
 }

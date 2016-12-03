@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Main.master" AutoEventWireup="true" CodeFile="readpokehunters.aspx.cs" Inherits="readpokehunters" %>
+﻿<%@ Page Title="Participants" Language="C#" MasterPageFile="~/Main.master" AutoEventWireup="true" CodeFile="readpokehunters.aspx.cs" Inherits="readpokehunters" %>
 
 
 
