@@ -77,16 +77,13 @@ public partial class Welcome : System.Web.UI.Page
                     Session["Pokehunter"] = p.alias;
                     Response.Redirect("readpokehunters.aspx");
                 }
-                else
-                {
-                    LabelNegativeFeedback.Text = "Wrong username and password";
-                }
 
                 break;
             }
 
         }
 
+        LabelNegativeFeedback.Text = "Wrong username and password";
 
     }
 

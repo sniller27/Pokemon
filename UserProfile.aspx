@@ -52,7 +52,7 @@
         <br />
         <br />
         <p>WARNING: THIS WILL DELETE YOUR PROFILE!</p>
-        <asp:Button ID="ButtonDelete" runat="server" Text="Delete profile" OnClick="ButtonDelete_Click" class="mdl-button mdl-js-button mdl-button--raised mdl-button--red" />
+        <asp:Button ID="ButtonDelete" runat="server" Text="Delete profile" OnClick="ButtonDelete_Click" class="mdl-button mdl-js-button mdl-button--raised" />
 
     </form>
 </asp:Content>

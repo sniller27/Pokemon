@@ -89,6 +89,8 @@ public partial class readorganizers : System.Web.UI.Page
         //disable and disable fields
         EnableUpdateForm();
         TextBoxUpdateFavorite.Enabled = false;
+        TextBoxUpdateFavorite.Visible = false;
+        LabelUpdateFavorite.Visible = false;
 
         //deactivate validation label for favoritepokemon
         RequiredFieldValidatorUpdateFavorite.Enabled = false;
@@ -354,5 +356,8 @@ public partial class readorganizers : System.Web.UI.Page
         TextBoxUpdatePassword.Enabled = true;
         TextBoxUpdateFavorite.Enabled = true;
         ButtonUpdate.Enabled = true;
+
+        TextBoxUpdateFavorite.Visible = true;
+        LabelUpdateFavorite.Visible = true;
     }
 }

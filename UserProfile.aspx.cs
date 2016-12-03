@@ -63,6 +63,8 @@ public partial class UserProfile : System.Web.UI.Page
                     else
                     {
                         TextBoxFavorite.Enabled = false;
+                        TextBoxFavorite.Visible = false;
+                        LabelFavorite.Visible = false;
                     }
 
                     break;
