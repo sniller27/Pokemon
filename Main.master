@@ -73,13 +73,11 @@
 
 
   <main class="mdl-layout__content">
-       
         <asp:ContentPlaceHolder id="content" runat="server">
         
 
         </asp:ContentPlaceHolder>
   </main>
-    
         
 </div>
 

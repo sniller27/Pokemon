@@ -10,7 +10,8 @@ public partial class Main : System.Web.UI.MasterPage
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-
+        //no page caching
+        Response.Cache.SetNoStore();
     }
 
     public string CurrentPageName { get; set; }

@@ -35,6 +35,23 @@ public partial class CreateOrganizer : System.Web.UI.Page
         }
 
         GetCheckedRadio();
+
+
+        //cannot go to this page if logged in
+        if (Session["Organizer"] != null)
+        {
+            if (!IsPostBack)
+            {
+                Response.Redirect("readorganizers.aspx");
+            }
+        }
+        else if (Session["Pokehunter"] != null)
+        {
+            if (!IsPostBack)
+            {
+                Response.Redirect("readpokehunters.aspx");
+            }
+        }
     }
 
     protected void ButtonCreateOrganizer_Click(object sender, EventArgs e)

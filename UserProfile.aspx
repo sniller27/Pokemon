@@ -7,9 +7,9 @@
         <form id="profileform" runat="server">
       
             <h2>Profile</h2>
-            <asp:Label ID="LabelNegativeFeedback" runat="server"></asp:Label>
+            <asp:Label ID="LabelNegativeFeedback" runat="server" CssClass="errorcolor"></asp:Label>
             <br />
-            <asp:Label ID="LabelPositiveFeedback" runat="server"></asp:Label>
+            <asp:Label ID="LabelPositiveFeedback" runat="server" CssClass="successcolor"></asp:Label>
             <br />
             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label longtextfield">
                 <asp:TextBox ID="TextBoxAlias" runat="server" class="mdl-textfield__input"></asp:TextBox>
@@ -72,13 +72,3 @@
     </div>
 
 </asp:Content>
-
-<asp:Content ID="Content2" ContentPlaceHolderID="afterscripts" Runat="Server">
-    <script>
-
-        //document.getElementById("content_RadioButtonListGender_0").className = 'class="mdl-radio__button"';
-
-    </script>
-</asp:Content>
-
-

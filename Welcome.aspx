@@ -10,8 +10,8 @@
 
             <form id="loginform" runat="server">
 
-                <asp:Label ID="LabelPositiveFeedback" runat="server"></asp:Label>
-                <asp:Label ID="LabelNegativeFeedback" runat="server"></asp:Label>
+                <asp:Label ID="LabelPositiveFeedback" runat="server" CssClass="successcolor"></asp:Label>
+                <asp:Label ID="LabelNegativeFeedback" runat="server" CssClass="errorcolor"></asp:Label>
                 <br />
                 <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
                     <asp:TextBox ID="TextBoxAlias" runat="server" class="mdl-textfield__input"></asp:TextBox>
@@ -19,7 +19,7 @@
                 </div>
                 <br />
                 <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                    <asp:TextBox ID="TextBoxPassword" runat="server" class="mdl-textfield__input"></asp:TextBox>
+                    <asp:TextBox ID="TextBoxPassword" runat="server" class="mdl-textfield__input" TextMode="Password"></asp:TextBox>
                     <asp:Label ID="LabelPasswordLogin" runat="server" Text="Password" AssociatedControlId="TextBoxPassword" class="mdl-textfield__label"></asp:Label>
                 </div>
                 <br />

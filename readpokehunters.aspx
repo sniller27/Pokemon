@@ -30,6 +30,7 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="afterscripts" Runat="Server">
     <script>
 
+        //apply classes to table
         document.getElementById("content_GridViewPokehunters").className = 'mdl-data-table mdl-js-data-table mdl-shadow--2dp';
 
     </script>

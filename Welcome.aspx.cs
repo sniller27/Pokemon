@@ -17,6 +17,23 @@ public partial class Welcome : System.Web.UI.Page
     {
         //initialize (setting object reference to an instance of an object)
         personlist = new ArrayList();
+
+        //cannot go to this page if logged in
+        if (Session["Organizer"] != null)
+        {
+            if (!IsPostBack)
+            {
+                Response.Redirect("readorganizers.aspx");
+            }
+        }
+        else if (Session["Pokehunter"] != null)
+        {
+            if (!IsPostBack)
+            {
+                Response.Redirect("readpokehunters.aspx");
+            }
+        }
+        
     }
 
     protected void ButtonLogin_Click(object sender, EventArgs e)

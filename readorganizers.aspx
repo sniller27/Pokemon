@@ -7,50 +7,50 @@
         <br />
         <form id="participantform" runat="server">
    
-        <div>
-            <asp:Label ID="LabelUpdateFeedbackPositive" runat="server" CssClass="successcolor" Font-Size="20px"></asp:Label>
-            <h3>Organizers</h3>
+            <div>
+                <asp:Label ID="LabelUpdateFeedbackPositive" runat="server" CssClass="successcolor" Font-Size="20px"></asp:Label>
+                <asp:Label ID="LabelUpdateFeedbackNegative" runat="server" CssClass="errorcolor" Font-Size="20px"></asp:Label>
+                <h3>Organizers</h3>
     
-            <asp:Label ID="LabelReadOrganizersInfo" runat="server"></asp:Label>
+                <asp:Label ID="LabelReadOrganizersInfo" runat="server"></asp:Label>
 
-            <asp:GridView ID="GridViewOrganizers" runat="server" Width="730px" AutoGenerateColumns="False" OnSelectedIndexChanged="GridViewOrganizers_SelectedIndexChanged" OnRowDeleting="GridViewOrganizers_RowDeleting" datakeynames="alias">
-                <Columns>
-                    <asp:CommandField ShowSelectButton="True" ControlStyle-CssClass="mdl-button mdl-js-button mdl-button--raised mdl-button--accent mdl-js-ripple-effect" />
-                    <asp:BoundField DataField="alias" HeaderText="Alias" SortExpression="alias" />
-                    <asp:BoundField DataField="name" HeaderText="Name" SortExpression="name" />
-                    <asp:BoundField DataField="age" HeaderText="Age" SortExpression="age" />
-                    <asp:BoundField DataField="gender" HeaderText="Gender" SortExpression="gender" />
-                    <asp:BoundField DataField="email" HeaderText="Email" SortExpression="email" />
-                    <asp:BoundField DataField="password" HeaderText="Password" SortExpression="password" />
-                    <asp:CommandField ButtonType="Button" ShowDeleteButton="True" ControlStyle-CssClass="mdl-button mdl-js-button mdl-button--raised" />
-                </Columns>
-            </asp:GridView>
+                <asp:GridView ID="GridViewOrganizers" runat="server" Width="730px" AutoGenerateColumns="False" OnSelectedIndexChanged="GridViewOrganizers_SelectedIndexChanged" OnRowDeleting="GridViewOrganizers_RowDeleting" datakeynames="alias">
+                    <Columns>
+                        <asp:CommandField ShowSelectButton="True" ControlStyle-CssClass="mdl-button mdl-js-button mdl-button--raised mdl-button--accent mdl-js-ripple-effect" />
+                        <asp:BoundField DataField="alias" HeaderText="Alias" SortExpression="alias" />
+                        <asp:BoundField DataField="name" HeaderText="Name" SortExpression="name" />
+                        <asp:BoundField DataField="age" HeaderText="Age" SortExpression="age" />
+                        <asp:BoundField DataField="gender" HeaderText="Gender" SortExpression="gender" />
+                        <asp:BoundField DataField="email" HeaderText="Email" SortExpression="email" />
+                        <asp:BoundField DataField="password" HeaderText="Password" SortExpression="password" />
+                        <asp:CommandField ButtonType="Button" ShowDeleteButton="True" ControlStyle-CssClass="mdl-button mdl-js-button mdl-button--raised" />
+                    </Columns>
+                </asp:GridView>
             
-            <br />
+                <br />
 
-            <h3>Pokehunters</h3>
-            <asp:Label ID="LabelReadPokehuntersInfo" runat="server"></asp:Label>
+                <h3>Pokehunters</h3>
+                <asp:Label ID="LabelReadPokehuntersInfo" runat="server"></asp:Label>
 
-            <asp:GridView ID="GridViewPokehunters" runat="server" Width="730px" AutoGenerateColumns="False" OnSelectedIndexChanged="GridViewPokehunters_SelectedIndexChanged" OnRowDeleting="GridViewPokehunters_RowDeleting" datakeynames="alias">
-                <Columns>
-                    <asp:CommandField ShowSelectButton="True" ControlStyle-CssClass="mdl-button mdl-js-button mdl-button--raised mdl-button--accent mdl-js-ripple-effect" />
-                    <asp:BoundField DataField="alias" HeaderText="Alias" SortExpression="alias" />
-                    <asp:BoundField DataField="name" HeaderText="Name" SortExpression="name" />
-                    <asp:BoundField DataField="age" HeaderText="Age" SortExpression="age" />
-                    <asp:BoundField DataField="gender" HeaderText="Gender" SortExpression="gender" />
-                    <asp:BoundField DataField="email" HeaderText="Email" SortExpression="email" />
-                    <asp:BoundField DataField="password" HeaderText="Password" SortExpression="password" />
-                    <asp:BoundField DataField="FavoritePokemon" HeaderText="Favorite Pokemon" SortExpression="FavoritePokemon" />
-                    <asp:CommandField ButtonType="Button" ShowDeleteButton="True" ControlStyle-CssClass="mdl-button mdl-js-button mdl-button--raised" />
-                </Columns>
-            </asp:GridView>
-        </div>
+                <asp:GridView ID="GridViewPokehunters" runat="server" Width="730px" AutoGenerateColumns="False" OnSelectedIndexChanged="GridViewPokehunters_SelectedIndexChanged" OnRowDeleting="GridViewPokehunters_RowDeleting" datakeynames="alias">
+                    <Columns>
+                        <asp:CommandField ShowSelectButton="True" ControlStyle-CssClass="mdl-button mdl-js-button mdl-button--raised mdl-button--accent mdl-js-ripple-effect" />
+                        <asp:BoundField DataField="alias" HeaderText="Alias" SortExpression="alias" />
+                        <asp:BoundField DataField="name" HeaderText="Name" SortExpression="name" />
+                        <asp:BoundField DataField="age" HeaderText="Age" SortExpression="age" />
+                        <asp:BoundField DataField="gender" HeaderText="Gender" SortExpression="gender" />
+                        <asp:BoundField DataField="email" HeaderText="Email" SortExpression="email" />
+                        <asp:BoundField DataField="password" HeaderText="Password" SortExpression="password" />
+                        <asp:BoundField DataField="FavoritePokemon" HeaderText="Favorite Pokemon" SortExpression="FavoritePokemon" />
+                        <asp:CommandField ButtonType="Button" ShowDeleteButton="True" ControlStyle-CssClass="mdl-button mdl-js-button mdl-button--raised" />
+                    </Columns>
+                </asp:GridView>
+            </div>
 
             <br />
 
             <div class="whitebackground boxmodelbox smallbox mdl-shadow--2dp">
                 <h2>Change information</h2>
-                <asp:Label ID="LabelUpdateFeedbackNegative" runat="server" CssClass="errorcolor" Font-Size="20px"></asp:Label>
                 <br />
 
                 <asp:Label ID="LabelUpdateInfoFor" runat="server"></asp:Label>
@@ -76,20 +76,6 @@
                 <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ControlToValidate="TextBoxUpdateAge" EnableClientScript="False" ErrorMessage="Fill in age please" CssClass="errorcolor"></asp:RequiredFieldValidator>
                 <br />
 
-
-
-
-
-
-                
-         <%--       <asp:Label ID="LabelUpdateGender" runat="server" Text="Gender"></asp:Label>
-                <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server" ControlToValidate="RadioButtonListUpdate" EnableClientScript="False" ErrorMessage="Choose your gender please" CssClass="errorcolor"></asp:RequiredFieldValidator>
-                <asp:RadioButtonList ID="RadioButtonListUpdate" runat="server">
-                    <asp:ListItem>Male</asp:ListItem>
-                    <asp:ListItem>Female</asp:ListItem>
-                </asp:RadioButtonList>--%>
-
-
                 <div id="genderdiv" runat="server">
                 
                     <label class="radio" id="labelmale" runat="server">
@@ -105,11 +91,6 @@
                     <asp:HiddenField ID="HiddenFieldfemale" runat="server" Value="Female" />
                 
                 </div>
-
-
-
-
-
 
                 <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label longtextfield">
                     <asp:TextBox ID="TextBoxUpdateEmail" runat="server" TextMode="Email" class="mdl-textfield__input"></asp:TextBox>
@@ -137,7 +118,6 @@
             </div>
         </form>
 
-
     </div>
 
 </asp:Content>
@@ -145,6 +125,7 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="afterscripts" Runat="Server">
     <script>
 
+        //apply classes to tables
         document.getElementById("content_GridViewPokehunters").className = 'mdl-data-table mdl-js-data-table mdl-shadow--2dp';
         document.getElementById("content_GridViewOrganizers").className = 'mdl-data-table mdl-js-data-table mdl-shadow--2dp';
 
