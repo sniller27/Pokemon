@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Sponsors>
+  <Sponsor>
+    <CompanyName>Lego</CompanyName>
+    <Website>www.lego.dk</Website>
+    <LogoUrl>lego.jpg</LogoUrl>
+  </Sponsor>
+  <Sponsor>
+    <CompanyName>Silvan</CompanyName>
+    <Website>www.silvan.dk</Website>
+    <LogoUrl>silvan.jpg</LogoUrl>
+  </Sponsor>
+  <Sponsor>
+    <CompanyName>jemogbyg</CompanyName>
+    <Website>www.byg.dk</Website>
+    <LogoUrl>byg.jpg</LogoUrl>
+  </Sponsor>
+  <Sponsor>
+    <CompanyName>jemogbyg</CompanyName>
+    <Website>www.byg.dk</Website>
+    <LogoUrl>byg.jpg</LogoUrl>
+  </Sponsor>
+  <Sponsor>
+    <CompanyName>tjao</CompanyName>
+    <Website>www.dada.com</Website>
+    <LogoUrl>jojo.jpg</LogoUrl>
+  </Sponsor>
+</Sponsors>
