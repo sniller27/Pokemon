@@ -97,6 +97,10 @@
 .redbutton:hover {
     background-color: #B71C1C;
 }
+/** ICONS **/
+.myicon {
+    margin-bottom: 7px;
+}
 /** MATERIAL DESIGN LITE DROPDOWN LIST **/
 .mdl-select {
     position: relative;
