@@ -21,9 +21,6 @@ public partial class readorganizers : System.Web.UI.Page
         }
 
 
-        //////////////////////////////
-
-
         //try to get data from Organizer file
         try
             {
