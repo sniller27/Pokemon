@@ -34,6 +34,35 @@
                     <div class="prev">Prev</div>
             </div>
         </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="text-center-me">
+                    <h1 class="sponsortext">Sponsors</h1>
+                    <div class="headerunderline"></div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <asp:repeater ID="RepeaterFrontpage" runat="server">
+
+            <HeaderTemplate>
+            </HeaderTemplate>
+
+            <ItemTemplate>
+
+                <div class="col-md-2 sponsorboxes">
+                    <image src="Images/sponsors/<%# Eval("LogoUrl") %>" alt="sponsor" />
+                </div>
+
+
+
+            </ItemTemplate>
+
+            <FooterTemplate>
+            </FooterTemplate>
+
+            </asp:repeater>
+        </div>
     </div>
 
     <%--frontpage files--%>

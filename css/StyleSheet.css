@@ -66,7 +66,7 @@ body {
 .carouselcontainer {
   margin: 0 auto;
   width: 250px;
-  height: 400px;
+  height: 370px;
   position: relative;
   perspective: 1000px;
 }
@@ -213,4 +213,40 @@ body {
 /** top buffer **/
 .mytopbuffer {
     margin-top: 20px;
+}
+/** sponsor header frontpage **/
+.headerunderline {
+    border-bottom: 3px solid;
+    width: 70px;
+    margin: auto;
+    margin-top: 20px;
+    margin-bottom: 45px;
+    color: #858585;
+}
+/** sponsor boxes **/
+.sponsorboxes {
+    height: 200px;
+    max-width: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.sponsorboxes img {
+    max-width: 100%;
+    max-height: 100%;
+}
+.sponsortext {
+    color: #858585;
+}
+/** Fileupload Imageboxes **/
+.mypokemonimage {
+    width: 165px;
+    height: 165px;
+}
+/** Feedback **/
+.succescolor {
+    color: green;
+}
+.errorcolor {
+    color: red;
 }

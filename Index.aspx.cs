@@ -14,15 +14,19 @@ public partial class Index : System.Web.UI.Page
     SqlCommand cmd = null;
     SqlDataReader rdr = null;
     String sqlsel = "";
+    //for sponsors
+    DataSet ds;
+    DataTable dt;
 
     protected void Page_Load(object sender, EventArgs e)
     {
         //query
         sqlsel = "select * from Pokemon";
-        showData();
+        showPokemonImages();
+        showSponsors();
     }
 
-    public void showData()
+    public void showPokemonImages()
     {
         try
         {
@@ -51,6 +55,37 @@ public partial class Index : System.Web.UI.Page
         {
             //close connection
             conn.Close();
+        }
+    }
+
+    public void showSponsors()
+    {
+        try
+        {
+            ds = new DataSet();
+            //get data
+            ds.ReadXml(Server.MapPath(@"~/XML/Sponsors.xml"));
+            //navnet er ikke selvalgt her
+            dt = ds.Tables["Sponsor"];
+
+            //DropDownList1.DataSource = dt;
+            //DropDownList1.DataTextField = dt.Columns[1].ToString();
+            //DropDownList1.DataValueField = dt.Columns[0].ToString();
+            //DropDownList1.DataBind();
+
+        }
+        catch (Exception ex)
+        {
+            //hvis der ikke findes XML fil så laves der et nyt datatable
+            //MakeNewDataSetAndDataTable();
+        }
+        finally
+        {
+            RepeaterFrontpage.DataSource = dt;
+            RepeaterFrontpage.DataBind();
+
+            //dropdown list default value
+            //DropDownList1.Items.Insert(0, "You can choose a horse");
         }
     }
 }
