@@ -76,7 +76,9 @@
 
                     <div class="col-md-12 mytopbuffer">
                         <h2>Upload image</h2>
-                        <asp:Image ID="ImageToUpload" runat="server" CssClass="mypokemonimage" />
+                        <div class="mypokemonimagebox">
+                            <asp:Image ID="ImageToUpload" runat="server" CssClass="mypokemonimage" />
+                        </div>
                         <br />
                         <asp:Label ID="LabelChooseImage" runat="server"></asp:Label>
                         <asp:fileupload runat="server" ID="FileUploadImage"></asp:fileupload>

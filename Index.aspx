@@ -1,7 +1,7 @@
 ﻿<%@ Page Title="Welcome to the annual Pokémon event" Language="C#" MasterPageFile="~/Loginmenu.master" AutoEventWireup="true" CodeFile="Index.aspx.cs" Inherits="Index" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolderhead" Runat="Server">
-    <%--css falbacks--%>
+    <%--css fallbacks--%>
     <script src="http://s.codepen.io/assets/libs/modernizr.js" type="text/javascript"></script>
 </asp:Content>
 

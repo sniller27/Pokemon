@@ -10,6 +10,7 @@ using System.Xml.Linq;
 
 public partial class Sponsors : System.Web.UI.Page
 {
+    //variables
     private DataSet ds;
     private DataTable dt;
     private int allsponsers = 0;
@@ -23,10 +24,11 @@ public partial class Sponsors : System.Web.UI.Page
             Response.Redirect("Index.aspx");
         }
 
-        //upload listener
+        //set upload listeners
         FileUploadCreateImage.Attributes["onchange"] = "UploadFile(this)";
         FileUploadUpdateImage.Attributes["onchange"] = "UploadFile(this)";
 
+        //check for postbacks
         if (!IsPostBack)
         {
             PopulateDropdownlist();
@@ -52,10 +54,27 @@ public partial class Sponsors : System.Web.UI.Page
                         ImageUpdate.ImageUrl = "Images/sponsors/" + r["LogoUrl"].ToString();
                         LabelUpdateChooseImage.Text = r["LogoUrl"].ToString();
                     }
+                }
+                else if (DropDownListUpdateChooseSponser.SelectedIndex == 0)
+                {
+                    //clear form
+                    TextBoxUpdateCompanyName.Text = "";
+                    TextBoxUpdateCompanyWebsite.Text = "";
+                    ImageUpdate.ImageUrl = "";
+                    LabelUpdateChooseImage.Text = "";
+                }
 
+                if (c.ID != "ButtonCreateSponsor")
+                {
+                    LabelAddPosFeedback.Text = "";
+                    LabelAddNegFeedback.Text = "";
+                }
+                if (c.ID != "ButtonUpdateSponsor" || c.ID != "ButtonDelete")
+                {
+                    LabelUpPosFeedback.Text = "";
+                    LabelUpNegFeedback.Text = "";
                 }
             }
-
         }
     }
 
@@ -64,11 +83,12 @@ public partial class Sponsors : System.Web.UI.Page
         try
         {
             ds = new DataSet();
-            //get data
+            //get data from XML-file to data set
             ds.ReadXml(Server.MapPath(@"~/XML/Sponsors.xml"));
-            //navnet er ikke selvalgt her
+            //data from data set to data table
             dt = ds.Tables["Sponsor"];
 
+            //populate dropdownlist
             DropDownListUpdateChooseSponser.DataSource = dt;
             DropDownListUpdateChooseSponser.DataTextField = dt.Columns[1].ToString();
             DropDownListUpdateChooseSponser.DataValueField = dt.Columns[0].ToString();
@@ -77,8 +97,8 @@ public partial class Sponsors : System.Web.UI.Page
         }
         catch (Exception ex)
         {
-            //hvis der ikke findes XML fil så laves der et nyt datatable
-            //MakeNewDataSetAndDataTable();
+            //new data table if XML-file doesn't exist
+            MakeNewDataSetAndDataTable();
         }
         finally
         {
@@ -100,32 +120,38 @@ public partial class Sponsors : System.Web.UI.Page
         catch (Exception)
         {
             //xml file doesn't exist
-            //MakeNewDataSetAndDataTable();
+            MakeNewDataSetAndDataTable();
         }
 
-        
+        //if data table is empty make new dataset and datatable
         if (dt == null)
         {
-            //MakeNewDataSetAndDataTable();
+            MakeNewDataSetAndDataTable();
         }
         else
         {
+            //get maximum sponsorid by looping through rows in data table
             foreach (DataRow r in dt.Rows)
             {
                 if (Convert.ToInt32(r["SponsorID"].ToString()) > allsponsers) allsponsers = Convert.ToInt32(r["SponsorID"].ToString());
             }
         }
 
+        //make new data row
         DataRow newRow = dt.NewRow();
         newRow["SponsorID"] = allsponsers + 1;
         newRow["CompanyName"] = TextBoxAddCompanyName.Text;
         newRow["Website"] = TextBoxAddCompanyWebsite.Text;
         newRow["LogoUrl"] = LabelCreateChooseImage.Text;
+        //add row to data table
         dt.Rows.Add(newRow);
 
+        //save or write to XML-file
         ds.WriteXml(Server.MapPath(@"~/XML/Sponsors.xml"));
+        //move image file to images folder
         MoveFile(LabelCreateChooseImage.Text);
 
+        //user feedback
         LabelAddPosFeedback.Text = "Sponsor added!";
 
         //clear form
@@ -140,19 +166,14 @@ public partial class Sponsors : System.Web.UI.Page
 
     protected void Upload(object sender, EventArgs e)
     {
-        if (FileUploadCreateImage.HasFile || FileUploadUpdateImage.HasFile)
-        {
-            
-        }
-
-        //show image
         if (FileUploadCreateImage.HasFile)
         {
             //getting filename
             fileName = Path.GetFileName(FileUploadCreateImage.PostedFile.FileName);
-            //save in images folder
+            //save in temp folder
             FileUploadCreateImage.PostedFile.SaveAs(Server.MapPath("~/temp/") + fileName);
 
+            //show image
             ImageCreate.ImageUrl = @"~\temp\" + fileName;
             //show filename
             LabelCreateChooseImage.Text = fileName;
@@ -161,9 +182,10 @@ public partial class Sponsors : System.Web.UI.Page
         {
             //getting filename
             fileName = Path.GetFileName(FileUploadUpdateImage.PostedFile.FileName);
-            //save in images folder
+            //save in temp folder
             FileUploadUpdateImage.PostedFile.SaveAs(Server.MapPath("~/temp/") + fileName);
 
+            //show image
             ImageUpdate.ImageUrl = @"~\temp\" + fileName;
             //show filename
             LabelUpdateChooseImage.Text = fileName;
@@ -178,12 +200,15 @@ public partial class Sponsors : System.Web.UI.Page
         //give data to data table
         dt = ds.Tables["Sponsor"];
 
+        //delete row with specific sponsor id by looping through data table
         foreach (DataRow r in dt.Select("SponsorID = " + DropDownListUpdateChooseSponser.SelectedValue))
         {
             r.Delete();
         }
 
+        //save or write to XML-file
         ds.WriteXml(Server.MapPath(@"~/XML/Sponsors.xml"));
+        //user feedback
         LabelUpPosFeedback.Text = "Sponsor deleted";
 
         //update dropdownlist
@@ -221,18 +246,19 @@ public partial class Sponsors : System.Web.UI.Page
         //give data to data table
         dt = ds.Tables["Sponsor"];
 
+        //find specific row in data table and change it
         foreach (DataRow r in dt.Select("SponsorID = " + DropDownListUpdateChooseSponser.SelectedValue))
         {
             r["SponsorID"] = Convert.ToInt32(DropDownListUpdateChooseSponser.SelectedValue);
             r["CompanyName"] = TextBoxUpdateCompanyName.Text;
             r["Website"] = TextBoxUpdateCompanyWebsite.Text;
             r["LogoUrl"] = LabelUpdateChooseImage.Text;
-            //LabelUpPosFeedback.Text = r["CompanyName"].ToString();
         }
 
+        //save or write to XML-file
         ds.WriteXml(Server.MapPath(@"~/XML/Sponsors.xml"));
 
-        //move file
+        //move file (check is file already exists)
         var relativePath = "~/Images/sponsors/" + LabelUpdateChooseImage.Text;
         var absolutePath = Server.MapPath(relativePath);
         if (System.IO.File.Exists(absolutePath) == false)
@@ -276,5 +302,18 @@ public partial class Sponsors : System.Web.UI.Page
 
         }
         return control;
+    }
+
+    public void MakeNewDataSetAndDataTable()
+    {
+        //create new data set with XML-corresponding name
+        ds = new DataSet("Sponsors");
+        //make new data table from data set
+        dt = ds.Tables.Add("Sponsor");
+        //specify table columns
+        dt.Columns.Add("SponsorID", typeof(Int32));
+        dt.Columns.Add("CompanyName", typeof(string));
+        dt.Columns.Add("Website", typeof(string));
+        dt.Columns.Add("LogoUrl", typeof(string));
     }
 }

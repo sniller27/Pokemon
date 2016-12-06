@@ -39,7 +39,9 @@
     </div>
 
     <p>Image</p>
-    <asp:Image ID="ImageToUpload" runat="server" CssClass="mypokemonimage" />
+    <div class="mypokemonimagebox">
+        <asp:Image ID="ImageToUpload" runat="server" CssClass="mypokemonimage" />
+    </div>
     <br />
     <asp:Label ID="LabelChooseImage" runat="server"></asp:Label>
     <br />

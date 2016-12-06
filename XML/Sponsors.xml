@@ -13,9 +13,33 @@
     <LogoUrl>silvan.png</LogoUrl>
   </Sponsor>
   <Sponsor>
-    <SponsorID>4</SponsorID>
-    <CompanyName>glad</CompanyName>
-    <Website>www.glad.dk</Website>
-    <LogoUrl>lol.png</LogoUrl>
+    <SponsorID>5</SponsorID>
+    <CompanyName>Bilka</CompanyName>
+    <Website>www.bilka.dk</Website>
+    <LogoUrl>logo-large-bilka.png</LogoUrl>
+  </Sponsor>
+  <Sponsor>
+    <SponsorID>6</SponsorID>
+    <CompanyName>Novo Nordisk</CompanyName>
+    <Website>www.novonordisk.com</Website>
+    <LogoUrl>novo-nordisk.png</LogoUrl>
+  </Sponsor>
+  <Sponsor>
+    <SponsorID>7</SponsorID>
+    <CompanyName>Rynkeby</CompanyName>
+    <Website>www.rynkeby.dk</Website>
+    <LogoUrl>Team-Rynkeby.png</LogoUrl>
+  </Sponsor>
+  <Sponsor>
+    <SponsorID>8</SponsorID>
+    <CompanyName>Copenhagen Zoo</CompanyName>
+    <Website>www.zoo.dk</Website>
+    <LogoUrl>kbhzoo.png</LogoUrl>
+  </Sponsor>
+  <Sponsor>
+    <SponsorID>9</SponsorID>
+    <CompanyName>Magasin</CompanyName>
+    <Website>www.magasin.dk</Website>
+    <LogoUrl>magasin.png</LogoUrl>
   </Sponsor>
 </Sponsors>

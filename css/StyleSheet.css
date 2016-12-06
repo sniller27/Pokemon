@@ -25,11 +25,6 @@
 
 
 /** MyPOKEMON **/
-/*images*/
-.mypokemonimage {
-    width: 240px;
-    height: 240px;
-}
 
 /**Hide catch id column**/
 .hidden {
@@ -240,8 +235,16 @@ body {
 }
 /** Fileupload Imageboxes **/
 .mypokemonimage {
+    width: 100%;
+}
+/** my image box **/
+.mypokemonimagebox {
     width: 165px;
     height: 165px;
+    border: 1px solid;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 /** Feedback **/
 .succescolor {
@@ -249,4 +252,24 @@ body {
 }
 .errorcolor {
     color: red;
+}
+/** FILE UPLOAD BOOTSTRAP STYLE **/
+.btn-file {
+    position: relative;
+    overflow: hidden;
+}
+.btn-file input[type=file] {
+    position: absolute;
+    top: 0;
+    right: 0;
+    min-width: 100%;
+    min-height: 100%;
+    font-size: 100px;
+    text-align: right;
+    filter: alpha(opacity=0);
+    opacity: 0;
+    outline: none;
+    background: white;
+    cursor: inherit;
+    display: block;
 }
