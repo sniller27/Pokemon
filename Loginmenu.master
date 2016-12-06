@@ -19,6 +19,7 @@
                 <div id="loginwebmaster" runat="server">
 
                     <% if (Session["Webmaster"] != null) { %>
+                    <a <%= IsCurrentPage("Sponsors.aspx")  %> href="Sponsors.aspx">Sponsors</a>
                     <a <%= IsCurrentPage("Webmaster.aspx")  %> href="Webmaster.aspx">Create Pokémon</a>
                     <a <%= IsCurrentPage("WebmasterRead.aspx")  %> href="WebmasterRead.aspx">Edit Pokémon</a>
                     <% } %>

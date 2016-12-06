@@ -17,6 +17,12 @@ public partial class Sponsors : System.Web.UI.Page
 
     protected void Page_Load(object sender, EventArgs e)
     {
+        //redirects you if you don't have access to this page
+        if (Session["Webmaster"] == null)
+        {
+            Response.Redirect("Index.aspx");
+        }
+
         //upload listener
         FileUploadCreateImage.Attributes["onchange"] = "UploadFile(this)";
         FileUploadUpdateImage.Attributes["onchange"] = "UploadFile(this)";
