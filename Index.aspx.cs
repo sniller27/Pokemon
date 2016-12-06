@@ -67,25 +67,28 @@ public partial class Index : System.Web.UI.Page
             ds.ReadXml(Server.MapPath(@"~/XML/Sponsors.xml"));
             //navnet er ikke selvalgt her
             dt = ds.Tables["Sponsor"];
-
-            //DropDownList1.DataSource = dt;
-            //DropDownList1.DataTextField = dt.Columns[1].ToString();
-            //DropDownList1.DataValueField = dt.Columns[0].ToString();
-            //DropDownList1.DataBind();
-
         }
         catch (Exception ex)
         {
-            //hvis der ikke findes XML fil så laves der et nyt datatable
-            //MakeNewDataSetAndDataTable();
+            MakeNewDataSetAndDataTable();
         }
         finally
         {
             RepeaterFrontpage.DataSource = dt;
             RepeaterFrontpage.DataBind();
-
-            //dropdown list default value
-            //DropDownList1.Items.Insert(0, "You can choose a horse");
         }
+    }
+
+    public void MakeNewDataSetAndDataTable()
+    {
+        //create new data set with XML-corresponding name
+        ds = new DataSet("Sponsors");
+        //make new data table from data set
+        dt = ds.Tables.Add("Sponsor");
+        //specify table columns
+        dt.Columns.Add("SponsorID", typeof(Int32));
+        dt.Columns.Add("CompanyName", typeof(string));
+        dt.Columns.Add("Website", typeof(string));
+        dt.Columns.Add("LogoUrl", typeof(string));
     }
 }
